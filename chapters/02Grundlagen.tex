@@ -1,7 +1,7 @@
 \section{Grundlagen}
 \subsection{Simulationsumgbeung}
-Die Simulationsumgebung wurde von der \atlas entwickelt und wird für diese Arbeit zur Verfügung gestellt [\ref{screenSim}].
-In der Simulation wird die Fahrzeugsensorik und Motorik simuliert (siehe \ref{sec_auvSimGrundlage}). Außerdem wird noch eine grundlegende Wasserbewegung erzeugt, die durch Parametrisierung verändert werden kann.\\
+Die Simulationsumgebung wurde von der \atlas entwickelt und wird für diese Arbeit zur Verfügung gestellt [Abb. \ref{screenSim}].
+In der Simulation wird die Fahrzeugsensorik und Motorik simuliert (siehe Kapitel \ref{sec_auvSimGrundlage}). Außerdem wird noch eine grundlegende Wasserbewegung erzeugt, die durch Parametrisierung verändert werden kann.\\
 \todo{umrechnung lat lon zu meter}
 
 Die Umgebung an sich besteht aus \textit{wrl} Dateien, in denen die Welt mit \textit{VRML} beschrieben wird. Diese einzelnen Dateien werden in der \textit{main.wrl} zusammengefügt. Bereits vorhanden sind \textit{wrl} Dateien für das AUV, in denen die Realvorlage maßstabsgetreu nachgebildet wird, sowie ein Generator um zufallsgenerierte Meeresböden in \textit{wrl} zu erstellen. Die Objekte, die in der Arbeit verfolgt werden sollen wurden in \textit{VRML} modelliert und dann als Unterknoten in die \textit{main.wrl} hinzugefügt.\\
@@ -22,14 +22,14 @@ Am Bug des AUVs befindet sich eine Kamera, die zentral nach unten ausgerichtet i
 Im folgenden werde ich die Koordinatensysteme beschreiben, in denen Koordinaten angegeben werden. Ich gehe hierbei von einer geraden Ebene aus, da ich von einem hinreichend kleinen Operationsgebiet des AUVs ausgehe, sodass die Erdkrümmung keine Auswirkung hat.
 \subsubsection{Bild und Kamera}
 \label{sec_img_cam_coords}
-Das Bildkoordinatensystem [\ref{imageKoords}] beschreibt die Anordnung der Pixel im Bild als 2D Koordinaten. Der Ursprung ist immer die linke obere Bildecke. Ich gehe davon aus, dass das Bildkoordinatensystem immer auf der Meeresbodenebene liegt. Diese Annahme ist wichtig für die Transformationen [\ref{sec_transformations}].
+Das Bildkoordinatensystem [Abb. \ref{imageKoords}] beschreibt die Anordnung der Pixel im Bild als 2D Koordinaten. Der Ursprung ist immer die linke obere Bildecke. Ich gehe davon aus, dass das Bildkoordinatensystem immer auf der Meeresbodenebene liegt. Diese Annahme ist wichtig für die Transformationen [Kapitel \ref{sec_transformations}].
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=1]{imageCoords2.jpg}
 	\caption{Das Bildkoordinatensystem}
 	\label{imageKoords}
 \end{figure}
-Das Kamerakoordinatensystem beschreibt das dreidimensionale Koordinatensystem mit Ursprung im Mittelpunkt der Kameralinse. Die Kamera befindet sich 25 cm unter und 1.5 m vor dem Fahrzeugmittelpunkt.
+Das Kamerakoordinatensystem [Abb. \ref{CamKoords}] beschreibt das dreidimensionale Koordinatensystem mit Ursprung im Mittelpunkt der Kameralinse. Die Kamera befindet sich 25 cm unter und 1.5 m vor dem Fahrzeugmittelpunkt.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=1]{camCoords.jpg}
@@ -38,9 +38,9 @@ Das Kamerakoordinatensystem beschreibt das dreidimensionale Koordinatensystem mi
 \end{figure}
 
 \subsubsection{Body}
-Das Body Koordinatensystem beschreibt das Koordinatensystem relativ zum AUV Mitelpunkt (\ref{Abb. 1}).
+Das Body Koordinatensystem beschreibt das Koordinatensystem relativ zum AUV Mitelpunkt (Abb. \ref{Abb. 1}).
 Der Ursprung wird hierbei durch den Schwerpunkt des AUVs bestimmt.
-Das Koordinatensystem entspricht dem klassischen nautischen Koordinatensystem, dem North-East-Down Koordinatensystem (vgl. Kapitel 2 in \cite{cai2011unmanned})
+Das Koordinatensystem entspricht dem klassischen nautischen Koordinatensystem, dem North-East-Down Koordinatensystem (vgl. Kapitel 2 in \texttt{Unmanned rotorcraft systems} \cite{cai2011unmanned})
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{bodyKoords.jpg}
@@ -48,7 +48,7 @@ Das Koordinatensystem entspricht dem klassischen nautischen Koordinatensystem, d
 	\label{Abb. 1}
 \end{figure}
 
-Die Neigungswinkel (Roll-Pitch-Yaw) werden wie in [\ref{Abb. 2}] im Body Koordinatensystem angegeben.
+Die Neigungswinkel (Roll-Pitch-Yaw) werden wie in [Abb. \ref{Abb. 2}] im Body Koordinatensystem angegeben.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{rollPitchYaw.jpg}
@@ -63,3 +63,8 @@ Abbildung \ref{Abb. 3} zeigt die Koordinatensysteme der \matlab Grafik Bibliothe
 	\caption{\matlab und Vrml Koordinatensystem.}
 	\label{Abb. 3}
 \end{figure}
+
+\subsection{Eingesetzte Software}
+Neben den bereits erwähnten \matlab Bibliotheken Simulink, Graphics und 3D Animation werden in dieser Arbeit noch weitere Bibliotheken verwendet.\\
+Grundlegende geometrische Berechnungen, zum Beispiel Transformationen in 2D und 3D oder auch Distanzberechnungen von Punkten werden mithilfe der freien Bibliotheken \textit{geom2d}\footnote{https://de.mathworks.com/matlabcentral/fileexchange/7844-geom2d} und \textit{geom3d}\footnote{https://de.mathworks.com/matlabcentral/fileexchange/24484-geom3d} durchgeführt.\\
+Das Schätzverfahren nutzt die \textit{Optimization} Toolbox \footnote{https://de.mathworks.com/products/optimization.html}, die Lösungen für verschiedene Minimierungs-, Maximierungs- und Optimierungsprobleme liefert. 

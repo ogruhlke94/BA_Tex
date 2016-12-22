@@ -49,7 +49,7 @@ Im \texttt{CSurvey}-Projekt \cite{Albiez2015CSurveyA} beleuchten Albiez et al. e
 Diese Detektion wurde vor allem in verschiedenen Entfernungen zum Boden und verschiedenen Trübheitsgraden des Wassers getestet. Ein Ergebnis der Arbeit ist, dass mit dem Template auch bei schlechter Sicht die Pipeline noch erkennbar ist. Jedoch wird ab einem bestimmten Trübheitsgrad das gesamte Bild zu hell für eine Erkennung, da die Reflexion des Laserlichts im trüben Wasser viel zu groß ist.\\
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{SOTA/templateCSurvey.jpg}
+\includegraphics[scale=0.6]{SOTA/templateCSurvey.jpg}
 \caption{Template zur Helligkeitsdetektion aus \textit{CSurvey}}
 \label{templateCSurv}
 \end{figure}
@@ -67,12 +67,21 @@ Aus diesen Rechtecken lässt sich dann die gesuchte Pipeline bestimmen.\\
 \caption{Einzelschritte der Erkennung aus \textit{Simple vision tracking of pipelines for an autonomous underwater vehicle}}
 \label{rectDetect}
 \end{figure}
-Mike Foedisch und Aya Takeuchi nutzen zur Straßendetektion ein neuronales Netz. Das neuronale Netz wird mit Bildern von Straßen und ohne Straßen, für die per Hand angegeben wurde, ob eine Straße zu sehen ist oder nicht, trainiert. Die Straßenbilder werden in gerade, leicht gebogene und stark gebogene Straßen unterteilt. Weiterhin wurden Trainingsbilder, in denen Teile des Bildes von Schatten überdeckt sind, genutzt. Aus der Arbeit ging hervor, dass \todo{hmm was bloß...}\\
 
+Foresti et al. detektieren in \textit{A Vision Based System for Object Detection in
+Underwater Images} Unterwasserpipelines mithilfe eines neuronalen Netz. In Abbildung \ref{nnDet} ist zu sehen, dass die Pipelines sehr gut erkannt wurden. Selbst bei vom Sand verdeckte Pipeline (c und d) werden die Kanten der Pipelines noch richtig bestimmt wurden.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth,height=0.3\textheight]{SOTA/nnpiperesults.jpg}
+\caption{Pipelines erkannt mithilfe eines neuronalen Netzwerks}
+\label{nnDet}
+\end{figure}
+Trotz dieser guten Ergebnisse habe ich mich gegen ein neuronales Netz entschieden. Zum einen gab es zu Beginn der Arbeit keine geeigneten Trainingsbilder aus der Simulationsumgebung um das Netz zu trainieren. Außerdem ist ein neuronales Netz stets als \textit{black box} zu betrachten und die Detektion ist nicht eindeutig nachvollziehbar. Neben diesen Faktoren ist auch der Berechnungsaufwand für ein neuronales Netz höher einzuschätzen, als bei anderen Ansätzen.\\
+Aus diesen Gründen habe ich mich für einen leichter zu implementierenden klassischeren Ansatz der Bildverarbeitung entschieden.
 
 Die auf Linienerkennung basierenden Ansätze eignen sich sehr gut, solange klare Kanten im Bild erkennbar sind. Im Unterwasserszenario setzt dies gute Sicht- und Lichtverhältnisse voraus. Außerdem würden vom Meeresboden verdeckte Objekte keine oder sehr kurvige Kanten ergeben, in denen die vorgestellten Ansätze keine Ergebnisse liefern würde. Beide Vorratssetzungen sind im Unterwasserbereich nicht erfüllbar, weswegen in dieser Arbeit ein anderer Ansatz gewählt wurde.\\
 Sehr gut eignet sich ein helligkeitsbasierter Ansatz. Wie im \textit{CSurvey}-Projekt\cite{Albiez2015CSurveyA} gezeigt kann ein solcher Ansatz selbst unter schlechten Sichtbedingungen noch gute Ergebnisse liefern. Es ist zu erwarten, dass auch in der verwendet Simulationsumgebung gute Resultate erzielt werden können.\\
-Die Erkennung über ein neuronales Netz wäre ebenso möglich, jedoch fehlten hierfür zum Beginn der Arbeit die benötigten Trainingsdaten. Außerdem sind linienförmige Objekte einfache geometrische Strukturen, für die ein neuronales Netz nicht unbedingt erforderlich ist, auch wenn es allgemein einen guten Ansatz zur Objekterkennung bietet.
 \subsection{Schätzverfahren}
 Wie in der Einleitung beschrieben muss ein Schätzverfahren entwickelt werden, um dem Objektverlauf optimal folgen zu können. Das Verfahren muss auf der Ausgabe der Objekterkennung aufsetzen.
 \subsubsection{Kalman-Filter}
