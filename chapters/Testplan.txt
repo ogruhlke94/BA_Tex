@@ -1,0 +1,29 @@
+Video auf CD
+Fahrtverlauf
+Fehler von AUV Position - Pipe
+Fehler von Pipe erkannt - Pipe
+Parameterbeschreibung
+
+1.
+Grade Pipe +
+2.
+Kurve
+3. 
+Grade dann Kurve
+4.
+Sinus
+5.
+Kreis 
+6.
+Grade dann Kreis
+
+
+Parameter:
+Grade mit verschiedenen Parametern
+
+Kurve verpassen wegen Parametern
+
+"Einschwingen"
+
+Fahrt entlang Y-Achse
+Transformation zeigen - unterschied der Qualität mit und ohne

@@ -1,0 +1,15 @@
+\subsection{Testläufe}
+Im folgenden werden die verschiedenen Testläufe genau beschrieben. Für alle Testläufe gilt, dass das AUV zuerst 30 Meter geradeaus fährt, bevor es auf das Objekt trifft, damit eine stabile Fahrt erreicht wird und die Schwankungen beim anfänglichen Beschleunigen die Ergebnisse nicht verfälschen. Ebenso wird auch gewährleistet, dass das AUV stets direkt auf das Objekt trifft, da dass Explorieren und Auffinden des Objektes nicht Teil der Arbeit ist.\\
+Zu jedem Testlauf befindet sich auf der CD ein Video, in dem das AUV von oben, die Rohbilder der Kamera, die Ausgabe der Objekterkennung und das berechnetet Polynom zu sehen ist.
+\subsubsection{Gerader Verlauf}
+Für die ersten Tests wurde ein 100 Meter langes Objekt gerade in die Simulationsumgebung eingefügt. Dieses Objekt ist in mehreren Bereichen vom Meeresboden leicht bis komplett bedeckt. 
+
+\subsubsection{Kurve}
+Nach den Tests zum geraden Verlauf wurden kurvige Objekte mithilfe von Polynomial- und Exponentialfunktionen in die Simulation eingefügt. Hierbei wurde darauf geachtet kein Polynom zweiten Grades zu verwenden, um dem Regressionsverfahren keine perfekte Lösung zu bieten.\\
+Ziel dieser Tests ist es zu zeigen, dass das Folgen einer Links- sowie Rechtskurve und auch ein wechseln zwischen beiden Kurvenarten möglich sind. Für letzteres wurde eine Sinuskurve genutzt, um ein entsprechendes Objekt zu erzeugen.
+\todo{hier grafiken}
+
+Außerdem wurde noch eine Kurve nach einer langen Geraden erzeugt. Hiermit wird getestet, ob auch wechselnden geometrischen Strukturen gefolgt werden kann.
+
+\subsection{Kreisbahn}
+Für die finalen Tests wurden Kreisbahnen in Form von Ellipsen verwendet. Eine Ellipse erfüllt einige Eigenschaften, die für die Arbeit nicht trivial zu lösen sind. Zum einen gibt es verschieden stark gebogene Kurven und fast gerade Abschnitte. Zum anderen gibt es ständig Abschnitte, die parallel zur $Y-Achse$ verlaufen.\\

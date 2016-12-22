@@ -1,0 +1,65 @@
+\section{Grundlagen}
+\subsection{Simulationsumgbeung}
+Die Simulationsumgebung wurde von der \atlas entwickelt und wird für diese Arbeit zur Verfügung gestellt [\ref{screenSim}].
+In der Simulation wird die Fahrzeugsensorik und Motorik simuliert (siehe \ref{sec_auvSimGrundlage}). Außerdem wird noch eine grundlegende Wasserbewegung erzeugt, die durch Parametrisierung verändert werden kann.\\
+\todo{umrechnung lat lon zu meter}
+
+Die Umgebung an sich besteht aus \textit{wrl} Dateien, in denen die Welt mit \textit{VRML} beschrieben wird. Diese einzelnen Dateien werden in der \textit{main.wrl} zusammengefügt. Bereits vorhanden sind \textit{wrl} Dateien für das AUV, in denen die Realvorlage maßstabsgetreu nachgebildet wird, sowie ein Generator um zufallsgenerierte Meeresböden in \textit{wrl} zu erstellen. Die Objekte, die in der Arbeit verfolgt werden sollen wurden in \textit{VRML} modelliert und dann als Unterknoten in die \textit{main.wrl} hinzugefügt.\\
+Die Simulation basiert auf der \matlab Simulink 3D Animation Toolbox, somit stehen auch weitere \matlab Toolboxen zur Verfügung. 
+\begin{figure}[H]
+\includegraphics[width=\textwidth,scale=0.5]{ScreenshotSimulation.jpg}
+\caption{Screenshot der Simulationsumgebung}
+\label{screenSim}
+\end{figure}
+\subsection{AUV-Simulation}
+\label{sec_auvSimGrundlage}
+Das AUV wurde wie bereits beschrieben von der \atlas auf Grundlage eines der eigenen AUVs entwickelt. Zu dieser Simulation gehören die bereits erwähnten \textit{wrl} Dateien, sowie eine Simulation der Fahrzeug Motorik und Sensorik in \matlab Simulink. Es werden die für die Steuerung benötigte Schnittstelle in Form von Wegpunkten und eine Schnittstelle für die innere Sensorik des AUVs bereitgestellt. Die für diese Arbeit wichtigen Informationen aus der inneren Sensorik bestehen aus der Pose des AUVs in der Welt bestehend aus geografischen Koordinaten, der Höhe über dem Meeresboden und den Roll, Pitch und Yaw Werten.\\
+Für die Steuerung wird ein \texttt{lane follower controller} verwendet, bei dem eine Linie zwischen einem neuen und altem Wegpunkt gebildet und diese dann verfolgt wird. Für die Höhenkontrolle werden zwei Steuerungsmodi zur Verfügung gestellt. Zum einen die Fahrt auf Tiefe unter der Wasserobefläche oder Höhe über Meeresboden. Für diese Arbeit wird die Fahrt auf Höhe über dem Meeresboden gewählt, da die Objekterkennung und inverse Projektion am besten in einem festen Abstand zum Meeresboden funktioniert.
+
+Am Bug des AUVs befindet sich eine Kamera, die zentral nach unten ausgerichtet ist. Das Sichtfeld beträgt dabei 45$^\circ$ bei einer Auflösung von 640x480 Pixeln.
+\subsection{Koordinatensysteme}
+
+Im folgenden werde ich die Koordinatensysteme beschreiben, in denen Koordinaten angegeben werden. Ich gehe hierbei von einer geraden Ebene aus, da ich von einem hinreichend kleinen Operationsgebiet des AUVs ausgehe, sodass die Erdkrümmung keine Auswirkung hat.
+\subsubsection{Bild und Kamera}
+\label{sec_img_cam_coords}
+Das Bildkoordinatensystem [\ref{imageKoords}] beschreibt die Anordnung der Pixel im Bild als 2D Koordinaten. Der Ursprung ist immer die linke obere Bildecke. Ich gehe davon aus, dass das Bildkoordinatensystem immer auf der Meeresbodenebene liegt. Diese Annahme ist wichtig für die Transformationen [\ref{sec_transformations}].
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1]{imageCoords2.jpg}
+	\caption{Das Bildkoordinatensystem}
+	\label{imageKoords}
+\end{figure}
+Das Kamerakoordinatensystem beschreibt das dreidimensionale Koordinatensystem mit Ursprung im Mittelpunkt der Kameralinse. Die Kamera befindet sich 25 cm unter und 1.5 m vor dem Fahrzeugmittelpunkt.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1]{camCoords.jpg}
+	\caption{Das Kamerakoordinatensystem}
+	\label{CamKoords}
+\end{figure}
+
+\subsubsection{Body}
+Das Body Koordinatensystem beschreibt das Koordinatensystem relativ zum AUV Mitelpunkt (\ref{Abb. 1}).
+Der Ursprung wird hierbei durch den Schwerpunkt des AUVs bestimmt.
+Das Koordinatensystem entspricht dem klassischen nautischen Koordinatensystem, dem North-East-Down Koordinatensystem (vgl. Kapitel 2 in \cite{cai2011unmanned})
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{bodyKoords.jpg}
+	\caption{Das Body Koordinatensystem mit Mittelpunkt des AUVs}
+	\label{Abb. 1}
+\end{figure}
+
+Die Neigungswinkel (Roll-Pitch-Yaw) werden wie in [\ref{Abb. 2}] im Body Koordinatensystem angegeben.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{rollPitchYaw.jpg}
+	\caption{Die Neigungswinkel am AUV.}
+	\label{Abb. 2}
+\end{figure}
+\subsubsection{\matlab und Vrml (World)}
+Abbildung \ref{Abb. 3} zeigt die Koordinatensysteme der \matlab Grafik Bibliothek und der \textit{Vrml} Bibliothek. Zum Berechnen der Wegpunkte für die Steuerung des AUVs muss eine Pose in das Vrml Koordinatensystem transformiert werden. Der Ursprung beider Systeme liegt im Mittelpunkt der Simulationsumgebung.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=1]{matlabAndVrml.jpg}
+	\caption{\matlab und Vrml Koordinatensystem.}
+	\label{Abb. 3}
+\end{figure}

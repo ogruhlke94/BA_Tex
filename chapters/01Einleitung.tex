@@ -1,0 +1,16 @@
+\section{Einleitung}
+Diese Bachelorarbeit behandelt die Entwicklung einer Detektion und Verfolgung von Objekten am Meeresboden. Es wird eine Komponente entwickelt, die einem AUV eben dies ermöglicht. Diese Komponente beinhaltet die Erkennung der Objekte, die Schätzung des Objektverlaufs und die Steuerung des AUVs anhand von Wegpunkten.
+\subsection{Motivation}
+Die Motivation für die Arbeit entspringt der Idee Kameradaten in einem Robotersystem dezentral zu verarbeiten. So kann die Verarbeitung der Bilddaten auf einem eigenen Prozessor innerhalb der Kamerakomponente umgesetzt werden. Somit würden dem System keine rohen Daten, sondern verwertbare Informationen geliefert.\\
+Ein mögliches Beispiel hierfür ist ein Missionsszenario, in dem ein AUV einem Objekt am Meeresboden autonom folgen soll. So können Strukturen (Kabel, Pipelines etc.) von einem AUV untersucht werden, ohne dass ein Pilot\todo{wirklich Pilot?} das Fahrzeug steuern und überwachen müsste.\\
+Die Kamerakomponente kann hierbei eine Lageposition des Objektes liefern, anstatt einem Bild, das zentral verarbeitet werden müsste. Die Software für diese Szenario wird in dieser Arbeit entwickelt.\\
+
+\subsection{Grundidee}
+Die zu entwickelnde Komponente soll dem AUV eine verlässliche Information über die Objektlage liefern. Hierfür gilt es zwei Hauptprobleme zu lösen.\\
+Zum ersten ist dies die Erkennung der Objekte im Bild. In dieser Arbeit beschränke ich mich auf Linienförmigen Objekte. Die Bilderkennung soll Position und Ausrichtung des Objektes relativ zum AUV bestimmen können.
+Das zweite Problem ist die Bestimmung relevanter Daten, wenn die Bilderkennung kein Objekt finden kann, sei es durch zeitweises Versagen der Algorithmik, nicht verwertbarer Rohdaten oder durch nicht Sichtbarkeit der Objekte, wenn diese zum Beispiel von Sand überdeckt sind.
+In diesem Fall soll ein Schätzverfahren aufgrund der vorherigen Positionsdaten auch weiterhin die ungefähre Objektlage bestimmen.\\
+Als Hilfe für die Algorithmen soll es möglich sein a-priori Wissen über die Objekte, wie zum Beispiel der Durchmesser des Objektes angeben zu können.
+\subsection{Aufbau der Arbeit}
+Zunächst werde ich grundlegend die Simulationsumgebung und das AUV beschreiben. Danach werde ich verschiedene Herangehensweisen ähnlicher Arbeiten vorstellen und auf ihre Eignung für das von mir zu lösende Problem eingehen.
+Im dritten Teil gehe ich dann auf die von mir gewählte und umgesetzte Lösung ein. Zum Schluss folgen dann Ausführungen über die durchgeführten Tests und ein Ausblick auf weitere Arbeiten.

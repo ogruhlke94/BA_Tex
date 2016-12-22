@@ -1,0 +1,112 @@
+\subsection{Transformation}
+\label{sec_transformations}
+\todo{transformationsmatrizen noch falsch}
+Wie bereits in der Einleitung beschrieben werden mehrere Koordinatensysteme genutzt. Zur sicheren Verwendung der Koordinatensysteme sind Transformationen unter den Systemen zwingend nötig.
+Eine Transformation besteht aus einer Rotation und einer Translation, die sich aus den Beziehungen der Systeme zueinander ergibt.
+Da die Bilderkennung ein Ergebnis in Pixelkoordinaten liefert, das Schätzverfahren auf Weltkoordinaten arbeitet und die Wegpunkte in VRML Koordinaten angegeben werden müssen ist dies die wichtigste Transformation. Da jedoch auch weitere Koordinatensysteme für bestimmte Anwendungen wichtig sein können habe ich eine Transformationskette zuerst vom Bild ins Kamerakoordinatensystem, von dort in das Bodykoordinatensystem [\ref{Abb. 1}], das Weltkoordinatensystem und zuletzt in das VRML-Koordinatensystem [\ref{Abb. 3}].\\
+
+\begin{lstlisting}[language=Matlab]
+
+\end{lstlisting}
+\subsubsection{Bild zu Kamera}
+\label{section_PicToCam}
+Die verlustfreie Transformation von 2D-Pixelkoordinaten in 3D-Kamerakoordinaten ist mit einer Kamera nicht möglich. Jedoch lässt sich über das Wissen über die Entfernung zur Bildebene und die intrinsischen Kameraparameter eine gute Transformation durchgeführt werden. Da die Kamera gerade nach unten gerichtet ist, entspricht die Entfernung zur Bildebene der Höhe des AUVs über dem Meeresboden, welche über die Sensorik bestimmt wird. Die intrinsischen Kameraparameter lassen sich über eine Kamerakalibrierung bestimmen. Die Kamerakalibrierung wurde mithilfe der \matlab \textit{Computer Vision System Toolbox}, der dazu gehörenden \textit{Camera Calibration App} und dem Tutorial \footnote{https://de.mathworks.com/help/vision/ug/single-camera-calibrator-app.html} durchgeführt.\\
+Da die resultierende Transformation am besten im Abstand der Kalibrierung funktioniert wurde die Kalibrierung in einem Abstand von 6 Metern durchgeführt, was im späteren Verlauf auch der gewünschte Abstand zum Boden ist.\\
+Aus der Kamera Kalibrierung wird ein \textit{CameraParameter}\footnote{https://de.mathworks.com/help/vision/ref/cameraparameters-class.html} Objekt erzeugt, welches die Methode \textit{pointsToWorld} bietet. Die Methode nutzt die Formel \ref{pointsToWorld} zur Transformation in das Kamerakoordinatensystem. Leichte Neigungswinkel, die während der Fahrt auftreten können durch die Multiplikation mit der entsprechenden Rotationsmatrix herausgerechnet werden. Jedoch ist dabei zu beachten, dass durch die Neigungswinkel die Fläche, die die Kamera sieht vergrößert wird. Dadurch bilden einzelne Pixel mehr Fläche ab und die Transformation wird ungenauer.\\
+Die $z$ Koordinate ergibt sich aus dem Wissen Objekte am Meeresboden zu betrachten und der Tatsache, dass die Höhe der Kamera über dem Meeresboden bekannt ist.
+
+\begin{ownequation}[H]
+\begin{equation}
+bla
+\end{equation}
+\caption{Transformation der Pixelkoordinaten zu Kamerakoordinaten}
+\label{pointsToWorld}
+\end{ownequation}
+
+\subsubsection{Kamera zu Body}
+Die Transformation vom Kamerakoordinatensystem zum Bodykoordinatensystem besteht aus einer Translation und einer Rotation, die durch die Montageposition der Kamera am AUV bestimmt wird [\ref{sec_img_cam_coords}].\\
+Aufgrund der Position der Kamera zum Bodykoordinatenursprung (Schwerpunkt des AUVs) ergibt sich eine Translation um $1.5$ in X Richtung und $0.25$ in Z Richtung.\\
+Die Rotation beträgt dabei $90^\circ$ um die Z-Achse.\\
+Somit ergibt sich die Tranformationsmatrix \ref{trans_cam_body}\\
+
+\begin{ownequation}[H]
+\begin{equation}
+\begin{pmatrix}
+x_{body}\\y_{body}\\z_{body}\\1
+\end{pmatrix}
+=
+\begin{pmatrix}
+x_{cam}\\y_{cam}\\z_{cam}\\1
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+-1 & 0 & 0& 1.5\\
+0 & -1 & 0& 0.25\\
+0 & 0 & 1& 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}
+\end{equation}
+\caption{Transformation der Kamerakoordinaten zu Bodykoordinaten}
+\label{trans_cam_body}
+\end{ownequation}
+
+\subsubsection{Body zu Welt}
+Die Transformation vom Bodykoordinatensystem in das Weltkoordinatensystem ist wieder eine Translation und eine Rotation nötig.
+Aus der Definition der Koordinatensysteme ist zunächst eine Rotation um $180^\circ$ um die X-Achse nötig.
+Die Translation ergibt sich aus der Position des AUVs (Position Nord/Ost in Metern).\\
+Die Rotation wird durch die Ausrichtung des AUVs in der Welt (Yaw [\ref{Abb. 2}]) bestimmt. Somit ergibt sich die Tranformationsmatrix \ref{trans_body_world}\\
+
+\begin{ownequation}[H]
+\begin{equation}
+\begin{split}
+\begin{pmatrix}
+x_{world} \\ y_{world} \\ z_{world} \\ 1
+\end{pmatrix}
+& =
+\left(
+\begin{pmatrix}
+x_{body} \\ y_{body} \\ z_{body} \\ 1
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+1 & 0 & 0& 0\\
+0 & -1 & 0& 0\\
+0 & 0 & -1& 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}
+\right)\\
+&\cdot
+\begin{pmatrix}
+cos(yaw) & -sin(yaw) & 0 & Pos_{north}\\
+sin(yaw) & cos(yaw) & 0 & Pos_{east}\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}
+\end{split}
+\end{equation}
+\caption{Transformation der Bodykoordinaten zu Weltkoordinaten}
+\label{trans_body_world}
+\end{ownequation}
+
+\subsubsection{Welt zu VRML}
+Für die Transformation von Weltkoordinaten in VRML Koordinaten ist nur eine Rotation um $-90^\circ$ um die X-Achse nötig [\ref{trans_world_vrml}].
+\begin{ownequation}[H]
+\begin{equation}
+\begin{pmatrix}
+x_{vrml}\\y_{vrml}\\z_{vrml}\\1
+\end{pmatrix}
+=
+\begin{pmatrix}
+x_{body}\\y_{body}\\z_{body}\\1
+\end{pmatrix}
+\cdot
+\begin{pmatrix}
+1 & 0 & 0& 0\\
+0 & -1 & 0& 0\\
+0 & 0 & -1& 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}
+\end{equation}
+\caption{Transformation von Weltkoordinaten in VRML Koordinaten}
+\label{trans_world_vrml}
+\end{ownequation}

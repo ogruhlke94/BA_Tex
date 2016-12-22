@@ -1,0 +1,9 @@
+\section{Lösungsansatz}
+In diesem Kapitel wird der von mir implementierte Lösungsansatz vorgestellt. Grundlegend gehe ich hier zuerst auf die Erweiterung der Simulationsumgebung und die implementierte Transformationskette ein.\\
+Danach folgen genauere Ausführungen zu den Kernelementen der Arbeit, der Objekterkennung und dem Schätzverfahren.\\
+
+Ein grundlegender Datentyp, der sich über alle Teile der Arbeit erstreckt ist durch die Struktur \textit{pointInFrame} [\ref{pointInFrame}] definiert. Diese Struktur bildet einen von der Objekterkennung detektierten Punkt des Objektes mit seiner Position und Orientierung ab. Zudem wird gespeichert, in welchem Referenzframe der Punkt angegeben ist. Neben diesen Positionsdaten sind zudem noch die Gütefaktoren der Objekterkennung angegeben, aus denen ein Gewicht für die Regression berechnet wird (\ref{sec_objDet}, \ref{sec_curveFit}).
+
+\begin{lstlisting}[language=Matlab]
+
+\end{lstlisting}
