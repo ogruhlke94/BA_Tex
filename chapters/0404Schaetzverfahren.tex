@@ -1,6 +1,6 @@
 \subsection{Schätzverfahren}
 \label{sec_curveFit}
-In diesem Abschnitt wird das implementierte Schätzverfahren erläutert. Das Verfahren nutzt die Erkenntnisse der Bilderkennung und versucht mithilfe der Regression ein Polynom $f$ zweiten \todo{Welcher Grad} Grades durch alle erkannten Punkte in Betrachtung ihrer Orientierung zu fitten.
+In diesem Abschnitt wird das implementierte Schätzverfahren erläutert. Das Verfahren nutzt die Erkenntnisse der Bilderkennung und versucht mithilfe der Regression ein Polynom $f$ zweiten Grades durch alle erkannten Punkte in Betrachtung ihrer Orientierung zu fitten.
 Das Verfahren basiert auf dem \textit{Least-Squares} Verfahren\cite{simon2006optimal}, wobei versucht wird die Gleichung [\ref{lsq}] zu minimieren.\\
 $x_i$ und $y_i$ sind hierbei die Koordinaten der erkannten Punkte. Es wird über alle Punkte summiert der quadratische Fehler vom Funktionswert zu gegebenen Parametern zum $y$ aus der Bilderkennung berechnet. $f(p,x)$ ist eine beliebige Funktion, die $x$ in Abhängigkeit von $p$ auf eine reelle Zahl abbildet.\\
 \begin{ownequation}[H]
@@ -97,25 +97,3 @@ In [\ref{solve3}] sind die Teilbereiche der Punkte und die Punkte in ihrem jewei
 
 Zum Rotieren der Punkte werden beim Erzeugen eines neuen Bereichs die Rotationsmatrix $actual\_rotation$, sowie die Inverse $actual\_rotation\_inv$ berechnet und Zwischengespeichert. Sollte es bereits eine Rotation geben wird die neue Rotation durch Multiplikation der alten Rotation mit der neuen erzeugt.\\
 Sobald eine Transformation vorhanden ist werden alle Punkte vor der Regression in das rotierte Koordinatensystem transformiert. Durch dieses Verfahren kann stets eine Kurve entlang der $X-Achse$ berechnet werden.
-
-\subsubsection*{Generierung der Gewichte}
-\label{sec_calcWeights}
-In der Gleichung [\ref{F-function}] werden die Gewichte zur Berechnung des Fehlers genutzt. Im Vektor \textit{w} befindet sich genau ein Gewicht für jeden Punkt. Dieses setzt sich zum einen aus den Merkmalen der Objekterkennung [\ref{sec_weights}] und zum Anderen aus der Höhe des AUVs und den Neigungswinkeln zusammen.\\
-In der Gleichung [\ref{weightsEquation}] ist die Berechnung des Gewichts für einen Punkt abgebildet. Alle Faktoren für das Gewicht werden als Linearkombination mit den Vorfaktoren $g_1$ bis $g_8$ zusammengefasst. Die Vorfaktoren werden mithilfe von Testdaten gelernt. Hierfür werden Objekte mithilfe von Funktionen in die Simulationsumgebung gelegt. Das AUV wurde dann mithilfe der gleichen Funktionen am Objekt entlang gesteuert. Die erkannten Punkte der Objekterkennung, sowie die Pose des AUVs wurden dabei aufgezeichnet.\\
-Für jeder dieser Testdaten wird dann die Funktion $F$ [\ref{F-function}] optimiert. Der Unterschied hierbei ist jedoch, dass aufgrund der Definition des Objektes anhand von Funktionen die Funktionsparameter $p$ bekannt sind. Somit wird $F$ nicht mehr über die Parameter, sondern über die Vorfaktoren der Gewichte $g$ optimiert. Die so gelernten Faktoren werden dann in den Livebetrieb übernommen.
-\begin{ownequation}[H]
-\begin{equation}
-\begin{split}
-w &= g_1 \cdot numParts \\
-&+ g_2 \cdot area \\
-&+ g_3 \cdot peakheight \\
-&+ g_4 \cdot fitsBorder \\
-&+ g_5 \cdot relativeCount \\
-&+ g_6 \cdot auvheight \\
-&+ g_7 \cdot roll \\
-&+ g_8 \cdot yaw
-\end{split}
-\end{equation}
-\caption{Zusammensetzung des Gewichts für einen Punkt.}
-\label{weightsEquation}
-\end{ownequation}

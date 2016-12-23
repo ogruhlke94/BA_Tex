@@ -1,24 +1,20 @@
 \defcounter {refsection}{0}\relax 
 \select@language {ngerman}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {1}{\ignorespaces Transformation der Pixelkoordinaten zu Kamerakoordinaten\relax }}{25}{ownequation.caption.25}
+\contentsline {ownequation}{\numberline {1}{\ignorespaces Kreisgleichung zum Test ob ein Punkt $X_{test},Y_{test}$ auf einem Kreis liegt\relax }}{22}{ownequation.caption.21}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {2}{\ignorespaces Transformation der Kamerakoordinaten zu Bodykoordinaten\relax }}{25}{ownequation.caption.26}
+\contentsline {ownequation}{\numberline {2}{\ignorespaces Transformation der Kamerakoordinaten zu Bodykoordinaten\relax }}{27}{ownequation.caption.25}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {3}{\ignorespaces Transformation der Bodykoordinaten zu Weltkoordinaten\relax }}{26}{ownequation.caption.27}
+\contentsline {ownequation}{\numberline {3}{\ignorespaces Transformation der Bodykoordinaten zu Weltkoordinaten\relax }}{27}{ownequation.caption.26}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {4}{\ignorespaces Transformation von Weltkoordinaten in VRML Koordinaten\relax }}{26}{ownequation.caption.28}
+\contentsline {ownequation}{\numberline {4}{\ignorespaces Transformation von Weltkoordinaten in VRML Koordinaten\relax }}{28}{ownequation.caption.27}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {5}{\ignorespaces Testbereich ($TP$) und Checkbereiche ($LC$ und $RC$) f\IeC {\"u}r ein Pixel mit Index $i$\relax }}{27}{ownequation.caption.29}
+\contentsline {ownequation}{\numberline {5}{\ignorespaces Templatewertberechnung f\IeC {\"u}r ein Pixel\relax }}{30}{ownequation.caption.29}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {6}{\ignorespaces Templatewertberechnung f\IeC {\"u}r ein Pixel $i$\relax }}{28}{ownequation.caption.30}
+\contentsline {ownequation}{\numberline {6}{\ignorespaces Least Squares Verfahren\relax }}{34}{ownequation.caption.35}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {7}{\ignorespaces Least Squares Verfahren\relax }}{32}{ownequation.caption.38}
+\contentsline {ownequation}{\numberline {7}{\ignorespaces Weighted Least Squares Verfahren\relax }}{34}{ownequation.caption.36}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {8}{\ignorespaces Weighted Least Squares Verfahren\relax }}{32}{ownequation.caption.39}
+\contentsline {ownequation}{\numberline {8}{\ignorespaces Funktion zum \IeC {\"u}berpr\IeC {\"u}fen, ob die Steigung einen Maximalwert nicht \IeC {\"u}bersteigt.\relax }}{35}{ownequation.caption.37}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {9}{\ignorespaces Funktion zum \IeC {\"u}berpr\IeC {\"u}fen, ob die Steigung einen Maximalwert nicht \IeC {\"u}bersteigt.\relax }}{33}{ownequation.caption.40}
-\defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {10}{\ignorespaces Zusammensetzung der Funktion F, die minimiert wird.\relax }}{33}{ownequation.caption.41}
-\defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {11}{\ignorespaces Zusammensetzung des Gewichts f\IeC {\"u}r einen Punkt.\relax }}{38}{ownequation.caption.48}
+\contentsline {ownequation}{\numberline {9}{\ignorespaces Zusammensetzung der Funktion F, die minimiert wird.\relax }}{35}{ownequation.caption.38}

@@ -7,7 +7,7 @@ In der Simulation wird die Fahrzeugsensorik und Motorik simuliert (siehe Kapitel
 Die Umgebung an sich besteht aus \textit{wrl} Dateien, in denen die Welt mit \textit{VRML} beschrieben wird. Diese einzelnen Dateien werden in der \textit{main.wrl} zusammengefügt. Bereits vorhanden sind \textit{wrl} Dateien für das AUV, in denen die Realvorlage maßstabsgetreu nachgebildet wird, sowie ein Generator um zufallsgenerierte Meeresböden in \textit{wrl} zu erstellen. Die Objekte, die in der Arbeit verfolgt werden sollen wurden in \textit{VRML} modelliert und dann als Unterknoten in die \textit{main.wrl} hinzugefügt.\\
 Die Simulation basiert auf der \matlab Simulink 3D Animation Toolbox, somit stehen auch weitere \matlab Toolboxen zur Verfügung. 
 \begin{figure}[H]
-\includegraphics[width=\textwidth,scale=0.5]{ScreenshotSimulation.jpg}
+\includegraphics[width=\textwidth,scale=0.5]{Einleitung/ScreenshotSimulation.jpg}
 \caption{Screenshot der Simulationsumgebung}
 \label{screenSim}
 \end{figure}
@@ -25,14 +25,14 @@ Im folgenden werde ich die Koordinatensysteme beschreiben, in denen Koordinaten 
 Das Bildkoordinatensystem [Abb. \ref{imageKoords}] beschreibt die Anordnung der Pixel im Bild als 2D Koordinaten. Der Ursprung ist immer die linke obere Bildecke. Ich gehe davon aus, dass das Bildkoordinatensystem immer auf der Meeresbodenebene liegt. Diese Annahme ist wichtig für die Transformationen [Kapitel \ref{sec_transformations}].
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=1]{imageCoords2.jpg}
+	\includegraphics[scale=1]{Einleitung/imageCoords2.jpg}
 	\caption{Das Bildkoordinatensystem}
 	\label{imageKoords}
 \end{figure}
-Das Kamerakoordinatensystem [Abb. \ref{CamKoords}] beschreibt das dreidimensionale Koordinatensystem mit Ursprung im Mittelpunkt der Kameralinse. Die Kamera befindet sich 25 cm unter und 1.5 m vor dem Fahrzeugmittelpunkt.
+Das Kamerakoordinatensystem [Abb. \ref{CamKoords}] beschreibt das dreidimensionale Koordinatensystem mit Ursprung im Mittelpunkt der Kameralinse. Die Kamera befindet sich 25 cm unter und 1.3 m vor dem Fahrzeugmittelpunkt.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=1]{camCoords.jpg}
+	\includegraphics[scale=1]{Einleitung/camCoords.jpg}
 	\caption{Das Kamerakoordinatensystem}
 	\label{CamKoords}
 \end{figure}
@@ -43,7 +43,7 @@ Der Ursprung wird hierbei durch den Schwerpunkt des AUVs bestimmt.
 Das Koordinatensystem entspricht dem klassischen nautischen Koordinatensystem, dem North-East-Down Koordinatensystem (vgl. Kapitel 2 in \texttt{Unmanned rotorcraft systems} \cite{cai2011unmanned})
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.7]{bodyKoords.jpg}
+	\includegraphics[scale=0.7]{Einleitung/bodyKoords.jpg}
 	\caption{Das Body Koordinatensystem mit Mittelpunkt des AUVs}
 	\label{Abb. 1}
 \end{figure}
@@ -51,7 +51,7 @@ Das Koordinatensystem entspricht dem klassischen nautischen Koordinatensystem, d
 Die Neigungswinkel (Roll-Pitch-Yaw) werden wie in [Abb. \ref{Abb. 2}] im Body Koordinatensystem angegeben.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.7]{rollPitchYaw.jpg}
+	\includegraphics[scale=0.7]{Einleitung/rollPitchYaw.jpg}
 	\caption{Die Neigungswinkel am AUV.}
 	\label{Abb. 2}
 \end{figure}
@@ -59,7 +59,7 @@ Die Neigungswinkel (Roll-Pitch-Yaw) werden wie in [Abb. \ref{Abb. 2}] im Body Ko
 Abbildung \ref{Abb. 3} zeigt die Koordinatensysteme der \matlab Grafik Bibliothek und der \textit{Vrml} Bibliothek. Zum Berechnen der Wegpunkte für die Steuerung des AUVs muss eine Pose in das Vrml Koordinatensystem transformiert werden. Der Ursprung beider Systeme liegt im Mittelpunkt der Simulationsumgebung.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=1]{matlabAndVrml.jpg}
+	\includegraphics[scale=1]{Einleitung/matlabAndVrml.jpg}
 	\caption{\matlab und Vrml Koordinatensystem.}
 	\label{Abb. 3}
 \end{figure}
@@ -67,4 +67,6 @@ Abbildung \ref{Abb. 3} zeigt die Koordinatensysteme der \matlab Grafik Bibliothe
 \subsection{Eingesetzte Software}
 Neben den bereits erwähnten \matlab Bibliotheken Simulink, Graphics und 3D Animation werden in dieser Arbeit noch weitere Bibliotheken verwendet.\\
 Grundlegende geometrische Berechnungen, zum Beispiel Transformationen in 2D und 3D oder auch Distanzberechnungen von Punkten werden mithilfe der freien Bibliotheken \textit{geom2d}\footnote{https://de.mathworks.com/matlabcentral/fileexchange/7844-geom2d} und \textit{geom3d}\footnote{https://de.mathworks.com/matlabcentral/fileexchange/24484-geom3d} durchgeführt.\\
-Das Schätzverfahren nutzt die \textit{Optimization} Toolbox \footnote{https://de.mathworks.com/products/optimization.html}, die Lösungen für verschiedene Minimierungs-, Maximierungs- und Optimierungsprobleme liefert. 
+Das Schätzverfahren nutzt die \textit{Optimization} Toolbox \footnote{https://de.mathworks.com/products/optimization.html}, die Lösungen für verschiedene Minimierungs-, Maximierungs- und Optimierungsprobleme liefert.\\
+Für die Kamera Kalibrierung wurde die \matlab \textit{Computer Vision System Toolbox} genutzt. Die Toolbox bietet die einfach zu bedienende \textit{Camera Calibration App} mit der die intrinsischen Parameter bestimmt werden können.
+Hilfestellung lieferte hierbei das dazugehörige Tutorial \footnote{https://de.mathworks.com/help/vision/ug/single-camera-calibrator-app.html}\\
