@@ -3,9 +3,9 @@
 \subsubsection{Binärbild mit Template}
 \todo{Kann man die graphen mit legends gut genug erkennen?}
 Die Objekterkennung basiert auf einem ähnlichen Verfahren wie das vorgestellte CSurvey Projekt\cite{Albiez2015CSurveyA}.\\
-Da ein Farberkennung aufgrund der Sichtbedingungen nicht in Frage kommt wird im ersten Schritt das RGB-Bild in ein Graustufenbild umgewandelt. Die erste Idee war es hier das Helligkeitsbild zu betrachten, da ein gesuchtes Objekt einen höheren Helligkeitswert besitzt, als der Meeresboden (siehe Abbildung \ref{brightCurve_real} und \ref{brightCurve_sim}).\\
+Da ein Farberkennung aufgrund der Sichtbedingungen nicht in Frage kommt wird im ersten Schritt das RGB-Bild in ein Graustufenbild umgewandelt. Die erste Idee war es hier das Helligkeitsbild zu betrachten, da ein gesuchtes Objekt einen höheren Helligkeitswert besitzt, als der Meeresboden (siehe Abb. \ref{brightCurve_real} und \ref{brightCurve_sim}).\\
 Aus Erfahrungswerten früherer Projekte riet Christopher Gaudig mir, die Rotwerte der Bilder zu betrachten, da oftmals der Meeresboden und trübes Wasser geringe Rotwerte haben. In den Abbildungen \ref{redCurve_real} und \ref{redCurve_sim} ist dies zu beobachten. Die Kurven sehen denen der Helligkeitswerte sehr ähnlich, jedoch sind die Ausschläge des Objektes in den Rotwerten höher.\\
-Im nächsten Schritt wird mithilfe eines Templates (Abbildung \ref{templImg}) ein Binärbild erzeugt. Das Template zeichnet sich durch drei Pixelangaben aus. Die \textit{Testpixel} (rot) geben einen Bereich an, der im aktuellen Schritt geprüft wird. Die \textit{Checkpixel} (blau) geben den Bereich rechts und links neben dem Testbereich an und bilden den Referenzwert. Die \textit{Borderpixel} (grün) geben einen Bereich zwischen Test- und Checkbereich an, der ignoriert wird. Jedes Pixel dient einmal als Mittelpunkt des Testbereichs, um zu entscheiden, ob das betrachte Pixel Teil des Objektes sein kann. Dies ist der Fall, wenn der Wert des Pixels [Gleichung \ref{templateValue}] einen Schwellwert (rote Linie) übersteigt.\\
+Im nächsten Schritt wird mithilfe eines Templates [Abb. \ref{templImg}] ein Binärbild erzeugt. Das Template zeichnet sich durch drei Pixelangaben aus. Die \textit{Testpixel} (rot) geben einen Bereich an, der im aktuellen Schritt geprüft wird. Die \textit{Checkpixel} (blau) geben den Bereich rechts und links neben dem Testbereich an und bilden den Referenzwert. Die \textit{Borderpixel} (grün) geben einen Bereich zwischen Test- und Checkbereich an, der ignoriert wird. Jedes Pixel dient einmal als Mittelpunkt des Testbereichs, um zu entscheiden, ob das betrachte Pixel Teil des Objektes sein kann. Dies ist der Fall, wenn der Wert des Pixels [Gleichung \ref{templateValue}] einen Schwellwert (rote Linie) übersteigt.\\
 %\begin{ownequation}[H]
 %\begin{eqnarray}
 %TP_i = \left\{i-\frac{\#TP}{2} \dots i \dots i+\frac{\#TP}{2}\right\}\\
@@ -56,11 +56,11 @@ TV = \frac{sum(Testpixel)}{\#TP} - \frac{sum(Checkpixel)}{2 \cdot \#CP}
 \caption{Helligkeit und Rotwert im Simulationsbild}
 \end{figure}
 
-\subsubsection{Ransac auf Binärbild}
+\subsubsection{\rans auf Binärbild}
 Im weiteren Verlauf wird auf dem  Binärbild gearbeitet. Nach dem Vorbild von Wang et al. \cite{wang2004lane} wird das Bild in drei Segmente unterteilt.\\
 In jedem Segment wird dann mithilfe des \rans -Algorithmus ein Rechteck gesucht [Listing \ref{ransPseudo}]. Der Algorithmus sampled verschiedene Rechtecke im Segment. Dieses Rechteck wird durch einen Mittelpunkt, eine Orientierung, der Breite und der Höhe definiert. Die Höhe ergibt sich aus der Höhe des Segmentes und die Breite wird durch die erwartete Breite des Objektes festgelegt. Mittelpunkt und Orientierung werden in jedem Iterationsschritt zufällig gewählt.\\
 Für jeden Punkt des Binärbilds wird dann geprüft, ob er im Rechteck liegt (ein Inlier ist). Gemäß des \rans wird das Rechteck mit den meisten Inliern gewählt.\\
-\begin{lstlisting}[language=Matlab,caption=Eingesetzter Ransac als Pseudocode,label=ransPseudo]
+\begin{lstlisting}[language=Matlab,caption=Eingesetzter \rans als Pseudocode,label=ransPseudo]
 function ransac(segment,height,width,minInlier,iterNum)
 	maxInlier = 0;
 	orientations = -pi/4:0.05:pi/4;

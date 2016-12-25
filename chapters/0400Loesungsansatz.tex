@@ -2,7 +2,7 @@
 In diesem Kapitel wird der von mir implementierte Lösungsansatz vorgestellt. Grundlegend gehe ich zuerst auf die Erweiterung der Simulationsumgebung und die implementierte Transformationskette ein.\\
 Danach folgen genauere Ausführungen zu den Kernelementen der Arbeit, der Objekterkennung und dem Schätzverfahren.\\
 
-Ein grundlegender Datentyp, der sich über alle Teile der Arbeit erstreckt ist durch die Struktur \textit{pointInFrame} [\ref{pointInFrame}] definiert. Diese Struktur bildet einen von der Objekterkennung detektierten Punkt des Objektes mit seiner Position und Orientierung ab. Zudem wird gespeichert, in welchem Referenzframe der Punkt angegeben ist. Neben diesen Positionsdaten sind zudem noch die Gütefaktoren der Objekterkennung angegeben. \todo{ref auf ausblick}
+Ein grundlegender Datentyp, der sich über alle Teile der Arbeit erstreckt ist durch die Struktur \textit{pointInFrame} [Listing \ref{pointInFrame}] definiert. Diese Struktur bildet einen von der Objekterkennung detektierten Punkt des Objektes mit seiner Position und Orientierung ab. Zudem wird gespeichert, in welchem Referenzframe der Punkt angegeben ist. Neben diesen Positionsdaten sind zudem noch die Gütefaktoren der Objekterkennung angegeben. \todo{ref auf ausblick}
 
 \begin{lstlisting}[language=Matlab,caption=\textit{pointInFrame} Struktur Initialisierung, label = pointInFrame]
 Point_In_Frame = struct;
