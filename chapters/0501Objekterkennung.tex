@@ -51,8 +51,8 @@ Um zu testen, ob das Verfahren auch bei echten Bildern funktioniert wurden insge
 \subfloat[]{\includegraphics[height=0.2\textheight,width=0.5\textwidth]{imageProcessing/realPipe/002orgImstart.jpg}\label{rp_b}}&
 \subfloat[]{\includegraphics[height=0.2\textheight,width=0.5\textwidth]{imageProcessing/realPipe/002detectedImage.jpg}\label{rp_b}}
 \end{tabular}
-\caption{Tests der Objekterkennung auf realen Bilder aufgenommen im Unisee vom AUV \textit{DAGON}. Trotz sehr schlechten Sichtbedingungen und vielen Störpunkten im Binärbild wird die Pipeline in den oberen zwei Segmenten gut erkannt. In \textit{d)} ist im unteren Bereich eine Fehldetektion aufgrund der hohen Störpunktdichte in diesem Bereich. Die Randbereiche werden während des Binärisierungsprozess am Bild hinzugefügt, um dass Template problemlos auch auf den ersten und letzten Pixeln anzuwenden. Diese Bereiche werden bei der Detektion nicht betrachtet.}
-\label{realData_all}
+\caption{Tests der Objekterkennung auf realen Bilder aufgenommen im Unisee vom AUV \textit{DAGON}. Trotz sehr schlechten Sichtbedingungen und vielen Störpunkten im Binärbild wird die Pipeline in den oberen zwei Segmenten gut erkannt. In \textit{d)} ist im unteren Bereich eine Fehldetektion aufgrund der hohen Störpunktdichte in diesem Bereich. Die Randbereiche werden während des Binärisierungsprozess am Bild hinzugefügt, um dass Template auch auf den ersten und letzten Pixeln anwenden zu können. Diese Bereiche werden bei der Detektion nicht betrachtet.}
+\label{realData_bad}
 \end{figure}
 
 \begin{figure}[H]
@@ -61,4 +61,7 @@ Um zu testen, ob das Verfahren auch bei echten Bildern funktioniert wurden insge
 \subfloat[]{\includegraphics[height=0.2\textheight,width=0.5\textwidth]{imageProcessing/realPipe/008detectedImage.jpg}}\\
 \end{tabular}
 \caption{Test der Objekterkennung auf einem realen Bild aufgenommen im Unisee vom AUV \textit{DAGON}. Die Pipeline reflektiert sehr stark und hebt sich dadurch deutlich vom Hintergrund ab. Jedoch gibt es eine starke Reflexion des Wassers nah an der Pipeline, was zu einer Fehldetektion im zweiten Segment führt.}
+\label{realData_good}
 \end{figure}
+
+In den durchgeführten Tests wird deutlich, dass die Objekterkennung unter verschiedensten Sichtbedingungen gute Ergebnisse liefert. Abhängig ist die zuverlässige Detektion vom Templateschwellwert für die Binärisierung des Bildes. Je stärker sich das Objekt vom Hintergrund abhebt, desto höher kann der Schwellwert gewählt werden (vgl. Kapitel \ref{sec_templ}). Bei einem geringen Schwellwert gibt es im Binärbild mehr Störpunkte als bei einem höheren (vgl. Abb. \ref{realData_bad} mit \ref{realData_good}). Für eine zuverlässige Detektion ist 

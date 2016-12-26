@@ -1,0 +1,7 @@
+ minimumPoints: 3
+                       maxError: 0.1000
+                 PoseMultiplier: 2
+            DirectionMultiplier: 3
+                       maxSlope: 2000
+                ParamMultiplier: 0.1000
+    pointWeightDecreasingFactor: 200
