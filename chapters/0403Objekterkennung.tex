@@ -1,5 +1,6 @@
 \subsection{Objekterkennung}
 \label{sec_objDet}
+In diesem Kapitel wird die umgesetzte Objekterkennung beschrieben. Dabei wird aus einem Rohbild der Kamera ein \textit{pointInFrame}-Objekt erzeugt. Grob besteht die Objekterkennung aus zwei Schritten. Zuerst wird aus dem Rohbild ein Binärbild erzeugt und im zweiten Schritt dann im Binärbild das gesuchte Objekt detektiert.
 \subsubsection{Binärbild mit Template}
 \label{sec_templ}
 \todo{Kann man die graphen mit legends gut genug erkennen?}
@@ -81,17 +82,17 @@ function ransac(segment,height,width,minInlier,iterNum)
 end
 \end{lstlisting}
 
-Somit gibt es für jedes Bild bis zu drei Objektposen. Durch das unterteilen in Segmente lässt sich zum Einen bestimmen, in wie vielen Segmenten ein Objekt erkannt wurde (entspricht der \textit{Länge} des Objektes im Bild). Des weiteren kann ein gebogener Verlauf oder ein abgeknicktes Objekt im Bild sinnvoll erkannt werden.\\
+Somit gibt es für jedes Bild bis zu drei Objektposen. Durch das unterteilen in Segmente lässt sich zum Einen bestimmen, in wie vielen Segmenten ein Objekt erkannt wurde (entspricht der \textit{Länge} des Objektes im Bild). Desweiteren kann ein gebogener Verlauf oder ein abgeknicktes Objekt im Bild sinnvoll erkannt werden.\\
 In den ersten Tests dieses Verfahrens ist ersichtlich geworden, dass es einen \todo{richtige wortwahl?}Tradeoff zwischen Geschwindigkeit und Erkennungsgüte gab. Die Erkennung wurde besser, je mehr maximale Iterationen dem \rans erlaubt wurden. Da der \rans jedoch auf jedes der drei Segmente separat angewendet wird, wird bei steigender Iterationsanzahl die Geschwindigkeit deutlich reduziert. Für eine zuverlässige Erkennung waren zu viele Iterationen nötig, sodass das Verfahren nicht einsetzbar wäre.\\
 Als Lösung für dieses Probleme habe ich die möglichen erzeugten Rechtecke für den \rans begrenzt. Da das Template nur in horizontaler Richtung auf das Bild angewendet wird, sind horizontal liegende Objekte im Binärbild nicht sichtbar. Aufgrund dieser Tatsache lassen sich die Orientierungen auf einen Bereich begrenzen, anstatt diese komplett zufällig zu wählen. Durch diese Maßnahme wurden die benötigten Iterationen für ein zuverlässiges Ergebnis drastisch reduziert. Jedoch steigt auch die Gefahr Orientierungen nicht mehr richtig zu erkennen, wie in Abbildung \ref{detecFail} gezeigt.\\
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{imageProcessing/realPipe/004detectedImage.jpg}
-\caption{Falsche Erkennung aufgrund der Beschränkung der Ausrichtungen für den \rans}
+\caption{Falsch detektierte Bestimmung der Objektorientierung aufgrund der Beschränkung der Ausrichtungen für den \rans}
 \label{detecFail}
 \end{figure}
-Der zweite Faktor, der die Geschwindigkeit der Objekterkennung verringerte war die Menge der Punkte im Binärbild. So musste für jede Iteration des \rans für jeden Punkt geprüft werden, ob der Punkt im Rechteck liegt. In den Testbildern der Simulation lag die Anzahl der Punkte teilweise bei weit über $10000$, was in Kombination mit $200$ Iterationen zu einer inakzeptablen Laufzeit von ca. 5 Sekunden pro Bild.\\
-Zum Lösen dieses Problems wurden vorm Einsatz des \rans die Punktanzahl verringert, indem nur jedes dritte Pixel betrachtet wird und diese den Wert aller seiner Nachbarpixel erhält. \todo{Grafik?} Somit konnte die Punktanzahl zuverlässig auf unter $2000$ verringert werden, was zu einer deutlichen Beschleunigung (ca. 1 Sekunde pro Bild) ohne nennenswerte Verschlechterung der Ergebnisse führte.
+Der zweite Faktor, der die Geschwindigkeit der Objekterkennung verringerte war die Menge der Punkte im Binärbild. So musste für jede Iteration des \rans für jeden Punkt geprüft werden, ob der Punkt im Rechteck liegt. In den Testbildern der Simulation lag die Anzahl der Punkte teilweise bei weit über $10000$, was in Kombination mit $200$ Iterationen zu einer inakzeptablen Laufzeit von ca. 5 Sekunden pro Bild führte.\\
+Zum Lösen dieses Problems wurden vor dem Einsatz des \rans die Punktanzahl verringert, indem nur jedes dritte Pixel betrachtet wird und dieses den Mittelwert aller seiner Nachbarpixel erhält. \todo{Grafik?} Somit konnte die Punktanzahl zuverlässig auf unter $2000$ verringert werden, was zu einer deutlichen Beschleunigung (ca. 1 Sekunde pro Bild) ohne nennenswerte Verschlechterung der Ergebnisse führte.
 %\subsubsection*{Gewicht der erkannten Punkte}
 %\label{sec_weights}
 %\begin{itemize}

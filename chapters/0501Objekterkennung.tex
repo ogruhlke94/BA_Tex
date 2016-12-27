@@ -1,5 +1,6 @@
 \subsection{Tests Objekterkennung}
 \label{sec_testObj}
+\todo{bitte erst ab dritte Testreihe lesen}
 Die Objekterkennung wurde auf drei Arten getestet. Für diese Arbeit ist eine verlässliche Erkennung auf Simulationsbildern wichtig. Aus diesem Grund beziehen sich die ersten Tests auf Simulationsbildern. Der dritte Test dient der Evaluation der genutzten Methode in Bezug auf Echtdaten.\\
 Die erste Testreihe besteht aus Bildern, auf denen das Objekt gut zu sehen ist und nur leicht verdeckt ist. Außerdem werden die Bilder so gewählt, dass teilweise in einzelnen Segmenten kein Objekt zu sehen ist und dass das Objekt über in verschiedenen Segmenten unterschiedlich Orientiert sind.\\
 In der zweiten Testreihe werden die gleichen Bilder künstlich verschlechtert, um Bewegungsunschärfe und Rauschen der Kamera zu simulieren und die Grenzen der Objekterkennung im Bezug zur Bildqualität ermittelt. Für beide Testreihen wurden auch Vergleichsbilder ohne Objekt genommen.
@@ -42,7 +43,7 @@ In der zweiten Testreihe werden die gleichen Bilder künstlich verschlechtert, u
 \end{figure}
 
 \subsubsection*{Dritte Testreihe}
-Um zu testen, ob das Verfahren auch bei echten Bildern funktioniert wurden insgesamt 12 Bilder [\ref{anhang_objdecttests}] aus einem Testlauf des AUVs \textit{DAGON}\footnote{http://robotik.dfki-bremen.de/de/forschung/robotersysteme/dagon.html} während des Projektes \textit{CUSLAM}\footnote{http://robotik.dfki-bremen.de/de/forschung/projekte/cuslam.html} im Unisee getestet. In einige Bilder, wie [\ref{rp_a}] oder [\ref{rp_b}] ist die Pipeline schwer zu erkennen. Dadurch muss der Schwellwert für das Template entsprechend niedrig gesetzt werden, was in vielen Punkten im Binärbild führt, die nicht zum Objekt gehören. In Bildern, in denen die Pipeline direkt angestrahlt wird und klar heller ist, wie in [\ref{rp_g}] oder [\ref{rp_j}] ist das Objekt wieder klar heller als der Hintergrund, der Schwellwert kann höher angesetzt werden und die Erkennung hat weniger Punkte im Binärbild.
+Um zu testen, ob das Verfahren auch bei echten Bildern funktioniert wurden insgesamt 12 Bilder [Anhang \ref{anhang_objdecttests}] aus einem Testlauf des AUVs \textit{DAGON}\footnote{http://robotik.dfki-bremen.de/de/forschung/robotersysteme/dagon.html} während des Projektes \textit{CUSLAM}\footnote{http://robotik.dfki-bremen.de/de/forschung/projekte/cuslam.html} im Unisee getestet. In einigen Bilder, wie in Abbildung \ref{rp_a} oder \ref{rp_b} ist die Pipeline schwer zu erkennen. Dadurch muss der Schwellwert für das Template entsprechend niedrig gesetzt werden, was in vielen Punkten im Binärbild führt, die nicht zum Objekt gehören. In Bildern, in denen die Pipeline direkt angestrahlt wird und klar heller ist, wie in Abbildung \ref{realData_good} ist das Objekt wieder klar heller als der Hintergrund, der Schwellwert kann höher angesetzt werden um weniger Störpunkte zu erhalten.
 
 \begin{figure}[H]
 \begin{tabular}{cc}
