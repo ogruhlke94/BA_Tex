@@ -7,7 +7,7 @@ In diesem Kapitel wird die umgesetzte Objekterkennung beschrieben. Dabei wird au
 Die Objekterkennung basiert auf einem ähnlichen Verfahren wie das vorgestellte CSurvey Projekt\cite{Albiez2015CSurveyA}.\\
 Da ein Farberkennung aufgrund der Sichtbedingungen nicht in Frage kommt wird im ersten Schritt das RGB-Bild in ein Graustufenbild umgewandelt. Die erste Idee war es hier das Helligkeitsbild zu betrachten, da ein gesuchtes Objekt einen höheren Helligkeitswert besitzt, als der Meeresboden (siehe Abb. \ref{brightCurve_real} und \ref{brightCurve_sim}).\\
 Aus Erfahrungswerten früherer Projekte riet Christopher Gaudig mir, die Rotwerte der Bilder zu betrachten, da oftmals der Meeresboden und trübes Wasser geringe Rotwerte haben. In den Abbildungen \ref{redCurve_real} und \ref{redCurve_sim} ist dies zu beobachten. Die Kurven sehen denen der Helligkeitswerte sehr ähnlich, jedoch sind die Ausschläge des Objektes in den Rotwerten höher.\\
-Im nächsten Schritt wird mithilfe eines Templates [Abb. \ref{templImg}] ein Binärbild erzeugt. Das Template zeichnet sich durch drei Pixelangaben aus. Die \textit{Testpixel} (rot) geben einen Bereich an, der im aktuellen Schritt geprüft wird. Die \textit{Checkpixel} (blau) geben den Bereich rechts und links neben dem Testbereich an und bilden den Referenzwert. Die \textit{Borderpixel} (grün) geben einen Bereich zwischen Test- und Checkbereich an, der ignoriert wird. Jedes Pixel dient einmal als Mittelpunkt des Testbereichs, um zu entscheiden, ob das betrachte Pixel Teil des Objektes sein kann. Dies ist der Fall, wenn der Wert des Pixels [Gleichung \ref{templateValue}] einen Schwellwert (rote Linie) übersteigt.\\
+Im nächsten Schritt wird mithilfe eines Templates [Abb. \ref{templImg}] ein Binärbild erzeugt. Das Template zeichnet sich durch drei Pixelangaben aus. Die \textit{Testpixel} (rot) geben einen Bereich an, der im aktuellen Schritt geprüft wird. Die \textit{Checkpixel} (blau) geben den Bereich rechts und links neben dem Testbereich an und bilden den Referenzwert. Die \textit{Borderpixel} (grün) geben einen Bereich zwischen Test- und Checkbereich an, der ignoriert wird. Durch das Ignorieren des Bereichs kann ein langsamer regelmäßiger Übergang, der bei Betrachtung der direkten Nachbarpixeln des Testbereichs als Checkbereich zu einem geringen Templatewert führt, trotzdem noch einen hohen Templatewert ergeben. Jedes Pixel dient einmal als Mittelpunkt des Testbereichs, um zu entscheiden, ob das betrachte Pixel Teil des Objektes sein kann. Dies ist der Fall, wenn der Wert des Pixels [Gleichung \ref{templateValue}] einen Schwellwert (rote Linie) übersteigt.\\
 %\begin{ownequation}[H]
 %\begin{eqnarray}
 %TP_i = \left\{i-\frac{\#TP}{2} \dots i \dots i+\frac{\#TP}{2}\right\}\\
@@ -28,7 +28,7 @@ Im nächsten Schritt wird mithilfe eines Templates [Abb. \ref{templImg}] ein Bin
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{imageProcessing/Prinzip/template.jpg}
-\caption{Template zum Bestimmen des Binärbilds}
+\caption[Template zum Bestimmen des Binärbilds]{Template zum Bestimmen des Binärbilds. Getestet wird das Pixel im Zentrum des Testbereichs (rot). Der Templatewert ergibt sich aus der Subtraktion des Durchschnitts im Checkbereich (blau) vom Durchschnitt des Testbereichs (rot). Der Borderbereich (grün) wird dabei nicht beachtet.}
 \label{templImg}
 \end{figure}
 
@@ -36,7 +36,7 @@ Im nächsten Schritt wird mithilfe eines Templates [Abb. \ref{templImg}] ein Bin
 \begin{equation}
 TV = \frac{sum(Testpixel)}{\#TP} - \frac{sum(Checkpixel)}{2 \cdot \#CP}
 \end{equation}
-\caption{Templatewertberechnung für ein Pixel}
+\caption[Templatewertberechnung für ein Pixel als Formelausdruck]{Templatewertberechnung für ein Pixel als Formelausdruck.}
 \label{templateValue}
 \end{ownequation}
 
@@ -91,8 +91,8 @@ Als Lösung für dieses Probleme habe ich die möglichen erzeugten Rechtecke fü
 \caption{Falsch detektierte Bestimmung der Objektorientierung aufgrund der Beschränkung der Ausrichtungen für den \rans}
 \label{detecFail}
 \end{figure}
-Der zweite Faktor, der die Geschwindigkeit der Objekterkennung verringerte war die Menge der Punkte im Binärbild. So musste für jede Iteration des \rans für jeden Punkt geprüft werden, ob der Punkt im Rechteck liegt. In den Testbildern der Simulation lag die Anzahl der Punkte teilweise bei weit über $10000$, was in Kombination mit $200$ Iterationen zu einer inakzeptablen Laufzeit von ca. 5 Sekunden pro Bild führte.\\
-Zum Lösen dieses Problems wurden vor dem Einsatz des \rans die Punktanzahl verringert, indem nur jedes dritte Pixel betrachtet wird und dieses den Mittelwert aller seiner Nachbarpixel erhält. \todo{Grafik?} Somit konnte die Punktanzahl zuverlässig auf unter $2000$ verringert werden, was zu einer deutlichen Beschleunigung (ca. 1 Sekunde pro Bild) ohne nennenswerte Verschlechterung der Ergebnisse führte.
+Der zweite Faktor, der die Geschwindigkeit der Objekterkennung verringerte, ist die Menge der Punkte im Binärbild. So musste für jede Iteration des \rans für jeden Punkt geprüft werden, ob der Punkt im Rechteck liegt. In den Testbildern der Simulation lag die Anzahl der Punkte teilweise bei weit über $10000$, was in Kombination mit $200$ Iterationen zu einer inakzeptablen Laufzeit von ca. 5 Sekunden pro Bild führte.\\
+Zum Lösen dieses Problems wurde vor dem Einsatz des \rans die Punktanzahl verringert, indem nur jedes dritte Pixel betrachtet wird und dieses den Mittelwert aller seiner Nachbarpixel erhält. \todo{Grafik?} Somit konnte die Punktanzahl zuverlässig auf unter $2000$ verringert werden, was zu einer deutlichen Beschleunigung (ca. 1 Sekunde pro Bild) ohne nennenswerte Verschlechterung der Ergebnisse führte.
 %\subsubsection*{Gewicht der erkannten Punkte}
 %\label{sec_weights}
 %\begin{itemize}

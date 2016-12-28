@@ -1,10 +1,10 @@
 \subsection{Parametrisierung}
-Während der Tests ist stark aufgefallen, dass das Regressionsverfahren sehr parameterabhängig ist. Wie im vorherigen Kapitel zu sehen ist funktioniert die implementierte Lösung mit der richtigen Parametrisierung ein gutes Verhalten liefert. 
+Während der Tests ist stark aufgefallen, dass das Regressionsverfahren sehr parameterabhängig ist. Wie im vorherigen Kapitel zu sehen ist, liefert die implementierte Lösung mit der richtigen Parametrisierung ein gutes Verhalten. 
 Bei falscher Parametrisierung wird die Verfolgung sehr viel schlechter bis unmöglich.\\
-Große Unterschiede gibt es bei geraden und kurvigen Objekten. Als ausschlaggebende Parameter stellten sich die Gewichtungen der einzelnen Fehlerarten, die Stärke \textit{Tikhonov Regularisierung} (siehe Gleichung \ref{F-function} und der maximale Gesamtfehler der Regression bis zu einer Transformation (siehe Listing \ref{transPseudo}) heraus.
-Bei geraden Objekten führt eine Gleichgewichtung der Fehlerarten, eine Starke \textit{Tikhonov Regularisierung} und ein hoher erlaubter Maximalfehler zu sehr guten Ergebnissen (vgl. \ref{sec_pendel}).\\
-Kurvige Objekte, wie in Abb. \ref{testSCurve} oder \ref{testStraightCirc} werden am besten bei einer höheren Gewichtung des Orientierungsfehlers, keine \textit{Tikhonov Regularisierung} und ein geringerer erlaubter Maximalfehler zu guten Ergebnissen.
-Problematisch ist, dass die \textit{falsche} Parametrisierung (z.B. hoher Maximalfehler für kurvige Objekte) im schlimmsten Fall zu einem großen Fehler, damit einhergehender Sichtverlust zum Objekt und einem schlecht geschätzten Polynom, dass keine erneute Annäherung zum Objekt mehr gelingt.\todo{hier fehlgeschlagene tests}
+Große Unterschiede gibt es bei geraden und kurvigen Objekten. Als ausschlaggebende Parameter stellten sich die Gewichtungen der einzelnen Fehlerarten, die stärke \textit{Tikhonov Regularisierung} (siehe Gleichung \ref{F-function}) und der maximale Gesamtfehler der Regression bis zu einer Transformation (siehe Abschnitt \ref{alterWorldCoords}) heraus.
+Bei geraden Objekten führt eine Gleichgewichtung der Fehlerarten, eine starke \textit{Tikhonov Regularisierung} und ein hoher erlaubter Maximalfehler zu sehr guten Ergebnissen (vgl. \ref{sec_pendel}).\\
+Kurvige Objekte, wie in Abb. \ref{testSCurve} oder \ref{testStraightCirc} führen am besten bei einer höheren Gewichtung des Orientierungsfehlers, keine \textit{Tikhonov Regularisierung} und ein geringerer erlaubter Maximalfehler zu guten Ergebnissen.
+Problematisch ist, dass die \textit{falsche} Parametrisierung (z.B. hoher Maximalfehler für kurvige Objekte) im schlimmsten Fall zu einem großen Fehler, damit einhergehendem Sichtverlust zum Objekt und einem schlecht geschätzten Polynom führt, dass keine erneute Annäherung zum Objekt mehr gelingt.\todo{hier fehlgeschlagene tests}
 
 \subsubsection{Einpendeln}
 \label{sec_pendel}
