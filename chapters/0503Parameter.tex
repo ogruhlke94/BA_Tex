@@ -26,9 +26,9 @@ In Abbildung \ref{figpendel} ist diese Beobachtung mit verschiedenen Parametrisi
 
 \begin{figure}[H]
 \begin{tabular}{cc}
-\subfloat[Sehr gute Parametrisierung mit Gleichgewichtung der Fehlerarten, \textit{Tikhonov Regularisierung} und hohem Maximalfehler.]{\includegraphics[width=0.5\textwidth,height=0.3\textheight]{/testlaeufe/gradeGut/groundTruthPosition.jpg}}&
-\subfloat[Gute Parametrisierung mit Gleichgewichtung der Fehlerarten, geringer \textit{Tikhonov Regularisierung} und weder hohem, noch geringen Maximalfehler.]{\includegraphics[width=0.5\textwidth,height=0.3\textheight]{/testlaeufe/Gradeok/groundTruthPosition.jpg}}\\
-\subfloat[Schlechte Parametrisierung mit höherer Gewichtung des Orientierungsfehlers, keiner \textit{Tikhonov Regularisierung} und geringen Maximalfehler.]{\includegraphics[width=0.5\textwidth,height=0.3\textheight]{/testlaeufe/Gradeschlecht/groundTruthPosition.jpg}}
+\subfloat[Sehr gute Parametrisierung mit Gleichgewichtung der Fehlerarten, \textit{Tikhonov Regularisierung} und hohem Maximalfehler.]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/testlaeufe/gradeGut/groundTruthPosition.jpg}}&
+\subfloat[Gute Parametrisierung mit Gleichgewichtung der Fehlerarten, geringer \textit{Tikhonov Regularisierung} und weder hohem, noch geringen Maximalfehler.]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/testlaeufe/Gradeok/groundTruthPosition.jpg}}\\
+\subfloat[Schlechte Parametrisierung mit höherer Gewichtung des Orientierungsfehlers, keiner \textit{Tikhonov Regularisierung} und geringen Maximalfehler.]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/testlaeufe/Gradeschlecht/groundTruthPosition.jpg}}
 \end{tabular}
 \caption{Testlauf mit einem geraden Objekt [Abb. \ref{testStraight}] mit unterschiedlicher Parametrisierung. Im Fehler der AUV-Position zur Objektposition ist zu erkennen, dass bei den guten Parametrisierungen der Fehler über die Zeit abfällt. Bei der sehr guten Parametrisierung (\textit{a)}) sogar noch weitaus schneller. Bei der schlechten Parametrisierung (\textit{c)}) findet keine Verringerung des Fehlers statt. Die Höhe der Ausschläge nehmen auch nicht beständig ab, wie bei den guten Parametern.}
 \label{figpendel}
@@ -44,5 +44,3 @@ Der systematische Fehler tritt also oft direkt nach Situationen auf, die eine un
 Eine andere mögliche Erklärung ist darin zu finden, dass das Objekt in den Bereichen mit systematischen Fehler oft leicht verdeckt ist. Verdeckte Objekte führen dazu, dass das Objekt im Binärbild schmaler erscheint. Da die Detektion im Binärbild über eine Box mit der erwarteten Breite des Objektes im Bild durchgeführt wird, führt ein schmaler erscheinendes Objekt zu Problemen. Bei optimal sichtbaren Objekten \textit{passt} diese Box am besten (die meisten Inlier), wenn der Mittelpunkt der Box in horizontaler Richtung genau in der Mitte des Objektes liegt. Bei schmaler erscheinenden Objekten \textit{passt} die Box auch an weiteren Stellen des Objekten genau so gut, wie in der Mitte. Durch den Zufallsaspekt des \rans -Algorithmus kann hier ein breiter Bereich als Objektmitte detektiert werden.\\
 Gestützt wird diese Möglichkeit auch durch die Tatsache, dass die Streuung des Fehlers in Bereichen mit systematischen Fehler weitaus größer ist.
 \todo{hier grafik}
-Eine dritte Möglichkeit ist ein Fehler in der Odometrie des Fahrzeuges. Bei leichten Fehlern in der Positionsschätzung wird durch die Transformation von Body- in Weltkoordinaten dieser Fehler auf die detektierte Objektposition übertragen.
-\todo{Max kann das sein? Kann man das irgendwie Prüfen?}
