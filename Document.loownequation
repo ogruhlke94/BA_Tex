@@ -1,20 +1,20 @@
 \defcounter {refsection}{0}\relax 
 \select@language {ngerman}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {1}{\ignorespaces Kreisgleichung zum Test ob ein Punkt auf einem Kreis liegt.}}{19}{ownequation.caption.25}
+\contentsline {ownequation}{\numberline {1}{\ignorespaces Kreisgleichung zum Test, ob ein Punkt auf einem Kreis liegt.}}{20}{ownequation.caption.26}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {2}{\ignorespaces Transformation der Kamerakoordinaten zu Bodykoordinaten}}{24}{ownequation.caption.28}
+\contentsline {ownequation}{\numberline {2}{\ignorespaces Transformation der Kamerakoordinaten zu Bodykoordinaten}}{25}{ownequation.caption.29}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {3}{\ignorespaces Transformation der Bodykoordinaten zu Weltkoordinaten}}{24}{ownequation.caption.29}
+\contentsline {ownequation}{\numberline {3}{\ignorespaces Transformation der Bodykoordinaten zu Weltkoordinaten}}{25}{ownequation.caption.30}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {4}{\ignorespaces Transformation von Weltkoordinaten in VRML\ Koordinaten}}{25}{ownequation.caption.30}
+\contentsline {ownequation}{\numberline {4}{\ignorespaces Transformation von Weltkoordinaten in VRML\ Koordinaten}}{26}{ownequation.caption.31}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {5}{\ignorespaces Templatewertberechnung f\IeC {\"u}r ein Pixel als Formelausdruck}}{27}{ownequation.caption.33}
+\contentsline {ownequation}{\numberline {5}{\ignorespaces Templatewertberechnung f\IeC {\"u}r ein Pixel als Formelausdruck}}{28}{ownequation.caption.34}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {6}{\ignorespaces Least Squares Ansatz\relax }}{32}{ownequation.caption.39}
+\contentsline {ownequation}{\numberline {6}{\ignorespaces Least Squares Ansatz}}{34}{ownequation.caption.42}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {7}{\ignorespaces Weighted Least Squares Verfahren\relax }}{32}{ownequation.caption.40}
+\contentsline {ownequation}{\numberline {7}{\ignorespaces Weighted Least Squares Verfahren}}{34}{ownequation.caption.43}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {8}{\ignorespaces Funktion zum \IeC {\"u}berpr\IeC {\"u}fen, ob die Steigung einen Maximalwert nicht \IeC {\"u}bersteigt.\relax }}{33}{ownequation.caption.41}
+\contentsline {ownequation}{\numberline {8}{\ignorespaces Funktion zum \IeC {\"U}berpr\IeC {\"u}fen, ob die Steigung einen Maximalwert nicht \IeC {\"u}bersteigt.}}{35}{ownequation.caption.44}
 \defcounter {refsection}{0}\relax 
-\contentsline {ownequation}{\numberline {9}{\ignorespaces Zusammensetzung der Funktion F, die minimiert wird.\relax }}{33}{ownequation.caption.42}
+\contentsline {ownequation}{\numberline {9}{\ignorespaces Zusammensetzung der Funktion F, die minimiert wird. In (\ref {posError}) wird der \textit {Weighted-Least-Squares} auf den Fehler der Position und in (\ref {orienError}) auf den Fehler der Steigung angewendet.\relax }}{35}{ownequation.caption.45}

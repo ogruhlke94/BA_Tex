@@ -4,7 +4,7 @@ Danach folgen genauere Ausführungen zu den Kernelementen der Arbeit, der Objekt
 
 Ein grundlegender Datentyp, der sich über alle Teile der Arbeit erstreckt, ist durch die Struktur \textit{pointInFrame} [Listing \ref{pointInFrame}] definiert. Diese Struktur bildet einen von der Objekterkennung detektierten Punkt des Objektes mit seiner Position und Orientierung ab. Zudem wird gespeichert, in welchem Referenzframe der Punkt angegeben ist. Neben diesen Positionsdaten sind zudem noch die Gütefaktoren der Objekterkennung angegeben (siehe hierfür Kapitel \ref{sec_learnWeights}).
 
-\begin{lstlisting}[language=Matlab,caption=Initialisierung der \textit{pointInFrame} Struktur\, die erkannte Punkte in verschiedenen Referenzkoordinatensystemen abbildet., label = pointInFrame]
+\begin{lstlisting}[language=Matlab,caption={Initialisierung der \textit{pointInFrame}-Struktur, die erkannte Punkte in verschiedenen Referenzkoordinatensystemen abbildet.}, label = pointInFrame]
 Point_In_Frame = struct;
 Point_In_Frame.point = [0 0 0];
 Point_In_Frame.direction = 0;

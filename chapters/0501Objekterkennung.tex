@@ -1,48 +1,71 @@
 \subsection{Tests Objekterkennung}
 \label{sec_testObj}
-\todo{bitte erst ab dritte Testreihe lesen}
-Die Objekterkennung wurde auf drei Arten getestet. Für diese Arbeit ist eine verlässliche Erkennung auf Simulationsbildern wichtig. Aus diesem Grund beziehen sich die ersten Tests auf Simulationsbildern. Der dritte Test dient der Evaluation der genutzten Methode in Bezug auf Echtdaten.\\
-Die erste Testreihe besteht aus Bildern, auf denen das Objekt gut zu sehen ist und nur leicht verdeckt ist. Außerdem werden die Bilder so gewählt, dass teilweise in einzelnen Segmenten kein Objekt zu sehen ist und dass das Objekt über in verschiedenen Segmenten unterschiedlich Orientiert sind.\\
-In der zweiten Testreihe werden die gleichen Bilder künstlich verschlechtert, um Bewegungsunschärfe und Rauschen der Kamera zu simulieren und die Grenzen der Objekterkennung im Bezug zur Bildqualität ermittelt. Für beide Testreihen wurden auch Vergleichsbilder ohne Objekt genommen.
-\subsubsection*{Erste Testreihe}
+Die Objekterkennung wurde auf drei Arten getestet. Für diese Arbeit ist eine verlässliche Erkennung auf Simulationsbildern wichtig. Aus diesem Grund beziehen sich die Tests auf Simulationsbildern. Außerdem werden noch Test auf Echtdaten durchgeführt, um das Verfahren zu evaluieren.\\
+Für die Tests werden verschiedene Szenarien verwendet. Zunächst wird ein gerades Objekt, das komplett zu sehen ist getestet [Abb. \ref{testStraightObj}]. Dieser Tests repräsentiert das einfachste Szenario zur Detektion. Im zweiten Test wird dieses gerade Objekt vom Meeresboden verdeckt [Abb. \ref{testhalfObj}], um eine Detektion zu erschweren.\\
+Im dritten Test wird ein Objekt betrachtet, dass innerhalb des Bildes abgeknickt ist [Abb. \ref{testknickObj}]. Dabei wird getestet, wie sich die verschiedenen Ausrichtungen innerhalb eines Bildes auf die Detektion auswirkt.
+Ein vierter Test überprüft das Verhalten der Objekterkennung wenn kein Objekt im Bild zu sehen ist. Hier sollte keine erfolgreiche Detektion entstehen. Alle Tests werden unter verschiedensten Sichtbedingungen durchgeführt. Die ursprünglichen Simulationsbilder als einfachsten Test, die Bildqualität, in der die meisten Testläufe des AUVs durchgeführt wurden und Bilder unter sehr schlechten Sichtbedingungen, in denen es schwer ist überhaupt ein Objekt zu entdecken.\\
+\begin{verbatim}
+
+\end{verbatim}
+
+Auf den nachfolgenden Seiten sind die Ergebnisse dieser Tests aufgeführt. Wie zu erwarten war werden die Objekte und ihre Ausrichtungen im ursprünglichen Simulationsbild am besten erkannt. Hier sind die Grenzen zwischen Meeresboden und Objekt am klarsten und das Binärbild bildet am nahezu optimal das Objekt ab. Ebenso kann der Templateschwellwert so hoch gesetzt werden, dass keine Störpunkte vorhanden sind.\\
+Die Tests mit schlechteren Sichtbedingungen führen ebenfalls zu guten Ergebnissen. In den Binärbildern sind oftmals \textit{wellenförmige} Kanten zu beobachten, die teilweise zu leicht fehlerhaften Detektionen der Ausrichtung führen. Zurückzuführen sind diese Kanten darauf, dass das Objekt aufgrund der Textur nicht überall gleich Hohe Pixelwerte hat und so die \textit{dunkleren} Bereiche am Rand des Objektes den Schwellwert nicht mehr überschreiten. Da der Unterschied zwischen Meeresboden und Objekt bei diesen Sichtbedingungen nicht so groß ist wie im ursprünglichen Bild kann der Schwellwert nicht weiter gesenkt werden, ohne zu viele Störpunkte zu erhalten.\\
+Unter sehr schlechten Sichtbedingungen werden die Objekte noch immer gut detektiert. Jedoch sind in einigen Binärbildern trotz der einfachen Umgebung bereits viele Störpunkte sichtbar. Auch komplett ohne Objekt sind Punkte vorhanden. Ebenso wird das Objekt im Binärbild nicht mehr so gut abgebildet, wie unter besseren Bedingungen. Die bereits erwähnten \textit{wellenförmigen} Kanten sind auch hier zu beobachten.\\
+Aus den Tests geht hervor, dass die Sichtbedingungen einen Einfluss auf die Binärisierung des Eingabebildes auswirkt. Je schlechter die Sichtbedingungen sind, desto geringer muss der Templateschwellwert gewählt werden. Der Schwellwert ist jedoch ausschlaggebend für die Qualität der Abbildung vom Objekt im Binärbild. Umso geringer der Schwellwert gewählt wird, umso mehr Störpunkte sind auch im Binärbild vorhanden. Bei schlechten Bedingungen muss der Schwellwert jedoch gering gewählt werden, um das Objekt abbilden zu können. Somit steigt bei schlechteren Sichtbedingungen die Gefahr falsche Detektionen aufgrund von Störpunkten zu erhalten oder auch Objekte zu detektieren, wo keine vorhanden sind.
+
+\todo{b)s neu machen auf gleiche Größe}
+\subsubsection*{Tests auf Simulationsbildern}
 \begin{figure}[H]
 \begin{tabular}{cc}
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeOptimal.jpg}}&
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeOptimalFin.jpg}}\\
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/graeOk.jpg}}&
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/graeOkFin.jpg}}
+\subfloat[Objekt in ursprünglichem Simulationsbild]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeOptimal.jpg}}&
+\subfloat[Detektiertes Objekt im ursprünglichen Simulationsbild]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeOptimalFin.jpg}}\\
+\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeTestQuali.jpg}}&
+\subfloat[Detektiertes Objekt unter schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeTestQualiFin.jpg}}\\
+\subfloat[Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeschlecht.jpg}}&
+\subfloat[Detektiertes Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeschlechtfin.jpg}}
 \end{tabular}
-\caption{Ein gerades Objekt, dass ohne Einschränkungen zu sehen ist wird unter verschiedenen Sichtbedingungen und Bildqualität getestet. }
+\caption{Ein gerades Objekt, dass ohne Einschränkungen zu sehen ist wird unter verschiedenen Sichtbedingungen und Bildqualität getestet. Die Gerade wird unter allen Bedingungen gut detektiert. In \textit{f)} ist zu sehen, dass unter sehr schlechten Sichtbedingungen ein \textit{gezackter} Kantenverlauf entsteht.}
+\label{testStraightObj}
 \end{figure}
 \begin{figure}[H]
 \begin{tabular}{cc}
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgen.jpg}}&
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgenfin.jpg}}\\
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgenok.jpg}}&
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgenokfin.jpg}}
+\subfloat[Objekt in ursprünglichem Simulationsbild]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgen.jpg}}&
+\subfloat[Detektiertes Objekt im ursprünglichen Simulationsbild]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgenfin.jpg}}\\
+\subfloat[Objekt unter schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgenTestQuali.jpg}}&
+\subfloat[Detektiertes Objekt unter schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgenTestQualiFin.jpg}}\\
+\subfloat[Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgenschlecht.jpg}}&
+\subfloat[Detektiertes Objekt im ursprünglichen Simulationsbild]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgenschlechtfin.jpg}}
 \end{tabular}
-\caption{}
+\caption{Das verborgene Objekt wird unter allen Sichtbedingungen erkannt. Hier ist der Effekt der drei Segmente zu sehen. Während in \textit{b)} und \textit{f)} das Objekt noch in zwei Segmenten detektiert wurde, ist das Objekt in \textit{d)} zu kurz um im zweiten Segment noch detektiert zu werden.}
+\label{testhalfObj}
 \end{figure}
 \begin{figure}[H]
 \begin{tabular}{cc}
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickOptimal.jpg}}&
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickoptimalfin.jpg}}\\
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickok.jpg}}&
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickokfin.jpg}}
+\subfloat[Objekt in ursprünglichem Simulationsbild]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickOptimal.jpg}}&
+\subfloat[Detektiertes Objekt im ursprünglichen Simulationsbild]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickoptimalfin.jpg}}\\
+\subfloat[Objekt unter schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickTestQuali.jpg}}&
+\subfloat[Detektiertes Objekt unter schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickTestQualiFin.jpg}}\\
+\subfloat[Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickschlecht.jpg}}&
+\subfloat[Detektiertes Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickschlechtfin.jpg}}
 \end{tabular}
-\caption{}
+\caption{Das abgeknickte Objekt wird unter allen Sichtbedingungen erkannt. In \textit{d)} und \textit{f)} ist ein \textit{wellenförmiger} Kantenverlauf zu beobachten, der in \textit{d)} zu einer leicht falschen Bestimmung der Orientierung im geraden Bereich führt. In \textit{f)} ist zu sehen, dass die Störpixel im abgeknickten Bereich zu einer Fehldetektion der Orientierung führt.}
+\label{testknickObj}
 \end{figure}
 \begin{figure}[H]
 \begin{tabular}{cc}
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichts.jpg}}&
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsoptimalfin.jpg}}\\
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsok.jpg}}&
-\subfloat[]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsokfin.jpg}}
+\subfloat[Leeres ursprünglichem Simulationsbild]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichts.jpg}}&
+\subfloat[Detektiertes Objekt im ursprünglichen Simulationsbild]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsoptimalfin.jpg}}\\
+\subfloat[Leeres Bild unter schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsTestQuali.jpg}}&
+\subfloat[Detektiertes Objekt unter schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsTestQualiFin.jpg}}\\
+\subfloat[Leeres Bild unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsschlecht.jpg}}&
+\subfloat[Detektiertes Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsschlechtfin.jpg}}
 \end{tabular}
-\caption{}
+\caption{In den Vergleichsbildern ohne Objekt wird auch unter allen Sichtbedingungen kein Objekt detektiert. Lediglich in \textit{f)} sind einige Störpunkte im Binärbild vorhanden, die auf den niedrig gewählten Templateschwellwert [Kapitel \ref{sec_templ}] zurückzuführen sind.}
+\label{testnothingObj}
 \end{figure}
 
-\subsubsection*{Dritte Testreihe}
+\subsubsection*{Tests auf Realbildern}
+\label{realObjTests}
 Um zu testen, ob das Verfahren auch bei echten Bildern funktioniert wurden insgesamt 12 Bilder [Anhang \ref{anhang_objdecttests}] aus einem Testlauf des AUVs \textit{DAGON}\footnote{http://robotik.dfki-bremen.de/de/forschung/robotersysteme/dagon.html} während des Projektes \textit{CUSLAM}\footnote{http://robotik.dfki-bremen.de/de/forschung/projekte/cuslam.html} im Unisee getestet. In einigen Bilder, wie in Abbildung \ref{rp_a} oder \ref{rp_b} ist die Pipeline schwer zu erkennen. Dadurch muss der Schwellwert für das Template entsprechend niedrig gesetzt werden, was zu vielen Punkten im Binärbild führt, die nicht zum Objekt gehören. In Bildern, in denen die Pipeline direkt angestrahlt wird und klar heller ist, wie in Abbildung \ref{realData_good} ist das Objekt wieder klar heller als der Hintergrund, der Schwellwert kann höher angesetzt werden, um weniger Störpunkte zu erhalten.
 
 \begin{figure}[H]
