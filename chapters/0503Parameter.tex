@@ -1,10 +1,24 @@
 \subsection{Parametrisierung}
+\label{sec_param}
 Während der Tests ist stark aufgefallen, dass das Regressionsverfahren sehr parameterabhängig ist. Wie im vorherigen Kapitel zu sehen ist, liefert die implementierte Lösung mit der richtigen Parametrisierung ein gutes Verhalten. 
 Bei falscher Parametrisierung wird die Verfolgung sehr viel schlechter bis unmöglich.\\
 Große Unterschiede gibt es bei geraden und kurvigen Objekten. Als ausschlaggebende Parameter stellten sich die Gewichtungen der einzelnen Fehlerarten, die stärke \textit{Tikhonov Regularisierung} (siehe Gleichung \ref{F-function}) und der maximale Gesamtfehler der Regression bis zu einer Transformation (siehe Abschnitt \ref{alterWorldCoords}) heraus.
 Bei geraden Objekten führt eine Gleichgewichtung der Fehlerarten, eine starke \textit{Tikhonov Regularisierung} und ein hoher erlaubter Maximalfehler zu sehr guten Ergebnissen (vgl. \ref{sec_pendel}).\\
 Kurvige Objekte, wie in Abb. \ref{testSCurve} oder \ref{testStraightCirc} führen am besten bei einer höheren Gewichtung des Orientierungsfehlers, keine \textit{Tikhonov Regularisierung} und ein geringerer erlaubter Maximalfehler zu guten Ergebnissen.
-Problematisch ist, dass die \textit{falsche} Parametrisierung (z.B. hoher Maximalfehler für kurvige Objekte) im schlimmsten Fall zu einem großen Fehler, damit einhergehendem Sichtverlust zum Objekt und einem schlecht geschätzten Polynom führt, dass keine erneute Annäherung zum Objekt mehr gelingt.\todo{hier fehlgeschlagene tests}
+Problematisch ist, dass die \textit{falsche} Parametrisierung (z.B. hoher Maximalfehler für kurvige Objekte) im schlimmsten Fall zu einem großen Fehler, damit einhergehendem Sichtverlust zum Objekt und einem schlecht geschätzten Polynom führt, dass keine erneute Annäherung zum Objekt mehr gelingt.
+
+\begin{figure}[H]
+\begin{tabular}{cc}
+\subfloat[Fahrtverlauf des AUVs (rot) an einer scharfen Kurve (blau)]{\includegraphics[height=0.4\textheight,width=0.5\textwidth]{/testlaeufe/kurvenichtverloren/auvroute.jpg}}&
+\subfloat[Fahrtverlauf des AUVs (rot) an einer scharfen Kurve (blau)]{\includegraphics[height=0.4\textheight,width=0.5\textwidth]{/testlaeufe/kurveverloren/auvroute.jpg}}\\
+\subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kurvenichtverloren/groundTruth.jpg}}&
+\subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kurveverloren/groundTruth.jpg}}
+\end{tabular}
+\caption{Das Folgen der Kurve funktioniert auch bei schlechten Sichtbedingungen. Es ist jedoch zu beobachten, dass eine nur leichte Verdeckung des Objektes einen starken Einfluss auf den Fehler hat.}
+\label{curveBadSight}
+\end{figure}
+
+\todo{hier fehlgeschlagene tests}
 
 \subsubsection{Einpendeln}
 \label{sec_pendel}
