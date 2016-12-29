@@ -23,7 +23,7 @@ Die Methode setzt dabei voraus, dass die geraden Anfänge der Straßenmarkierung
 	\label{lcfDec}
 \end{figure}
 
-Alternativ können auch gerade Linien im Kantenbild gesucht werden. In \texttt{A Real-time Lane Detection Algorithm Based on a Hyperbola-Pair Model} \cite{chen2006real} suchen Chen et al. mithilfe des \textit{\rans}-Algorithmus auf einem Kantenbild zwei gerade Linien. Auf Grundlage der gefundenen Linien wird dann die Mitte der Straße und in weiteren Schritten dann auch der Straßenverlauf bestimmt [Abb. \ref{ransDetectChen}].\\
+Alternativ können auch gerade Linien im Kantenbild gesucht werden. In \texttt{A Real-time Lane Detection Algorithm Based on a Hyperbola-Pair Model} \cite{chen2006real} suchen Chen et al. mithilfe des \textit{\rans}-Algorithmus auf einem Kantenbild zwei gerade Linien. Auf Grundlage der gefundenen Linien wird anschließend die Mitte der Straße und in weiteren Schritten der Straßenverlauf bestimmt [Abb. \ref{ransDetectChen}].\\
 \begin{figure}[H]
 \centering
 \begin{tabular}{cc}
@@ -33,16 +33,16 @@ Alternativ können auch gerade Linien im Kantenbild gesucht werden. In \texttt{A
 \caption[Detektion eines Straßenverlaufs mit dem \rans -Algorithmus]{Erkennungsprozess aus \textit{A Real-time Lane Detection Algorithm Based on a Hyperbola-Pair Model}. Im rechten Bild ist in rot die detektierte Straßenmitte gekennzeichnet.}
 \label{ransDetectChen}
 \end{figure}
-Einen ähnlichen Ansatz verfolgen auch Wang et al. für ihre Detektion in \texttt{Lane detection and tracking using B-Snake}\cite{wang2004lane}. Besonders hierbei ist, dass das Eingabebild vertikal in fünf Segmente eingeteilt wird (siehe Ab. \ref{Abb. 4}). In jedem Segment werden mithilfe der \textit{Hough Transformation} Linien erkannt und wie bei Chen die Mitte der Straße bestimmt. Außerdem wird für jedes Segment auch der vanishing point \textit{vp} bestimmt. Der \textit{vanishing point} eines Segmentes bestimmt die Richtung der detektierten Straße (siehe Abb. \ref{detHough}).\\
+Einen ähnlichen Ansatz verfolgen auch Wang et al. für ihre Detektion in \texttt{Lane detection and tracking using B-Snake}\cite{wang2004lane}. Besonders hierbei ist, dass das Eingabebild vertikal in fünf Segmente eingeteilt wird (siehe Ab. \ref{Abb. 4}). In jedem Segment werden mithilfe der \textit{Hough Transformation} Linien erkannt und wie bei Chen die Mitte der Straße bestimmt. Außerdem wird für jedes Segment auch der \textit{vanishing point} bestimmt. Der \textit{vanishing point} eines Segmentes bestimmt die Richtung der detektierten Straße (siehe Abb. \ref{detHough}).\\
 Die Arbeit bietet eine Möglichkeit innerhalb eines Bildes eine Kurve zu detektieren, obwohl nur gerade Linien gesucht wurden.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{SOTA/edgesSection.jpg}
-\caption[Detektion eines Straßenverlaufs mit der \textit{Hough Transformation}]{Ergebnis der Straßenverlaufsdetektion mithilfe von \textit{Hough Transformation} nach Wang et al.. Links werden die erkannten Straßenmarkierungen der Segmente angedeutet und der \textit{vanishing point} des vierten Segmentes. Rechts ist die final detektierte Mittellinie der Straße über alle Segmente.}
+\caption[Detektion eines Straßenverlaufs mit der \textit{Hough Transformation}]{Ergebnis der Straßenverlaufsdetektion mithilfe von \textit{Hough Transformation} nach Wang et al.. Links werden die erkannten Straßenmarkierungen der Segmente angedeutet und der \textit{vanishing point (vp)} des vierten Segmentes. Rechts ist die final detektierte Mittellinie der Straße über alle Segmente.}
 \label{detHough}
 \end{figure}
 Aus den von mir betrachteten Arbeiten geht hervor, dass mithilfe von LCFs kurvige Straßenverläufe gut erkannt werden können. Da Kameras in den betrachteten Arbeiten jedoch nach vorne ausgerichtet sind, um den Straßenverlauf möglichst weit zu erkennen, unterscheidet sich dieser Ansatz in einem wesentlichen Punkt vom Unterwasserszenario. In den meisten Einsatzgebieten würde eine nach vorn ausgerichtete Kamera keine Objekte am Meeresboden sehen können. Der Höhenunterschied von der Kamera zum Boden wäre zu groß um Objekte nah am Fahrzeug zu sehen und in der Entfernung sind oftmals, bedingt durch schlechte Sichtverhältnisse, keine Objekte erkennbar. Aus diesen Gründen sollte die Kamera gerade nach unten oder leicht nach vorne geneigt ausgerichtet sein.\\
-Aus dieser Ausrichtung resultiert jedoch, dass der betrachtete Bereich weitaus kleiner ist und die meisten Objekte nur eine sehr leichte Krümmung im Bild aufweisen. Hier reicht eine Linienerkennung aus.
+Aus dieser Ausrichtung resultiert jedoch, dass der betrachtete Bereich weitaus kleiner ist und die meisten Objekte nur eine sehr leichte Krümmung im Bild aufweisen. In solch kleinen Bereichen reicht eine Linienerkennung aus.
 
 \subsubsection{Andere Ansätze}
 Im \texttt{CSurvey}-Projekt \cite{Albiez2015CSurveyA} beleuchten Albiez et al. eine Pipeline mit einem Linienlaser und erkennen die Linie im Kamerabild über den Helligkeitswert. Für die Detektion wird für jede Bildzeile ein Helligkeitsmaximum gesucht. Hierfür wird ein Template, das den typischen Helligkeitsunterschied der beleuchteten Pipeline zum Hintergrund abbildet, auf die Zeile angewandt [Abb. \ref{templateCSurv}].\\
@@ -54,7 +54,7 @@ Diese Detektion wurde vor allem in verschiedenen Entfernungen zum Boden und vers
 \label{templateCSurv}
 \end{figure}
 Im \texttt{Avalon}-Projekt \cite{avalon} wird eine Pipeline mit einem Farbfilter im HSV-Farbraum detektiert. Dieser Filter erzeugt zuerst ein Binärbild. Auf diesem Binärbild wird dann mit einem Canny Edge Detector ein Kantenbild generiert. Im Kantenbild wird mithilfe der Hough-Transformation nach Linien gesucht.\\
-In \texttt{Simple vision tracking of pipelines for an autonomous underwater vehicle}\cite{hallset1991simple} wird ähnlich wie bei den Linienerkennungsansätzen eine Kantenerkennung durchgeführt. Im Kantenbild werden dann mithilfe von Segmentierung Regionen definiert. Auf diese Regionen werden dann umschließende Rechtecke gelegt.
+In \texttt{Simple vision tracking of pipelines for an autonomous underwater vehicle}\cite{hallset1991simple} wird ähnlich wie bei den Linienerkennungsansätzen eine Kantenerkennung durchgeführt. Im Kantenbild werden dann durch Segmentierung Regionen definiert, auf welche dann umschließende Rechtecke gelegt werden.
 Aus diesen Rechtecken lässt sich dann die gesuchte Pipeline bestimmen.\\
 \begin{figure}[H]
 \centering
@@ -69,7 +69,7 @@ Aus diesen Rechtecken lässt sich dann die gesuchte Pipeline bestimmen.\\
 \end{figure}
 
 Foresti et al. detektieren in \textit{A Vision Based System for Object Detection in
-Underwater Images}\cite{foresti2000vision} Unterwasserpipelines mithilfe eines neuronalen Netzes. In Abbildung \ref{nnDet} ist zu sehen, dass die Pipelines sehr gut erkannt wurden. Selbst bei vom Sand verdeckte Pipelines (\ref{nnDet}c und \ref{nnDet}d) werden die Kanten der Pipelines noch richtig bestimmt.
+Underwater Images}\cite{foresti2000vision} Unterwasserpipelines mithilfe eines neuronalen Netzes. In Abbildung \ref{nnDet} ist zu sehen, dass die Pipelines sehr gut erkannt wurden. Selbst bei vom Sand verdeckten Pipelines (\ref{nnDet}c und \ref{nnDet}d) werden die Kanten der Pipelines noch richtig bestimmt.
 
 \begin{figure}[H]
 \centering
@@ -109,8 +109,8 @@ In der Abbildung \ref{gpsfit} ist gut zu sehen, wie die Kurve nahezu den echten 
 \label{gpsfit}
 \end{figure}
 Eine sehr ähnliche Arbeit findet sich in \texttt{Autonomous Searching and Tracking of a River using an UAV}\cite{rathinam2007autonomous} von Rathinam et al.. Ziel der Arbeit ist es mithilfe eines UAVs (Unmanned Aerial Vehicle) den Verlauf eines Flusses zu bestimmen. Das Flugzeug ist mit einer Kamera zur Detektion des Flusses ausgestattet.\\
-Aus der Objekterkennung werden GPS-Positionen des Flusses berechnet. Durch diese Daten wird dann mithilfe von Regression eine Kurve gelegt (siehe Abb. \ref{riverCurve}).\\
-Im gelb gekennzeichneten Bereich im rechten Bild ist zu sehen, dass die Kurve an dieser Stelle nicht den Flussverlauf abbildet. Im selben Bereich ist im linken Bild zu sehen, dass die Objekterkennung keine Ergebnisse lieferte. Dies liegt daran, dass das Flugzeug dem engen Flussverlauf aufgrund der Trägheit der Steuerung nicht folgen konnte. Diese Trägheit ist in ähnlichen Rahmen auch im Unterwasserszenario zu erwarten.\\
+Aus der Objekterkennung werden GPS-Positionen des Flusses berechnet. Durch diese Daten wird dann durch Regression eine Kurve gelegt (siehe Abb. \ref{riverCurve}).\\
+Im gelb gekennzeichneten Bereich des rechten Bildes ist zu sehen, dass die Kurve an dieser Stelle nicht den Flussverlauf abbildet. Im selben Bereich ist im linken Bild zu sehen, dass die Objekterkennung keine Ergebnisse lieferte. Dies liegt daran, dass das Flugzeug dem engen Flussverlauf aufgrund der Trägheit der Steuerung nicht folgen konnte. Diese Trägheit ist in ähnlichen Rahmen auch im Unterwasserszenario zu erwarten.\\
 Bemerkenswert ist, dass im roten Bereich ebenfalls keine Ergebnisse der Objekterkennung vorhanden sind, die Kurve jedoch trotzdem genau dem Flussverlauf folgt. Dies lässt sich darauf zurückführen, dass die letzten GPS Daten vor der Lücke die Abzweigung der Kurve andeuten, was im gelben Bereich nicht der Fall ist.
 \begin{figure}[H]
 \centering
@@ -121,4 +121,4 @@ Bemerkenswert ist, dass im roten Bereich ebenfalls keine Ergebnisse der Objekter
 \caption[Abbildung eines Flusses mit Regression]{Regression angewendet auf GPS-Daten eines Flussverlaufs aus \texttt{Autonomous Searching and Tracking of a River using an UAV}\cite{rathinam2007autonomous}. Im gelben Bereich wird ein fehlender Sichtkontakt zum Fluss nicht optimal abgedeckt. Im roten Bereich ist die Kurve trotz fehlender Detektion nahezu optimal abgebildet.}
 \label{riverCurve}
 \end{figure}
-Das Curve Fitting Verfahren eignet sich gut für die Problemstellung der Arbeit. Die zwei vorgestellten Arbeiten zeigen, dass sowohl Fehler durch Ausreißer abgefangen werden können, als auch Bereiche ohne Ergebnisse der Objekterkennung gut überbrückt werden können. Die genaue Beschreibung der eingesetzten Lösung und des von mir eingesetzten Modells folgt im nächsten Kapitel.
+Das Curve Fitting Verfahren eignet sich gut für die Problemstellung der Arbeit. Die zwei vorgestellten Arbeiten zeigen, dass sowohl Fehler durch Ausreißer abgefangen werden, als auch Bereiche ohne Ergebnisse der Objekterkennung gut überbrückt werden können. Die genaue Beschreibung der eingesetzten Lösung und des von mir eingesetzten Modells folgt im nächsten Kapitel.

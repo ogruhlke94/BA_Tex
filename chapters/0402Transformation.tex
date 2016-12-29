@@ -12,7 +12,7 @@ Umgesetzt wird eine Transformation aus einem \textit{source} Frame in einen \tex
 
 \subsubsection{Bild zu Kamera}
 \label{section_PicToCam}
-Die verlustfreie Transformation von 2D-Pixelkoordinaten in 3D-Kamerakoordinaten ist mit einer Kamera nicht möglich, da die Tiefeninformation nicht vorhanden ist. Jedoch lässt sich über das Wissen über die Entfernung zur Bildebene, der \textit{flat world assumption} (siehe Kapitel \ref{sec_coordsystems}) und die intrinsischen Kameraparameter eine ausreichend gute Transformation durchführen. Da die Kamera gerade nach unten gerichtet ist, entspricht die Entfernung zur Bildebene der Höhe des AUVs über dem Meeresboden, welche über die Sensorik bestimmt wird. Die intrinsischen Kameraparameter lassen sich über eine Kamerakalibrierung bestimmen. Die Kamerakalibrierung wurde mithilfe der \matlab \textit{Computer Vision System Toolbox} durchgeführt.\\
+Die verlustfreie Transformation von 2D-Pixelkoordinaten in 3D-Kamerakoordinaten ist mit einer Kamera nicht möglich, da die Tiefeninformation nicht vorhanden ist. Jedoch lässt sich über das Wissen über die Entfernung zur Bildebene, der \textit{flat world assumption} (siehe Kapitel \ref{sec_coordsystems}) und die intrinsischen Kameraparameter eine ausreichend gute Transformation durchführen. Da die Kamera gerade nach unten gerichtet ist, entspricht die Entfernung zur Bildebene der Höhe des AUVs über dem Meeresboden, welche über die Sensorik bestimmt wird. Die intrinsischen Kameraparameter lassen sich über eine Kamerakalibrierung bestimmen, welche mithilfe der \matlab \textit{Computer Vision System Toolbox} durchgeführt.\\
 Da die resultierende Transformation am besten im Abstand der Kalibrierung funktioniert wurde die Kalibrierung in einem Abstand von 6 Metern durchgeführt, was im späteren Verlauf auch der gewünschte Abstand zum Boden ist.\\
 Aus der Kamerakalibrierung wird ein \textit{CameraParameter}\footnote{https://de.mathworks.com/help/vision/ref/cameraparameters-class.html} Objekt erzeugt, welches die Methode \textit{pointsToWorld} bietet. Die Methode berechnet eine Projektionsmatrix aus den Kamera-Parametern und dem bekannten Abstand der Kamera zum Objekt. Mithilfe der Inversen dieser Matrix können dann Pixel in Kamerakoordinaten umgerechnet werden.\\
 Leichte Neigungswinkel, die während der Fahrt auftreten, können durch die Multiplikation mit der entsprechenden Rotationsmatrix herausgerechnet werden. Jedoch ist dabei zu beachten, dass durch die Neigungswinkel die Fläche, die die Kamera sieht, vergrößert wird. Dadurch bilden einzelne Pixel mehr Fläche ab und die Transformation wird ungenauer.\\
@@ -22,7 +22,7 @@ Die $z$-Koordinate ergibt sich aus dem Wissen, Objekte am Meeresboden zu betrach
 Die Transformation vom Kamerakoordinatensystem zum Bodykoordinatensystem besteht aus einer Translation und einer Rotation, die durch die Montageposition der Kamera am AUV bestimmt wird [Kapitel \ref{sec_img_cam_coords}].\\
 Aufgrund der Verschiebung der Kamera zum Bodykoordinatenursprung (Schwerpunkt des AUVs) ergibt sich eine Translation um $1.3$m in x-Richtung und $0.25$m in z-Richtung.\\
 Die Rotation beträgt dabei $90^\circ$ um die Z-Achse.\\
-Somit ergibt sich die Tranformationsmatrix Gleichung \ref{trans_cam_body}\\
+Somit ergibt sich die Tranformationsmatrix aus Gleichung \ref{trans_cam_body}\\
 
 \begin{ownequation}[H]
 \begin{equation}
@@ -47,9 +47,9 @@ x_{cam}\\y_{cam}\\z_{cam}\\1
 
 \subsubsection{Body zu Welt}
 Für die Transformation vom Bodykoordinatensystem in das Weltkoordinatensystem ist wieder eine Translation und eine Rotation nötig.
-Aus der Definition der Koordinatensysteme ist zunächst eine Rotation um $180^\circ$ um die X-Achse nötig.
+Aus der Definition der Koordinatensysteme folgt zunächst eine Rotation um $180^\circ$ um die X-Achse nötig.
 Die Translation ergibt sich aus der Position des AUVs (Position Nord/Ost in Metern).\\
-Die Rotation wird durch die Ausrichtung des AUVs in der Welt (Yaw [Abb. \ref{Abb. 2}]) bestimmt. Somit ergibt sich die Tranformationsmatrix Gleichung \ref{trans_body_world}\\
+Die Rotation wird durch die Ausrichtung des AUVs in der Welt (Yaw [Abb. \ref{Abb. 2}]) bestimmt. Somit ergibt sich die Tranformationsmatrix aus Gleichung \ref{trans_body_world}\\
 
 \begin{ownequation}[H]
 \begin{equation}

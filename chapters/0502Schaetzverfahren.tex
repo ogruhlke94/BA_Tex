@@ -1,9 +1,9 @@
 \subsection{Testläufe}
-Im folgenden werden die verschiedenen Testläufe genau beschrieben. Für alle Testläufe gilt, dass das AUV zuerst 30 Meter geradeaus fährt, bevor es auf das Objekt trifft, damit eine stabile Fahrt erreicht wird und die Schwankungen beim anfänglichen Beschleunigen die Ergebnisse nicht verfälschen. Ebenso wird auch gewährleistet, dass das AUV stets direkt auf das Objekt trifft, da dass Explorieren und Auffinden des Objektes nicht Teil der Arbeit ist.\\
-Zu jedem Testlauf befindet sich auf der CD ein Video, in dem das AUV von oben, die Rohbilder der Kamera, die Ausgabe der Objekterkennung und das berechnetet Polynom zu sehen ist.
+Im folgenden werden die verschiedenen Testläufe genau beschrieben. Für alle Testläufe gilt, dass das AUV zuerst 30 Meter geradeaus fährt, bevor es auf das Objekt trifft. Dadurch wird eine stabile Fahrt erreicht und die Schwankungen beim anfänglichen Beschleunigen verfälschen die Ergebnisse nicht. Ebenso wird auch gewährleistet, dass das AUV stets direkt auf das Objekt trifft, da dass Explorieren und Auffinden des Objektes nicht Teil der Arbeit ist.\\
+Zu jedem Testlauf befindet sich auf der CD ein Video, in dem das AUV von oben, sowie die Rohbilder der Kamera, die Ausgabe der Objekterkennung und das berechnetet Polynom zu sehen ist.
 \subsubsection{Gerader Verlauf}
 Für die ersten Tests wurde ein 100 Meter langes Objekt gerade in die Simulationsumgebung eingefügt. Dieses Objekt ist in mehreren Bereichen vom Meeresboden leicht bis komplett bedeckt.\\
-Die Testläufe mit geraden Objekte zeigten, dass mit steigender Anzahl an detektierten Punkt die gerade immer bessert vom Schätzverfahren abgebildet wurde. Es sind bei einer dann auch längere Strecken ohne Sichtkontakt kein Problem.
+Die Testläufe mit geraden Objekte zeigten, dass mit steigender Anzahl an detektierten Punkt die gerade immer besser vom Schätzverfahren abgebildet wurde. Es sind bei einer dann auch längere Strecken ohne Sichtkontakt kein Problem.
 
 \begin{figure}[H]
 \begin{tabular}{cc}
@@ -17,7 +17,7 @@ Die Testläufe mit geraden Objekte zeigten, dass mit steigender Anzahl an detekt
 
 \subsubsection{Kurve}
 Nach den Tests zum geraden Verlauf wurden kurvige Objekte mithilfe von Polynomial- und Exponentialfunktionen in die Simulation eingefügt. Hierbei wurde darauf geachtet kein Polynom zweiten Grades zu verwenden, um dem Regressionsverfahren keine perfekte Lösung zu bieten.\\
-Ziel dieser Tests ist es zu zeigen, dass das Folgen einer Links- sowie Rechtskurve und auch ein wechseln zwischen beiden Kurvenarten möglich sind. Für letzteres wurde eine Sinuskurve genutzt, um ein entsprechendes Objekt zu erzeugen.
+Ziel dieser Tests ist es zu zeigen, dass das Folgen einer Links- sowie Rechtskurve und auch ein Wechseln zwischen beiden Kurvenarten möglich ist. Für letzteres wurde eine Sinuskurve genutzt, um ein entsprechendes Objekt zu erzeugen.
 
 Außerdem wurde noch eine Kurve nach einer langen Geraden erzeugt. Hiermit wird getestet, ob auch wechselnden geometrischen Strukturen gefolgt werden kann.\\
 
@@ -40,7 +40,7 @@ Bei den Tests mit kurvigen Objekten ist zu beobachten, dass zu Beginn jeder Kurv
 \subfloat[Fehler der AUV Position zur echten Position des Objektes.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/rechtskurveLinks/groundTruthPosition.jpg}}&
 \subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/rechtskurveLinks/groundTruth.jpg}}
 \end{tabular}
-\caption{Testlauf mit einer Kurve. In diesem Lauf wurde die Kurve in die andere Richtung wie in Abb. \ref{fig_leftCurve} erzeugt. Wie zu erwarten sind die Ergebnisse in diesem Lauf analog zur anderen Kurve.}
+\caption{Testlauf mit einer Kurve. In diesem Lauf wurde die Kurve, anders als in Abb. \ref{fig_leftCurve}, in die andere Richtung erzeugt. Wie zu erwarten sind die Ergebnisse in diesem Lauf analog zur anderen Kurve.}
 \label{fig_rightCurve}
 \end{figure}
 
@@ -74,7 +74,7 @@ Bei den Tests mit kurvigen Objekten ist zu beobachten, dass zu Beginn jeder Kurv
 \end{figure}
 
 \subsubsection{Kreisbahn}
-Für die finalen Tests wurden Kreisbahnen in Form von Ellipsen verwendet. Eine Ellipse erfüllt einige Eigenschaften, die für die Arbeit nicht trivial zu lösen sind. Zum einen gibt es verschieden stark gebogene Kurven und fast gerade Abschnitte. Zum anderen gibt es ständig Abschnitte, die parallel zur $Y-Achse$ verlaufen.\\
+Für die finalen Tests wurden Kreisbahnen in Form von Ellipsen verwendet. Eine Ellipse erfüllt einige Eigenschaften, die für die Arbeit zu nicht trivial zu lösenden Problemen führen. Zum einen gibt es verschieden stark gebogene Kurven und fast gerade Abschnitte. Zum anderen gibt es kontinuierlich Abschnitte, die parallel zur $Y-Achse$ verlaufen.\\
 In diesen Tests ist zu sehen, dass sowohl Kreise, als auch der Wechsel zwischen Geraden und Kreisabschnitten gefolgt werden kann.
 
 \begin{figure}[H]
@@ -97,7 +97,7 @@ In diesen Tests ist zu sehen, dass sowohl Kreise, als auch der Wechsel zwischen 
 \end{figure}
 
 \subsubsection{Schlechte Sichtbedingungen}
-Einige Tests wurden mit sehr schlechten Sichtbedingungen (siehe Abb. \ref{img_badSeight}) wiederholt. In den Tests ist zu sehen, dass selbst unter diesen Bedingungen dem Objekt gefolgt werden kann. Jedoch ist bei diesen Tests zu beachten, dass der Templateschwellwert sehr gering gewählt wurde und dadurch eine sehr sensitive Objekterkennung genutzt wurde. Da jedoch in der Simulation nur Meeresboden und Zielobjekt existieren führte dies nicht zu Problemen. Schon kleinste Objekte, wie kleinere Felsen oder Pflanzen, würden bei einem solch geringen Schwellwert zu schwerwiegenden Fehldetektionen führen. Tests mit anderen Objekten in der Simulationsumgebung wurden jedoch nicht durchgeführt, da es keine einfache Methode gibt Steine oder Pflanzen hinzuzufügen. Die Tatsache, dass aber selbst der Meeresboden schon zu Störpunkten innerhalb des Binärbilds führt unterstützt diese Aussage.
+Einige Tests wurden mit sehr schlechten Sichtbedingungen (siehe Abb. \ref{img_badSeight}) wiederholt. In den Tests ist zu sehen, dass selbst unter diesen Bedingungen dem Objekt gefolgt werden kann. Jedoch ist bei diesen Tests zu beachten, dass der Templateschwellenwert sehr gering gewählt wurde und dadurch eine sehr sensitive Objekterkennung genutzt wurde. Da jedoch in der Simulation nur Meeresboden und Zielobjekt existieren führte dies nicht zu Problemen. Schon kleinste Objekte, wie kleinere Felsen oder Pflanzen, würden bei einem solch geringen Schwellenwert zu schwerwiegenden Fehldetektionen führen. Tests mit anderen Objekten in der Simulationsumgebung wurden jedoch nicht durchgeführt, da es keine einfache Methode gibt Steine oder Pflanzen hinzuzufügen. Die Tatsache, dass aber selbst der Meeresboden schon zu Störpunkten innerhalb des Binärbilds führt unterstützt diese Aussage.
 
 \begin{figure}[H]
 \begin{tabular}{cc}

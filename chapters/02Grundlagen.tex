@@ -2,9 +2,8 @@
 \subsection{Simulationsumgebung}
 Die Simulationsumgebung wurde von der \atlas entwickelt und wird für diese Arbeit zur Verfügung gestellt [Abb. \ref{screenSim}].
 In der Simulation wird die Fahrzeugsensorik und Aktuatorik simuliert (siehe Kapitel \ref{sec_auvSimGrundlage}). Außerdem wird noch eine grundlegende Wasserbewegung erzeugt, die durch Parametrisierung verändert werden kann.\\
-\todo{umrechnung lat lon zu meter}
 
-Die Umgebung an sich besteht aus \textit{wrl}-Dateien, in denen die Welt mit \textit{\vrml} beschrieben wird. Diese einzelnen Dateien werden in der \textit{main.wrl} zusammengefügt. Bereits vorhanden sind \textit{wrl}-Dateien für das AUV, in denen die Realvorlage maßstabsgetreu nachgebildet wird, sowie ein Generator zum Erstellen zufallsgenerierter Meeresböden in \textit{wrl}. Die Objekte, die in der Arbeit verfolgt werden sollen, wurden in \textit{\vrml} modelliert und dann als Unterknoten in der \textit{main.wrl} hinzugefügt.\\
+Die Umgebung an sich besteht aus \textit{wrl}-Dateien, in denen die Welt mit \textit{\vrml} beschrieben wird. Diese einzelnen Dateien werden in der \textit{main.wrl} zusammengefügt. Bereits vorhanden sind \textit{wrl}-Dateien für das AUV, in denen die Realvorlage maßstabsgetreu nachgebildet wird sowie ein Generator zum Erstellen zufallsgenerierter Meeresböden in \textit{wrl}. Die Objekte, die in der Arbeit verfolgt werden sollen, wurden in \textit{\vrml} modelliert und dann als Unterknoten in der \textit{main.wrl} hinzugefügt.\\
 Die Simulation basiert auf der \matlab Simulink 3D Animation Toolbox, somit stehen auch weitere \matlab -Toolboxen zur Verfügung. 
 \begin{figure}[H]
 \includegraphics[width=\textwidth,scale=0.5]{Einleitung/ScreenshotSimulation.jpg}
@@ -19,7 +18,7 @@ Für die Steuerung wird ein \texttt{lane follower controller} verwendet, bei dem
 Am Bug des AUVs befindet sich eine Kamera, die zentral nach unten ausgerichtet ist. Das Sichtfeld beträgt dabei 45$^\circ$ bei einer Auflösung von 640x480 Pixeln.
 \subsection{Koordinatensysteme}
 \label{sec_coordsystems}
-Im Folgenden werde ich die Koordinatensysteme beschreiben, in denen Koordinaten angegeben werden. Ich gehe hierbei von einer Tangentialebene an der WGS84-Kugel verschoben auf den Meeresboden aus\todo{link}, da nur hinreichend kleinen Operationsgebiete des AUVs betrachtet werden, sodass die Erdkrümmung keine Auswirkung hat.
+Im Folgenden werde ich die Koordinatensysteme beschreiben, in denen Koordinaten angegeben werden. Ich gehe hierbei von einer Tangentialebene an der WGS84-Kugel verschoben auf den Meeresboden aus\todo{link}, da nur hinreichend kleine Operationsgebiete des AUVs betrachtet werden, sodass die Erdkrümmung keine Auswirkung hat.
 \subsubsection{Bild und Kamera}
 \label{sec_img_cam_coords}
 Das Bildkoordinatensystem [Abb. \ref{imageKoords}] beschreibt die Anordnung der Pixel im Bild als 2D-Koordinaten. Der Ursprung ist immer die linke obere Bildecke. Ich gehe davon aus, dass das Bildkoordinatensystem immer auf der Meeresbodenebene liegt. Diese Annahme ist wichtig für die Transformationen [Kapitel \ref{sec_transformations}].
