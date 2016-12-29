@@ -2,23 +2,22 @@
 \label{sec_param}
 Während der Tests ist stark aufgefallen, dass das Regressionsverfahren sehr parameterabhängig ist. Wie im vorherigen Kapitel zu sehen ist, liefert die implementierte Lösung mit der richtigen Parametrisierung ein gutes Verhalten. 
 Bei falscher Parametrisierung wird die Verfolgung sehr viel schlechter bis unmöglich.\\
-Große Unterschiede gibt es bei geraden und kurvigen Objekten. Als ausschlaggebende Parameter stellten sich die Gewichtungen der einzelnen Fehlerarten, die stärke \textit{Tikhonov Regularisierung} (siehe Gleichung \ref{F-function}) und der maximale Gesamtfehler der Regression bis zu einer Transformation (siehe Abschnitt \ref{alterWorldCoords}) heraus.
-Bei geraden Objekten führt eine Gleichgewichtung der Fehlerarten, eine starke \textit{Tikhonov Regularisierung} und ein hoher erlaubter Maximalfehler zu sehr guten Ergebnissen (vgl. \ref{sec_pendel}).\\
+Große Unterschiede gibt es bei geraden und kurvigen Objekten. Als ausschlaggebende Parameter stellten sich die Gewichtungen der einzelnen Fehlerarten, die Stärke der \textit{Tikhonov Regularisierung} (siehe Gleichung \ref{F-function}) und der maximale Gesamtfehler der Regression bis zu einer Transformation (siehe Abschnitt \ref{alterWorldCoords}) heraus.
+Bei geraden Objekten führt eine Gleichgewichtung der Fehlerarten, eine starke \textit{Tikhonov Regularisierung} und ein hoher erlaubter Maximalfehler zu sehr guten Ergebnissen (vgl. Kapitel \ref{sec_pendel}).\\
 Kurvige Objekte, wie in Abb. \ref{testSCurve} oder \ref{testStraightCirc} führen am besten bei einer höheren Gewichtung des Orientierungsfehlers, keine \textit{Tikhonov Regularisierung} und ein geringerer erlaubter Maximalfehler zu guten Ergebnissen.
-Problematisch ist, dass die \textit{falsche} Parametrisierung (z.B. hoher Maximalfehler für kurvige Objekte) im schlimmsten Fall zu einem großen Fehler, damit einhergehendem Sichtverlust zum Objekt und einem schlecht geschätzten Polynom führt, dass keine erneute Annäherung zum Objekt mehr gelingt.
+Problematisch ist, dass die \textit{falsche} Parametrisierung (z.B. hoher Maximalfehler für kurvige Objekte) im schlimmsten Fall zu einem großen Fehler, damit einhergehendem Sichtverlust zum Objekt und einem schlecht geschätzten Polynom führt, dass keine erneute Annäherung zum Objekt mehr gelingt. \\
+Dieses Verhalten ist im Testlauf Abb. \ref{curveLost} zu beobachten. Je schärfer die Kurven und je mehr Wechsel zwischen geraden und kurvigen Bereichen im Objekt vorhanden sind, desto schwieriger ist es die richtigen Parameter zu finden. Vor allem für den Test der geraden gefolgt von einer Kreisbahn [Abb. \ref{testStraightCirc}] war es in der Testphase schwierig die richtige Parametrisierung zu finden ohne entweder den Wechsel zwischen Kurve und Gerade (oder zurück) zu verpassen oder aber während den Geraden aufgrund des schlechten Einpendelns [Kapitel \ref{sec_pendel}] das Objekt zu verlieren.
 
 \begin{figure}[H]
 \begin{tabular}{cc}
-\subfloat[Fahrtverlauf des AUVs (rot) an einer scharfen Kurve (blau)]{\includegraphics[height=0.4\textheight,width=0.5\textwidth]{/testlaeufe/kurvenichtverloren/auvroute.jpg}}&
-\subfloat[Fahrtverlauf des AUVs (rot) an einer scharfen Kurve (blau)]{\includegraphics[height=0.4\textheight,width=0.5\textwidth]{/testlaeufe/kurveverloren/auvroute.jpg}}\\
+\subfloat[Fahrtverlauf des AUVs (rot) an einer scharfen Kurve (blau) mit guten Parametern für den Objektverlauf.]{\includegraphics[height=0.4\textheight,width=0.5\textwidth]{/testlaeufe/kurvenichtverloren/auvroute.jpg}}&
+\subfloat[Fahrtverlauf des AUVs (rot) an einer scharfen Kurve (blau) mit schlechteren Parametern für den Objektverlauf.]{\includegraphics[height=0.4\textheight,width=0.5\textwidth]{/testlaeufe/kurveverloren/auvroute.jpg}}\\
 \subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kurvenichtverloren/groundTruth.jpg}}&
 \subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kurveverloren/groundTruth.jpg}}
 \end{tabular}
-\caption{Das Folgen der Kurve funktioniert auch bei schlechten Sichtbedingungen. Es ist jedoch zu beobachten, dass eine nur leichte Verdeckung des Objektes einen starken Einfluss auf den Fehler hat.}
-\label{curveBadSight}
+\caption{Hier wurden zwei Testläufe in der identischen Umgebung (Sichtbedingungen und Objektlage) durchgeführt. Nur die Parametrisierung der Regression wurden geändert. Es ist zu beobachte, dass trotz gleich guter Detektion des Objektes (der Fehlerausschlag in \textit{c)} und \textit{d)} ist sehr ähnlich) das Objekt nur mit der richtigen Parametrisierung verfolgt werden kann.}
+\label{curveLost}
 \end{figure}
-
-\todo{hier fehlgeschlagene tests}
 
 \subsubsection{Einpendeln}
 \label{sec_pendel}
