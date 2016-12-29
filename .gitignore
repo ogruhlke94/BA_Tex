@@ -28,6 +28,9 @@
 # *.eps
 # *.pdf
 
+*.avi
+*.mp4
+
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
 *.bcf

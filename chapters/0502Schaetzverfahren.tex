@@ -36,9 +36,9 @@ Bei den Tests mit kurvigen Objekten ist zu beobachten, dass zu Beginn jeder Kurv
 
 \begin{figure}[H]
 \begin{tabular}{cc}
-\multicolumn{2}{c}{\subfloat[Fahrtverlauf (rot) bei einer Kurve (blau).]{\includegraphics[height=0.4\textheight,width=\textwidth]{/testlaeufe/rechtskurve/auvroute.jpg}}}\\
-\subfloat[Fehler der AUV Position zur echten Position des Objektes.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/rechtskurve/groundTruthPosition.jpg}}&
-\subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/rechtskurve/groundTruth.jpg}}
+\multicolumn{2}{c}{\subfloat[Fahrtverlauf (rot) bei einer Kurve (blau).]{\includegraphics[height=0.4\textheight,width=\textwidth]{/testlaeufe/rechtskurveLinks/auvroute.jpg}}}\\
+\subfloat[Fehler der AUV Position zur echten Position des Objektes.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/rechtskurveLinks/groundTruthPosition.jpg}}&
+\subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/rechtskurveLinks/groundTruth.jpg}}
 \end{tabular}
 \caption{Testlauf mit einer Kurve. In diesem Lauf wurde die Kurve in die andere Richtung wie in Abb. \ref{fig_leftCurve} erzeugt. Wie zu erwarten sind die Ergebnisse in diesem Lauf analog zur anderen Kurve.}
 \label{fig_rightCurve}
@@ -46,9 +46,19 @@ Bei den Tests mit kurvigen Objekten ist zu beobachten, dass zu Beginn jeder Kurv
 
 \begin{figure}[H]
 \begin{tabular}{cc}
-\multicolumn{2}{c}{\subfloat[Fahrtverlauf (rot) bei einer Sinuskurve (blau).]{\includegraphics[height=0.4\textheight,width=\textwidth]{/testlaeufe/sinusGut/auvroute.jpg}}}\\
-\subfloat[Fehler der AUV Position zur echten Position des Objektes.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/sinusGut/groundTruthPosition.jpg}}&
-\subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/sinusGut/groundTruth.jpg}}
+\multicolumn{2}{c}{\subfloat[Fahrtverlauf (rot) bei einer Kurve (blau).]{\includegraphics[height=0.4\textheight,width=\textwidth]{/testlaeufe/gradeKurveSicht/auvroute.jpg}}}\\
+\subfloat[Fehler der AUV Position zur echten Position des Objektes.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/gradeKurveSicht/groundTruthPosition.jpg}}&
+\subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/gradeKurveSicht/groundTruth.jpg}}
+\end{tabular}
+\caption{Testlauf mit einer Kurve. In diesem Lauf wurde die Kurve in die andere Richtung wie in Abb. \ref{fig_leftCurve} erzeugt. Wie zu erwarten sind die Ergebnisse in diesem Lauf analog zur anderen Kurve.}
+\label{fig_rightCurve}
+\end{figure}
+
+\begin{figure}[H]
+\begin{tabular}{cc}
+\multicolumn{2}{c}{\subfloat[Fahrtverlauf (rot) bei einer Sinuskurve (blau).]{\includegraphics[height=0.4\textheight,width=\textwidth]{/testlaeufe/sinusSicht/auvroute.jpg}}}\\
+\subfloat[Fehler der AUV Position zur echten Position des Objektes.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/sinusSicht/groundTruthPosition.jpg}}&
+\subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/sinusSicht/groundTruth.jpg}}
 \end{tabular}
 \caption{Beim Testlauf mit der Sinuskurve ist zu beobachten, dass innerhalb der Kurven aufgrund der Richtungsänderung des Verlaufs einen größeren Fehler der Verfolgung gibt. Nach der Kurve wird dem Objekt jedoch schnell wieder gut gefolgt.}
 \end{figure}
@@ -69,18 +79,18 @@ In diesen Tests ist zu sehen, dass sowohl Kreise, als auch der Wechsel zwischen 
 
 \begin{figure}[H]
 \begin{tabular}{cc}
-\multicolumn{2}{c}{\subfloat[Fahrtverlauf (rot) bei einem Kreis (blau). Es wurden anderthalb runden im Kreis gefahren.]{\includegraphics[height=0.4\textheight,width=\textwidth]{/testlaeufe/kreiszweimalrum-gut/auvroute.jpg}}}\\
-\subfloat[Fehler der AUV Position zur echten Position des Objektes. Es ist ein gleichmäßiges Auftreten von Fehlerspitzen zu beobachten. Der größte Ausschlag ist einer Unsichtbarkeit des Objektes innerhalb des rechten oberen Kreisabschnitts zuzuschreiben.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kreiszweimalrum-gut/groundTruthPosition.jpg}}&
-\subfloat[Fehler der detektierten Objektposition zur echten Objektposition. Es sind zwei Bereiche mit größerem Fehler zu beobachten. Diese liegen beide im unteren linken Bereich des Kreises, in dem das Objekt teilweise vom Meeresboden bedeckt ist.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kreiszweimalrum-gut/groundTruth.jpg}}
+\multicolumn{2}{c}{\subfloat[Fahrtverlauf (rot) bei einem Kreis (blau). Es wurden anderthalb runden im Kreis gefahren.]{\includegraphics[height=0.4\textheight,width=\textwidth]{/testlaeufe/kreissicht/auvroute.jpg}}}\\
+\subfloat[Fehler der AUV Position zur echten Position des Objektes. Es ist ein gleichmäßiges Auftreten von Fehlerspitzen zu beobachten. Der größte Ausschlag ist einer Unsichtbarkeit des Objektes innerhalb des rechten oberen Kreisabschnitts zuzuschreiben.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kreissicht/groundTruthPosition.jpg}}&
+\subfloat[Fehler der detektierten Objektposition zur echten Objektposition. Es sind zwei Bereiche mit größerem Fehler zu beobachten. Diese liegen beide im unteren linken Bereich des Kreises, in dem das Objekt teilweise vom Meeresboden bedeckt ist.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kreissicht/groundTruth.jpg}}
 \end{tabular}
 \caption{Im Testlauf der Kreisbahn ist zu beobachten, wie die ständig ändernde Krümmung der Bahn zu Fehlerspitzen führt. Bei jeder Spitze ist der Fehler der Regression so hoch, dass eine Transformation der detektierten Punkte stattfindet (siehe Kapitel \ref{sec_curveFit}), die zu einer direkten Abnahme des Fehlers führt.}
 \end{figure}
 
 \begin{figure}[H]
 \begin{tabular}{cc}
-\multicolumn{2}{c}{\subfloat[Fahrtverlauf (rot) bei einer Kreisbahn mit geraden Abschnitten (blau).]{\includegraphics[height=0.4\textheight,width=\textwidth]{/testlaeufe/gradekreis/auvroute.jpg}}}\\
-\subfloat[Fehler der AUV Position zur echten Position des Objektes.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/gradekreis/groundTruthPosition.jpg}}&
-\subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/gradekreis/groundTruth.jpg}}
+\multicolumn{2}{c}{\subfloat[Fahrtverlauf (rot) bei einer Kreisbahn mit geraden Abschnitten (blau).]{\includegraphics[height=0.4\textheight,width=\textwidth]{/testlaeufe/gradeKreissicht/auvroute.jpg}}}\\
+\subfloat[Fehler der AUV Position zur echten Position des Objektes.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/gradeKreissicht/groundTruthPosition.jpg}}&
+\subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/gradeKreissicht/groundTruth.jpg}}
 \end{tabular}
 \caption{Zu Beginn ist das bereits bekannte einpendeln auf eine gerade Strecke zu beobachten. Beim Übergang in die Kreisbahn ist ein erwarteter hoher Fehler zu beobachten, der durch den Wechsel der Form zu erklären ist. Innerhalb der Kreisbahn sind einige verdeckte Bereiche, was die Fehler in \textit{b)} und \textit{c)} erklärt.}
 \label{testStraightCirc}
