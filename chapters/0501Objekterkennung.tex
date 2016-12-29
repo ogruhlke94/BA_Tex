@@ -4,14 +4,10 @@ Die Objekterkennung wurde auf drei Arten getestet. Für diese Arbeit ist eine ve
 Für die Tests werden verschiedene Szenarien verwendet. Zunächst wird ein gerades Objekt, das komplett zu sehen ist getestet [Abb. \ref{testStraightObj}]. Dieser Tests repräsentiert das einfachste Szenario zur Detektion. Im zweiten Test wird dieses gerade Objekt vom Meeresboden verdeckt [Abb. \ref{testhalfObj}], um eine Detektion zu erschweren.\\
 Im dritten Test wird ein Objekt betrachtet, dass innerhalb des Bildes abgeknickt ist [Abb. \ref{testknickObj}]. Dabei wird getestet, wie sich die verschiedenen Ausrichtungen innerhalb eines Bildes auf die Detektion auswirkt.
 Ein vierter Test überprüft das Verhalten der Objekterkennung wenn kein Objekt im Bild zu sehen ist. Hier sollte keine erfolgreiche Detektion entstehen. Alle Tests werden unter verschiedensten Sichtbedingungen durchgeführt. Die ursprünglichen Simulationsbilder als einfachsten Test, die Bildqualität, in der die meisten Testläufe des AUVs durchgeführt wurden und Bilder unter sehr schlechten Sichtbedingungen, in denen es schwer ist überhaupt ein Objekt zu entdecken.\\
-\begin{verbatim}
-
-\end{verbatim}
 
 Auf den nachfolgenden Seiten sind die Ergebnisse dieser Tests aufgeführt. Wie zu erwarten war werden die Objekte und ihre Ausrichtungen im ursprünglichen Simulationsbild am besten erkannt. Hier sind die Grenzen zwischen Meeresboden und Objekt am klarsten und das Binärbild bildet am nahezu optimal das Objekt ab. Ebenso kann der Templateschwellwert so hoch gesetzt werden, dass keine Störpunkte vorhanden sind.\\
 Die Tests mit schlechteren Sichtbedingungen führen ebenfalls zu guten Ergebnissen. In den Binärbildern sind oftmals \textit{wellenförmige} Kanten zu beobachten, die teilweise zu leicht fehlerhaften Detektionen der Ausrichtung führen. Zurückzuführen sind diese Kanten darauf, dass das Objekt aufgrund der Textur nicht überall gleich Hohe Pixelwerte hat und so die \textit{dunkleren} Bereiche am Rand des Objektes den Schwellwert nicht mehr überschreiten. Da der Unterschied zwischen Meeresboden und Objekt bei diesen Sichtbedingungen nicht so groß ist wie im ursprünglichen Bild kann der Schwellwert nicht weiter gesenkt werden, ohne zu viele Störpunkte zu erhalten.\\
 Unter sehr schlechten Sichtbedingungen werden die Objekte noch immer gut detektiert. Jedoch sind in einigen Binärbildern trotz der einfachen Umgebung bereits viele Störpunkte sichtbar. Auch komplett ohne Objekt sind Punkte vorhanden. Ebenso wird das Objekt im Binärbild nicht mehr so gut abgebildet, wie unter besseren Bedingungen. Die bereits erwähnten \textit{wellenförmigen} Kanten sind auch hier zu beobachten.\\
-Aus den Tests geht hervor, dass die Sichtbedingungen einen Einfluss auf die Binärisierung des Eingabebildes auswirkt. Je schlechter die Sichtbedingungen sind, desto geringer muss der Templateschwellwert gewählt werden. Der Schwellwert ist jedoch ausschlaggebend für die Qualität der Abbildung vom Objekt im Binärbild. Umso geringer der Schwellwert gewählt wird, umso mehr Störpunkte sind auch im Binärbild vorhanden. Bei schlechten Bedingungen muss der Schwellwert jedoch gering gewählt werden, um das Objekt abbilden zu können. Somit steigt bei schlechteren Sichtbedingungen die Gefahr falsche Detektionen aufgrund von Störpunkten zu erhalten oder auch Objekte zu detektieren, wo keine vorhanden sind.
 
 \todo{b)s neu machen auf gleiche Größe}
 \subsubsection*{Tests auf Simulationsbildern}
@@ -45,8 +41,8 @@ Aus den Tests geht hervor, dass die Sichtbedingungen einen Einfluss auf die Bin�
 \subfloat[Detektiertes Objekt im ursprünglichen Simulationsbild]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickoptimalfin.jpg}}\\
 \subfloat[Objekt unter schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickTestQuali.jpg}}&
 \subfloat[Detektiertes Objekt unter schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickTestQualiFin.jpg}}\\
-\subfloat[Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickschlecht.jpg}}&
-\subfloat[Detektiertes Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickschlechtfin.jpg}}
+\subfloat[Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickSchlecht.jpg}}&
+\subfloat[Detektiertes Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickSchlechtFin.jpg}}
 \end{tabular}
 \caption{Das abgeknickte Objekt wird unter allen Sichtbedingungen erkannt. In \textit{d)} und \textit{f)} ist ein \textit{wellenförmiger} Kantenverlauf zu beobachten, der in \textit{d)} zu einer leicht falschen Bestimmung der Orientierung im geraden Bereich führt. In \textit{f)} ist zu sehen, dass die Störpixel im abgeknickten Bereich zu einer Fehldetektion der Orientierung führt.}
 \label{testknickObj}
@@ -58,7 +54,7 @@ Aus den Tests geht hervor, dass die Sichtbedingungen einen Einfluss auf die Bin�
 \subfloat[Leeres Bild unter schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsTestQuali.jpg}}&
 \subfloat[Detektiertes Objekt unter schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsTestQualiFin.jpg}}\\
 \subfloat[Leeres Bild unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsschlecht.jpg}}&
-\subfloat[Detektiertes Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsschlechtfin.jpg}}
+\subfloat[Detektiertes Objekt unter sehr schlechteren Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsschlechtFin.jpg}}
 \end{tabular}
 \caption{In den Vergleichsbildern ohne Objekt wird auch unter allen Sichtbedingungen kein Objekt detektiert. Lediglich in \textit{f)} sind einige Störpunkte im Binärbild vorhanden, die auf den niedrig gewählten Templateschwellwert [Kapitel \ref{sec_templ}] zurückzuführen sind.}
 \label{testnothingObj}
@@ -88,4 +84,4 @@ Um zu testen, ob das Verfahren auch bei echten Bildern funktioniert wurden insge
 \label{realData_good}
 \end{figure}
 
-In den durchgeführten Tests wird deutlich, dass die Objekterkennung unter verschiedensten Sichtbedingungen gute Ergebnisse liefert. Abhängig ist die zuverlässige Detektion vom Templateschwellwert für die Binärisierung des Bildes. Je stärker sich das Objekt vom Hintergrund abhebt, desto höher kann der Schwellwert gewählt werden (vgl. Kapitel \ref{sec_templ}). Bei einem geringen Schwellwert gibt es im Binärbild mehr Störpunkte als bei einem höheren (vgl. Abb. \ref{realData_bad} mit \ref{realData_good}).
+In den durchgeführten Tests wird deutlich, dass die Objekterkennung unter verschiedensten Sichtbedingungen gute Ergebnisse liefert. Die Sichtbedingungen hat dabei einen Einfluss auf die Binärisierung des Eingabebildes. Je schlechter die Sichtbedingungen sind, desto geringer muss der Templateschwellwert gewählt werden. Der Schwellwert ist jedoch ausschlaggebend für die Qualität der Abbildung vom Objekt im Binärbild. Umso geringer der Schwellwert gewählt wird, umso mehr Störpunkte sind auch im Binärbild vorhanden (vgl. Abb. \ref{realData_bad} mit \ref{realData_good}). Bei schlechten Bedingungen muss der Schwellwert jedoch gering gewählt werden, um das Objekt abbilden zu können (vgl. Kapitel \ref{sec_templ}). Somit steigt bei schlechteren Sichtbedingungen die Gefahr falsche Detektionen aufgrund von Störpunkten zu erhalten oder auch Objekte zu detektieren, wo keine vorhanden sind.
