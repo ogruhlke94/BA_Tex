@@ -43,8 +43,8 @@ TV = \frac{sum(Testpixel)}{\#TP} - \frac{sum(Checkpixel)}{\#CP}
 \begin{figure}[H]
 \begin{tabular}{cc}
 \multicolumn{2}{c}{\subfloat[Originalbild. Das Testbild stammt aus Aufnahmen eines Testlaufs im Unisee (siehe Abschnitt \ref{realObjTests}.]{\includegraphics[height=0.33\textheight,width=\textwidth]{imageProcessing/realPipe/003orgImstart.jpg}}}\\
-\subfloat[Auswertung des Helligkeitsverlauf einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.33\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/verkleinert/p3hellRealGut.jpg}\label{brightCurve_real}}&
-\subfloat[Auswertung des Rotwertverlauf einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.33\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/verkleinert/p3RotRealGut.jpg}\label{redCurve_real}}
+\subfloat[Auswertung des Helligkeitsverlauf einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.33\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/hellReal.jpg}\label{brightCurve_real}}&
+\subfloat[Auswertung des Rotwertverlauf einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.33\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/rotReal.jpg}\label{redCurve_real}}
 \end{tabular}
 \caption[Helligkeit und Rotwert im echten Testbild]{Helligkeit und Rotwert im echten Testbild. In beiden Grafiken zeigt die blaue Linie die jeweiligen Pixeldaten, die gelbe Linie den Wert des Testbereichs, die lila Linie den Durchschnitt des Checkbereichs und die weiter unten gelegene rote Linie den Templatewert für das Pixel. In beiden Templatewerten ist die Pipeline eindeutig zu erkennen, wobei der Ausschlag im Rotwert weitaus höher ist.}
 \end{figure}
@@ -52,8 +52,8 @@ TV = \frac{sum(Testpixel)}{\#TP} - \frac{sum(Checkpixel)}{\#CP}
 \begin{figure}[H]
 \begin{tabular}{cc}
 \multicolumn{2}{c}{\subfloat[Originalbild der Simulation]{\includegraphics[height=0.33\textheight,width=0.4\textwidth]{imageProcessing/Prinzip/sim2,5Vis.jpg}}}\\
-\subfloat[Auswertung des Helligkeitsverlaufs einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.33\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/verkleinert/simHell2,5Vis.jpg}\label{brightCurve_sim}}&
-\subfloat[Auswertung des Rotwertverlaufs einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.33\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/verkleinert/simRot2Vis.jpg}\label{redCurve_sim}}
+\subfloat[Auswertung des Helligkeitsverlaufs einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.33\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/hellSim.jpg}\label{brightCurve_sim}}&
+\subfloat[Auswertung des Rotwertverlaufs einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.33\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/rotSim.jpg}\label{redCurve_sim}}
 \end{tabular}
 \caption[Helligkeit und Rotwert im Simulationsbild]{Helligkeit und Rotwert im Simulationsbild.In beiden Grafiken zeigt die blaue Linie die jeweiligen Pixeldaten, die gelbe Linie den Wert des Testbereichs, die lila Linie den Durchschnitt des Checkbereichs und die weiter unten gelegene rote Linie den Templatewert für das Pixel. In beiden Templatewerten ist die Pipeline eindeutig zu erkennen, wobei der Ausschlag im Rotwert weitaus höher ist.}
 \end{figure}
