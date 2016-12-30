@@ -5,8 +5,8 @@ In diesem Kapitel wird die umgesetzte Objekterkennung beschrieben. Dabei wird au
 \label{sec_templ}
 \todo{Kann man die graphen mit legends gut genug erkennen?}
 Die Objekterkennung basiert auf einem ähnlichen Verfahren wie das vorgestellte CSurvey Projekt\cite{Albiez2015CSurveyA}.\\
-Da eine Farberkennung aufgrund der Sichtbedingungen nicht in Frage kommt, wird im ersten Schritt das RGB-Bild in ein Graustufenbild umgewandelt. Die erste Idee war es hier, das Helligkeitsbild zu betrachten, da ein gesuchtes Objekt einen höheren Helligkeitswert besitzt als der Meeresboden (siehe Abb. \ref{brightCurve_real} und \ref{brightCurve_sim}).\\
-Aus Erfahrungswerten früherer Projekte riet Christopher Gaudig mir, die Rotwerte der Bilder zu betrachten, da oftmals der Meeresboden und trübes Wasser geringe Rotwerte haben. In den Abbildungen \ref{redCurve_real} und \ref{redCurve_sim} ist dies zu beobachten. Die Kurven sehen denen der Helligkeitswerte sehr ähnlich, jedoch sind die Ausschläge des Objektes in den Rotwerten höher.\\
+Da eine Farberkennung aufgrund der Sichtbedingungen nicht in Frage kommt, wird im ersten Schritt das RGB-Bild in ein Graustufenbild umgewandelt. Der erste Ansatz bestand darin, das Helligkeitsbild zu betrachten, da ein gesuchtes Objekt einen höheren Helligkeitswert besitzt als der Meeresboden (siehe Abb. \ref{brightCurve_real} und \ref{brightCurve_sim}).\\
+Aus Erfahrungswerten früherer Projekte riet Christopher Gaudig mir, die Rotwerte der Bilder zu betrachten, da oftmals sowohl der Meeresboden als auch trübes Wasser geringe Rotwerte haben. In den Abbildungen \ref{redCurve_real} und \ref{redCurve_sim} ist dies zu beobachten. Die Kurven sehen denen der Helligkeitswerte sehr ähnlich, jedoch sind die Ausschläge des Objektes in den Rotwerten höher.\\
 Im nächsten Schritt wird mithilfe eines Templates [Abb. \ref{templImg}] ein Binärbild erzeugt. Das Template zeichnet sich durch drei Pixelangaben aus. Die \textit{Testpixel} (rot) geben einen Bereich an, der im aktuellen Schritt geprüft wird. Die \textit{Checkpixel} (blau) geben den Bereich rechts und links neben dem Testbereich an und bilden den Referenzwert. Die \textit{Borderpixel} (grün) geben einen Bereich zwischen Test- und Checkbereich an, der ignoriert wird. Durch das Ignorieren des Bereichs kann ein langsamer regelmäßiger Übergang, der bei Betrachtung der direkten Nachbarpixeln des Testbereichs als Checkbereich zu einem geringen Templatewert führt, trotzdem noch einen hohen Templatewert ergeben. Jedes Pixel dient einmal als Mittelpunkt des Testbereichs, um zu entscheiden, ob das betrachtete Pixel Teil des Objektes sein kann. Dies ist der Fall, wenn der Wert des Pixels [Gleichung \ref{templateValue}] einen Schwellenwert (rote Linie) übersteigt.\\
 %\begin{ownequation}[H]
 %\begin{eqnarray}
@@ -36,7 +36,7 @@ Im nächsten Schritt wird mithilfe eines Templates [Abb. \ref{templImg}] ein Bin
 \begin{equation}
 TV = \frac{sum(Testpixel)}{\#TP} - \frac{sum(Checkpixel)}{\#CP}
 \end{equation}
-\caption[Templatewertberechnung für ein Pixel als Formelausdruck]{Templatewertberechnung für ein Pixel als Formelausdruck. $\#TP$ bezeichnet die Anzahl der Testpixel und $\#CP$ die Anzahl der Checkpixel.}
+\caption[Templatewertberechnung für ein Pixel als Formelausdruck]{Templatewertberechnung für ein Pixel als Formelausdruck.Der berechnete Wert $TV$ ist der Unterschied zwischen Test- und Checkbereich.$\#TP$ bezeichnet die Anzahl der Testpixel und $\#CP$ die Anzahl der Checkpixel.}
 \label{templateValue}
 \end{ownequation}
 
@@ -83,8 +83,8 @@ function ransac(segment,height,width,minInlier,iterNum)
 end
 \end{lstlisting}
 
-Somit gibt es für jedes Bild bis zu drei Objektposen. Durch das Unterteilen in Segmente lässt sich zum Einen bestimmen, in wie vielen Segmenten ein Objekt erkannt wurde (entspricht der \textit{Länge} des Objektes im Bild). Desweiteren kann ein gebogener Verlauf oder ein abgeknicktes Objekt im Bild sinnvoll erkannt werden.\\
-In den ersten Tests dieses Verfahrens ist ersichtlich geworden, dass es einen \todo{richtige wortwahl?}Tradeoff zwischen Geschwindigkeit und Erkennungsgüte gab. Die Erkennung wurde besser, je mehr maximale Iterationen dem \rans erlaubt wurden. Da der \rans jedoch auf jedes der drei Segmente separat angewendet wird, wird bei steigender Iterationsanzahl die Geschwindigkeit deutlich reduziert. Für eine zuverlässige Erkennung waren zu viele Iterationen nötig, sodass das Verfahren nicht einsetzbar wäre.\\
+Somit gibt es für jedes Bild bis zu drei Objektposen. Durch das Unterteilen in Segmente lässt sich zum einen bestimmen, in wie vielen Segmenten ein Objekt erkannt wurde (entspricht der \textit{Länge} des Objektes im Bild). Des weiteren kann ein gebogener Verlauf oder ein abgeknicktes Objekt im Bild sinnvoll erkannt werden.\\
+In den ersten Tests dieses Verfahrens ist ersichtlich geworden, dass es einen \todo{richtige wortwahl?}Tradeoff zwischen Geschwindigkeit und Erkennungsgüte gab. Die Erkennung wurde besser, je größer das Maximum der Iteration für \rans gewählt wurden. Da der \rans jedoch auf jedes der drei Segmente separat angewendet wird, reduziert sich die Geschwindigkeit bei steigender Iterationsanzahl deutlich. Für eine zuverlässige Erkennung waren zu viele Iterationen nötig, sodass das Verfahren nicht einsetzbar wäre.\\
 Als Lösung für dieses Probleme werden die möglichen erzeugten Rechtecke für den \rans begrenzt. Da das Template nur in horizontaler Richtung auf das Bild angewendet wird, sind horizontal liegende Objekte im Binärbild nicht sichtbar. Aufgrund dieser Tatsache lassen sich die Orientierungen auf einen Bereich begrenzen, anstatt diese komplett zufällig zu wählen. Durch diese Maßnahme wurden die benötigten Iterationen für ein zuverlässiges Ergebnis drastisch reduziert. Jedoch steigt auch die Gefahr Orientierungen nicht mehr richtig zu erkennen, wie in Abbildung \ref{detecFail} gezeigt.\\
 \begin{figure}[H]
 \centering

@@ -1,11 +1,8 @@
 \subsection{Laufzeittests}
 \label{sec_laufzeit}
-Tests zur Laufzeit wurden mit dem \texttt{Simulink Profiler}\footnote{https://de.mathworks.com/help/simulink/ug/how-profiler-captures-performance-data.html} durchgeführt. Der \texttt{Simulink Profiler} erstellt nach einem Simulationsdurchlauf einen Report über Laufzeiten der einzelnen Komponenten. Die wichtigen Daten, die für Aussagen über Laufzeit aus diesem Report sind die Anzahl der Aufrufe und der \textit{self time} (Laufzeit) der Komponente.\\
+Tests zur Laufzeit wurden mit dem \texttt{Simulink Profiler}\footnote{https://de.mathworks.com/help/simulink/ug/how-profiler-captures-performance-data.html} durchgeführt. Der \texttt{Simulink Profiler} erstellt nach einem Simulationsdurchlauf einen Report über Laufzeiten der einzelnen Komponenten. Die wichtigen Daten, für Aussagen über Laufzeit, aus diesem Report sind die Anzahl der Aufrufe und der \textit{self time} (Laufzeit) der Komponente.\\
 Die Analyse der aufgezeichneten Daten während mehrerer Testläufe zeigte, dass die Objekterkennung und das Schätzverfahren die einzigen für die Laufzeitbetrachtung relevanten Komponenten sind. Andere Komponenten, wie die Berechnung der Wegpunkte oder die Transformationen fallen hingegen nicht ins Gewicht und benötigen bei einer Gesamtlaufzeit der Simulation von $1000$ Sekunden lediglich ca. $2$ Sekunden. 
 
-\begin{verbatim}
-
-\end{verbatim}
 Die Daten stammen aus Testläufen zwischen $1000$ und $2500$ Sekunden Gesamtsimulationszeit. Dies entspricht zwischen $180$ und $350$ Komponentenaufrufen.\\
 Die Objekterkennung benötigte hierbei im Durchschnitt ($\frac{Komponentenlaufzeit}{Anzahl Aufrufe}$) zwischen $1,3$ und $1,56$ Sekunden.\\
 Das Schätzverfahren benötigte im Schnitt zwischen $0,65$ und $0,8$ Sekunden.\\

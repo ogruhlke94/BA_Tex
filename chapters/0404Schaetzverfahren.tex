@@ -1,22 +1,22 @@
 \subsection{Schätzverfahren}
 \label{sec_curveFit}
-In diesem Abschnitt wird das implementierte Schätzverfahren erläutert. Das Verfahren nutzt die Ergebnisse der Bilderkennung und versucht mithilfe der Regression ein Polynom $f$ zweiten Grades durch alle erkannten Punkte in Betrachtung ihrer Orientierung zu fitten.
-Das Verfahren basiert auf dem \textit{Least-Squares} Verfahren\cite{simon2006optimal}, wobei versucht wird die Gleichung \ref{lsq} zu minimieren.\\
-$x_i$ und $y_i$ sind hierbei die Koordinaten der erkannten Punkte. Es wird über alle Punkte der quadratische Fehler vom Funktionswert für ein $x$ zu gegebenen Modellparameter $p$ zum $y$ aus der Bilderkennung summiert. $f(p,x)$ ist eine beliebige Funktion, die $x$ in Abhängigkeit von $p$ auf eine reelle Zahl abbildet.\\
+In diesem Abschnitt wird das implementierte Schätzverfahren erläutert. Das Verfahren nutzt die Ergebnisse der Bilderkennung und versucht mithilfe der Regression ein Polynom $f$ zweiten Grades durch alle erkannten Punkte unter Betrachtung ihrer Orientierung zu fitten.
+Der Ansatz basiert auf dem \textit{Least-Squares} Verfahren\cite{simon2006optimal}, wobei versucht wird, die Gleichung \ref{lsq} zu minimieren.\\
+$x_i$ und $y_i$ sind hierbei die Koordinaten der erkannten Punkte. Es wird über alle Punkte der quadratische Fehler vom Funktionswert für ein $x$ zu gegebenen Modellparametern $p$ zum $y$ aus der Bilderkennung summiert. $f(p,x)$ ist eine beliebige Funktion, die $x$ in Abhängigkeit von $p$ auf eine reelle Zahl abbildet.\\
 \begin{ownequation}[H]
 \begin{equation}
 err = \sum_{i}(f(p,x_i)-y_i)^2
 \end{equation}
-\caption[Least Squares Ansatz]{Least Squares Ansatz. $x_i$ und $y_i$ sind die erkannten Objektpositionen.}
+\caption[Least-Squares-Ansatz]{Least-Squares-Ansatz. $x_i$ und $y_i$ sind die erkannten Objektpositionen.}
 \label{lsq}
 \end{ownequation}
-Über die Zeit gesehen wird die Menge an detektierten Punkten immer größer. Da das Ziel des Verfahrens die Vorhersage des Objektverlaufs ist, ist eine gute Extrapolation wichtiger als das richtige Abbilden aller Punkte der Vergangenheit. Für die Extrapolation ist anzunehmen, dass neuere Punkte für den Verlauf wichtiger sind als ältere. Aus diesem Grund werden die Punkte über die Zeit exponentiell abnehmend gewichtet. Somit erhalten aktuelle Punkte einen höheren Stellenwert als ältere, ohne jedoch alte Punkte komplett zu verwerfen.\\
+Über die Zeit gesehen wird die Menge an detektierten Punkten immer größer. Da das Ziel des Verfahrens die Vorhersage des Objektverlaufs ist, ist eine gute Extrapolation wichtiger als das richtige Abbilden aller Punkte der Vergangenheit. Für die Extrapolation ist anzunehmen, dass neuere Punkte für den Verlauf wichtiger sind als ältere. Aus diesem Grund werden die Punkte über die Zeit exponentiell aufsteigend gewichtet. Somit erhalten aktuelle Punkte einen höheren Stellenwert als ältere, ohne jedoch alte Punkte komplett zu verwerfen.\\
 Um diese Anforderungen umzusetzen wird eine Erweiterung des \textit{Least-Squares} verwendet, den \textit{Weighted-Least-Squares}[Gleichung \ref{wlsq}]\\
 \begin{ownequation}[H]
 \begin{equation}
 err = \sum_{i}w_i \cdot (f(p,x_i)-y_i)^2
 \end{equation}
-\caption[Weighted Least Squares Verfahren]{Weighted Least Squares Verfahren. Erweitert das Least Squares Verfahren um eine Gewichtung der Punkte.}
+\caption[Weighted-Least-Squares-Verfahren]{Weighted-Least-Squares Verfahren. Erweitert das Least-Squares Verfahren um eine Gewichtung der Punkte.}
 \label{wlsq}
 \end{ownequation}
 
@@ -24,10 +24,10 @@ Das \textit{Weighted-Least-Squares} Verfahren bietet eine gute Grundlage für di
 \begin{enumerate}
 \item Beachtung der Orientierung erkannter Punkte
 \item Bedingungen für die Kurve (z.B. maximale Steigung)
-\item Schätzungen, für Punktverläufe, die sich nicht durch ein einzelnes Polynom darstellen lassen
+\item Schätzungen für Punktverläufe, die sich nicht durch ein einzelnes Polynom darstellen lassen
 \end{enumerate}
 
-Zum Lösen der ersten zwei Probleme bietet die \matlab Funktion \textit{fmincon}\footnote{https://de.mathworks.com/help/optim/ug/fmincon.html} aus der Optimization Toolbox eine geeignete Lösung. Die Funktion bietet die Möglichkeit eine Funktion $F(p)$ zu minimieren, wobei mit $c(p) \leq 0$ eine Bedingung erfüllt werden muss. Die Funktion $c(p,x_i)$ [Gleichung \ref{constraint}] berechnet über den Funktionsverlauf von $f(p,x)$ mithilfe der Ableitung $f'(p,x)$ die Steigung in jedem Punkt $x_i$. Da \textit{fmincon} prüft, ob die Bedingungsfunktion kleiner 0 ist wird von der Steigung ein Maximalwert ($max_{slope}$) abgezogen (\textit{Erfüllt 2.}).\\
+Zum Lösen der ersten zwei Probleme bietet die \matlab -Funktion \textit{fmincon}\footnote{https://de.mathworks.com/help/optim/ug/fmincon.html} aus der Optimization Toolbox eine geeignete Lösung. Die Funktion bietet die Möglichkeit eine Funktion $F(p)$ zu minimieren, wobei mit $c(p) \leq 0$ eine Bedingung erfüllt werden muss. Die Funktion $c(p,x_i)$ [Gleichung \ref{constraint}] berechnet über den Funktionsverlauf von $f(p,x)$ mithilfe der Ableitung $f'(p,x)$ die Steigung in jedem Punkt $x_i$. Da \textit{fmincon} prüft, ob die Bedingungsfunktion kleiner 0 ist wird von der Steigung ein Maximalwert ($max_{slope}$) abgezogen (\textit{Erfüllt 2.}).\\
 \begin{ownequation}[H]
 \begin{equation}
 c(p,x_i) = f'(p,x_i)-max_{slope}
@@ -36,7 +36,7 @@ c(p,x_i) = f'(p,x_i)-max_{slope}
 \label{constraint}
 \end{ownequation}
 Die Funktion $F(p)$ wird als $F(p,x,y,s,w,n,m,tau)$ [Gleichung \ref{minimizeFunction}] definiert, wobei $x$ und $y$ erneut die Punkte der Bilderkennung darstellen, $s$ die erkannte Orientierung im Punkt und $w$ das Gewicht darstellt. Die Funktion $F$ besteht aus einer Linearkombination der Funktionen $g$ und $h$, wobei $g$ den summierten Fehler der Position [Gleichung \ref{posError}] ($x$,$y$ Koordinaten) und $h$ den summierten Fehler der Orientierung [Gleichung \ref{orienError}] mithilfe des \textit{Weighted-Least-Squares} Verfahren berechnen (\textit{Erfüllt 1.}). $n$ und $m$ gewichten, wie stark die einzelnen Fehlerarten (Position und Orientierung) in den Gesamtfehler für die gegebenen Funktionsparameter $p$ eingehen.\\
-Um die erhaltenen Polynome einschränken zu können, wurde $F$ noch gemäß der \textit{Tikhonov Regularisierung} \cite{kaipio2006statistical} angepasst. Durch die \textit{Tikhonov Regularisierung} können wenig gekrümmte Kurven bevorzugt werden, was für einen ruhigeren Fahrtverlauf sorgen kann.
+Um die erhaltenen Polynome einschränken zu können, wurde $F$ noch gemäß der \textit{Tikhonov Regularisierung} \cite{kaipio2006statistical} angepasst. Durch die \textit{Tikhonov-Regularisierung} können wenig gekrümmte Kurven bevorzugt werden, was für einen ruhigeren Fahrtverlauf sorgen kann.
 \begin{ownequation}[H]
 \begin{equation}
 \label{minimizeFunction}
