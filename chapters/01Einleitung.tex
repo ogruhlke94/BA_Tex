@@ -1,16 +1,16 @@
 \section{Einleitung}
-Diese Bachelorarbeit behandelt die Entwicklung einer Detektion und Verfolgung von Objekten am Meeresboden. Es wird eine Komponente entwickelt, die einem \textit{Autonomous Underwater Vehicle} (AUV) eben dies ermöglicht. Diese Komponente beinhaltet die Erkennung der Objekte, die Schätzung des Objektverlaufs und die Steuerung des AUVs anhand von Wegpunkten.
+Diese Bachelorarbeit behandelt die Entwicklung einer Detektion und Verfolgung von Objekten am Meeresboden. Es wird eine Komponente entwickelt, die einem \gls{auv} eben dies ermöglicht. Diese Komponente beinhaltet die Erkennung der Objekte, die Schätzung des Objektverlaufs und die Steuerung des \gls{auv}s anhand von Wegpunkten.
 \subsection{Motivation}
 Die Motivation für die Arbeit entspringt der Idee, Kameradaten in einem Robotersystem dezentral zu verarbeiten. So kann die Verarbeitung der Bilddaten auf einem eigenen Prozessor innerhalb der Kamerakomponente umgesetzt werden. Somit würden dem System keine rohen Daten, sondern verwertbare Informationen geliefert.\\
-Ein mögliches Beispiel hierfür ist ein Missionsszenario, in dem ein AUV einem Objekt am Meeresboden autonom folgen soll. So können Strukturen (Kabel, Pipelines etc.) von einem AUV untersucht werden, ohne dass ein Pilot das Fahrzeug steuern und überwachen muss.\\
+Ein mögliches Beispiel hierfür ist ein Missionsszenario, in dem ein \gls{auv} einem Objekt am Meeresboden autonom folgen soll. So können Strukturen (Kabel, Pipelines etc.) von einem \gls{auv}\glsadd{auv} untersucht werden, ohne dass ein Pilot das Fahrzeug steuern und überwachen muss.\\
 Die Kamerakomponente kann hierbei eine Lageposition des Objektes liefern, anstatt eines Bildes, das zentral verarbeitet werden müsste. Die Software für dieses Szenario wird in dieser Arbeit entwickelt.\\
 
 \subsection{Grundidee}
-Die zu entwickelnde Komponente soll dem AUV eine verlässliche Information über die Objektlage liefern. Hierfür gilt es zwei Hauptprobleme zu lösen.\\
-Erstens ist dies die Erkennung der Objekte im Bild. In dieser Arbeit beschränke ich mich auf linienförmige Objekte. Die Bilderkennung soll Position und Ausrichtung des Objektes relativ zum AUV bestimmen können.
+Die zu entwickelnde Komponente soll dem \gls{auv} eine verlässliche Information über die Objektlage liefern. Hierfür gilt es zwei Hauptprobleme zu lösen.\\
+Erstens ist dies die Erkennung der Objekte im Bild. In dieser Arbeit beschränke ich mich auf linienförmige Objekte. Die Bilderkennung soll Position und Ausrichtung des Objektes relativ zum \gls{auv} bestimmen können.
 Das zweite Problem ist die Bestimmung relevanter Daten, wenn die Bilderkennung kein Objekt finden kann, sei es durch zeitweises Versagen der Algorithmik, nicht verwertbare Rohdaten oder durch Unsichtbarkeit der Objekte, wenn diese zum Beispiel von Sand überdeckt sind.
 In diesem Fall soll ein Schätzverfahren auf Basis der vorherigen Positionsdaten auch weiterhin die ungefähre Objektlage liefern.\\
 Als Hilfe für die Algorithmen soll es möglich sein, a-priori Wissen über die Objekte, wie zum Beispiel den Durchmesser des Objektes, angeben zu können.
 \subsection{Aufbau der Arbeit}
-Zunächst wird grundlegend die Simulationsumgebung und das AUV beschreiben. Danach werden verschiedene Herangehensweisen ähnlicher Arbeiten vorgestellt und die Eignung für das zu lösende Problem diskutiert.
+Zunächst wird grundlegend die Simulationsumgebung und das \gls{auv} beschreiben. Danach werden verschiedene Herangehensweisen ähnlicher Arbeiten vorgestellt und die Eignung für das zu lösende Problem diskutiert.
 Im dritten Teil wird dann die gewählte und umgesetzte Lösung beschrieben. Zum Schluss folgen dann Ausführungen über die durchgeführten Tests und ein Fazit, sowie ein Ausblick auf weitere Arbeiten.

@@ -57,13 +57,12 @@ TV = \frac{sum(Testpixel)}{\#TP} - \frac{sum(Checkpixel)}{\#CP}
 \end{tabular}
 \caption[Helligkeit und Rotwert im Simulationsbild]{Helligkeit und Rotwert im Simulationsbild.In beiden Grafiken zeigt die blaue Linie die jeweiligen Pixeldaten, die gelbe Linie den Wert des Testbereichs, die lila Linie den Durchschnitt des Checkbereichs und die weiter unten gelegene rote Linie den Templatewert für das Pixel. In beiden Templatewerten ist die Pipeline eindeutig zu erkennen, wobei der Ausschlag im Rotwert weitaus höher ist.}
 \end{figure}
-\todo{neu machen}
 
-\subsubsection{\rans auf Binärbild}
+\subsubsection{\gls{rans} auf Binärbild}
 Im weiteren Verlauf wird auf dem  Binärbild gearbeitet. Nach dem Vorbild von Wang et al. \cite{wang2004lane} wird das Bild in drei Segmente unterteilt.\\
-In jedem Segment wird dann mithilfe des \rans -Algorithmus ein Rechteck gesucht [Listing \ref{ransPseudo}]. Der Algorithmus sampled verschiedene Rechtecke im Segment. Jedes Rechteck wird durch einen Mittelpunkt, eine Orientierung, die Breite und die Höhe definiert. Die Höhe ergibt sich aus der Höhe des Segmentes und die Breite wird durch die erwartete Breite des Objektes festgelegt. Mittelpunkt und Orientierung werden in jedem Iterationsschritt zufällig gewählt.\\
-Für jeden Punkt des Binärbilds wird dann geprüft, ob er im Rechteck liegt (ein \textit{Inlier} ist). Gemäß des \rans wird das Rechteck mit den meisten Inliern gewählt.\\
-\begin{lstlisting}[language=Matlab,caption={Eingesetzter \rans als Pseudocode.},label=ransPseudo]
+In jedem Segment wird dann mithilfe des \gls{rans}-Algorithmus ein Rechteck gesucht [Listing \ref{ransPseudo}]. Der Algorithmus sampled verschiedene Rechtecke im Segment. Jedes Rechteck wird durch einen Mittelpunkt, eine Orientierung, die Breite und die Höhe definiert. Die Höhe ergibt sich aus der Höhe des Segmentes und die Breite wird durch die erwartete Breite des Objektes festgelegt. Mittelpunkt und Orientierung werden in jedem Iterationsschritt zufällig gewählt.\\
+Für jeden Punkt des Binärbilds wird dann geprüft, ob er im Rechteck liegt (ein \textit{Inlier} ist). Gemäß des \gls{rans} wird das Rechteck mit den meisten Inliern gewählt.\\
+\begin{lstlisting}[language=Matlab,caption={Eingesetzter \gls{rans} als Pseudocode.},label=ransPseudo]
 function ransac(segment,height,width,minInlier,iterNum)
 	maxInlier = 0;
 	orientations = -pi/4:0.05:pi/4;
@@ -84,17 +83,17 @@ end
 \end{lstlisting}
 
 Somit gibt es für jedes Bild bis zu drei Objektposen. Durch das Unterteilen in Segmente lässt sich zum einen bestimmen, in wie vielen Segmenten ein Objekt erkannt wurde (entspricht der \textit{Länge} des Objektes im Bild). Des weiteren kann ein gebogener Verlauf oder ein abgeknicktes Objekt im Bild sinnvoll erkannt werden.\\
-In den ersten Tests dieses Verfahrens ist ersichtlich geworden, dass es einen \todo{richtige wortwahl?}Tradeoff zwischen Geschwindigkeit und Erkennungsgüte gab. Die Erkennung wurde besser, je größer das Maximum der Iteration für \rans gewählt wurden. Da der \rans jedoch auf jedes der drei Segmente separat angewendet wird, reduziert sich die Geschwindigkeit bei steigender Iterationsanzahl deutlich. Für eine zuverlässige Erkennung waren zu viele Iterationen nötig, sodass das Verfahren nicht einsetzbar wäre.\\
-Als Lösung für dieses Probleme werden die möglichen erzeugten Rechtecke für den \rans begrenzt. Da das Template nur in horizontaler Richtung auf das Bild angewendet wird, sind horizontal liegende Objekte im Binärbild nicht sichtbar. Aufgrund dieser Tatsache lassen sich die Orientierungen auf einen Bereich begrenzen, anstatt diese komplett zufällig zu wählen. Durch diese Maßnahme wurden die benötigten Iterationen für ein zuverlässiges Ergebnis drastisch reduziert. Jedoch steigt auch die Gefahr Orientierungen nicht mehr richtig zu erkennen, wie in Abbildung \ref{detecFail} gezeigt.\\
+In den ersten Tests dieses Verfahrens ist ersichtlich geworden, dass es einen \todo{richtige wortwahl?}Tradeoff zwischen Geschwindigkeit und Erkennungsgüte gab. Die Erkennung wurde besser, je größer das Maximum der Iteration für \gls{rans} gewählt wurden. Da der \gls{rans} jedoch auf jedes der drei Segmente separat angewendet wird, reduziert sich die Geschwindigkeit bei steigender Iterationsanzahl deutlich. Für eine zuverlässige Erkennung waren zu viele Iterationen nötig, sodass das Verfahren nicht einsetzbar wäre.\\
+Als Lösung für dieses Probleme werden die möglichen erzeugten Rechtecke für den \gls{rans} begrenzt. Da das Template nur in horizontaler Richtung auf das Bild angewendet wird, sind horizontal liegende Objekte im Binärbild nicht sichtbar. Aufgrund dieser Tatsache lassen sich die Orientierungen auf einen Bereich begrenzen, anstatt diese komplett zufällig zu wählen. Durch diese Maßnahme wurden die benötigten Iterationen für ein zuverlässiges Ergebnis drastisch reduziert. Jedoch steigt auch die Gefahr Orientierungen nicht mehr richtig zu erkennen, wie in Abbildung \ref{detecFail} gezeigt.\\
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{imageProcessing/realPipe/004detectedImage.jpg}
-\caption{Falsch detektierte Objektorientierung aufgrund der Beschränkung der Ausrichtungen für den \rans}
+\caption{Falsch detektierte Objektorientierung aufgrund der Beschränkung der Ausrichtungen für den \gls{rans}}
 \label{detecFail}
 \end{figure}
 \todo{evtl box vom ransac zeigen}
-Der zweite Faktor, der die Geschwindigkeit der Objekterkennung verringerte, ist die Menge der Punkte im Binärbild. So musste für jede Iteration des \rans für jeden Punkt geprüft werden, ob der Punkt im Rechteck liegt. In den Testbildern der Simulation lag die Anzahl der Punkte teilweise bei weit über $10000$, was in Kombination mit $200$ Iterationen zu einer inakzeptablen Laufzeit von ca. 5 Sekunden pro Bild führte.\\
-Zum Lösen dieses Problems wurde vor dem Einsatz des \rans die Punktanzahl verringert, indem nur jedes dritte Pixel betrachtet wird und dieses den Mittelwert aller seiner Nachbarpixel erhält. \todo{Grafik?} Somit konnte die Punktanzahl zuverlässig auf unter $2000$ verringert werden, was zu einer deutlichen Beschleunigung (ca. 1 Sekunde pro Bild) ohne nennenswerte Verschlechterung der Ergebnisse führte.
+Der zweite Faktor, der die Geschwindigkeit der Objekterkennung verringerte, ist die Menge der Punkte im Binärbild. So musste für jede Iteration des \gls{rans} für jeden Punkt geprüft werden, ob der Punkt im Rechteck liegt. In den Testbildern der Simulation lag die Anzahl der Punkte teilweise bei weit über $10000$, was in Kombination mit $200$ Iterationen zu einer inakzeptablen Laufzeit von ca. 5 Sekunden pro Bild führte.\\
+Zum Lösen dieses Problems wurde vor dem Einsatz des \gls{rans} die Punktanzahl verringert, indem nur jedes dritte Pixel betrachtet wird und dieses den Mittelwert aller seiner Nachbarpixel erhält. \todo{Grafik?} Somit konnte die Punktanzahl zuverlässig auf unter $2000$ verringert werden, was zu einer deutlichen Beschleunigung (ca. 1 Sekunde pro Bild) ohne nennenswerte Verschlechterung der Ergebnisse führte. Die Laufzeit wurde dabei mit dem \matlab \textit{Stopwatch Timer}\footnote{https://de.mathworks.com/help/matlab/ref/tic.html} gemessen.
 %\subsubsection*{Gewicht der erkannten Punkte}
 %\label{sec_weights}
 %\begin{itemize}

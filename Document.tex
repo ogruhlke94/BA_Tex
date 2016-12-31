@@ -71,7 +71,7 @@
 
 % Abkürzungsverzeichnis und Glossar
 \usepackage[
-	acronym=true,
+	acronym,
 	toc
 ]{glossaries}
 \makeglossary
@@ -81,6 +81,7 @@
 
 \newcounter{acronymcounter}
 \newcommand{\addAcronymEntry}{\stepcounter{acronymcounter}\newacronym}
+\setacronymstyle{short-long}
 
 % Aufzählungen
 \usepackage[inline]{enumitem}
