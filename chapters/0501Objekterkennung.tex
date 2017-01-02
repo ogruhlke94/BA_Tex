@@ -20,7 +20,7 @@ Unter sehr schlechten Sichtbedingungen werden die Objekte noch immer gut detekti
 \subfloat[Objekt unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeschlecht.jpg}}&
 \subfloat[Detektiertes Objekt unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeschlechtfin.jpg}}
 \end{tabular}
-\caption{Ein gerades Objekt, dass ohne Einschränkungen zu sehen ist wird unter verschiedenen Sichtbedingungen und Bildqualität getestet. Die Gerade wird unter allen Bedingungen gut detektiert. In \textit{f)} ist zu sehen, dass unter sehr schlechten Sichtbedingungen ein \textit{gezackter} Kantenverlauf entsteht.}
+\caption[Test der Objekterkennung auf geraden Objekt]{Ein gerades Objekt, dass ohne Einschränkungen zu sehen ist wird unter verschiedenen Sichtbedingungen und Bildqualität getestet. Die Gerade wird unter allen Bedingungen gut detektiert. In \textit{f)} ist zu sehen, dass unter sehr schlechten Sichtbedingungen ein \textit{gezackter} Kantenverlauf entsteht.}
 \label{testStraightObj}
 \end{figure}
 \begin{figure}[H]
@@ -32,7 +32,7 @@ Unter sehr schlechten Sichtbedingungen werden die Objekte noch immer gut detekti
 \subfloat[Objekt unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgenschlecht.jpg}}&
 \subfloat[Detektiertes Objekt unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/gradeverborgenschlechtfin.jpg}}
 \end{tabular}
-\caption{Das verborgene Objekt wird unter allen Sichtbedingungen erkannt. Hier ist der Effekt der drei Segmente zu sehen. Während in \textit{b)} und \textit{f)} das Objekt noch in zwei Segmenten detektiert wurde, ist das Objekt in \textit{d)} zu kurz um im zweiten Segment noch detektiert zu werden.}
+\caption[Test der Objekterkennung auf teilweise verdeckten Objekt]{Das verdeckte Objekt wird unter allen Sichtbedingungen erkannt. Hier ist der Effekt der drei Segmente zu sehen. Während in \textit{b)} und \textit{f)} das Objekt noch in zwei Segmenten detektiert wurde, ist das Objekt in \textit{d)} zu kurz um im zweiten Segment noch detektiert zu werden.}
 \label{testhalfObj}
 \end{figure}
 \begin{figure}[H]
@@ -44,7 +44,7 @@ Unter sehr schlechten Sichtbedingungen werden die Objekte noch immer gut detekti
 \subfloat[Objekt unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickSchlecht.jpg}}&
 \subfloat[Detektiertes Objekt unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/knickSchlechtFin.jpg}}
 \end{tabular}
-\caption{Das abgeknickte Objekt wird unter allen Sichtbedingungen erkannt. In \textit{d)} und \textit{f)} ist ein \textit{wellenförmiger} Kantenverlauf zu beobachten, der in \textit{d)} zu einer leicht falschen Bestimmung der Orientierung im geraden Bereich führt. In \textit{f)} ist zu sehen, dass die Störpixel im abgeknickten Bereich zu einer Fehldetektion der Orientierung führt.}
+\caption[Test der Objekterkennung auf abgeknickten Objekt]{Das abgeknickte Objekt wird unter allen Sichtbedingungen erkannt. In \textit{d)} und \textit{f)} ist ein \textit{wellenförmiger} Kantenverlauf zu beobachten, der in \textit{d)} zu einer leicht falschen Bestimmung der Orientierung im geraden Bereich führt. In \textit{f)} ist zu sehen, dass die Störpixel im abgeknickten Bereich zu einer Fehldetektion der Orientierung führt.}
 \label{testknickObj}
 \end{figure}
 \begin{figure}[H]
@@ -56,7 +56,7 @@ Unter sehr schlechten Sichtbedingungen werden die Objekte noch immer gut detekti
 \subfloat[Leeres Bild unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsschlecht.jpg}}&
 \subfloat[Einige Störpunkte aus dem Bild ohne Objekt unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsschlechtFin.jpg}}
 \end{tabular}
-\caption{In den Vergleichsbildern ohne Objekt wird auch unter allen Sichtbedingungen kein Objekt detektiert. Lediglich in \textit{f)} sind einige Störpunkte im Binärbild vorhanden, die auf den niedrig gewählten Templateschwellenwert [Kapitel \ref{sec_templ}] zurückzuführen sind.}
+\caption[Test der Objekterkennung leerem Bild]{In den Vergleichsbildern ohne Objekt wird auch unter allen Sichtbedingungen kein Objekt detektiert. Lediglich in \textit{f)} sind einige Störpunkte im Binärbild vorhanden, die auf den niedrig gewählten Templateschwellenwert [Kapitel \ref{sec_templ}] zurückzuführen sind.}
 \label{testnothingObj}
 \end{figure}
 
@@ -72,7 +72,7 @@ In den Bildern, in denen die Pipeline kaum zu erkennen ist, wie in Abbildung \re
 \subfloat[]{\includegraphics[height=0.2\textheight,width=0.5\textwidth]{imageProcessing/realPipe/002orgImstart.jpg}\label{rp_b}}&
 \subfloat[]{\includegraphics[height=0.2\textheight,width=0.5\textwidth]{imageProcessing/realPipe/002detectedImage.jpg}\label{rp_b}}
 \end{tabular}
-\caption{Tests der Objekterkennung auf realen Bildern aufgenommen im Unisee vom \gls{auv} \textit{DAGON}. Trotz sehr schlechter Sichtbedingungen und vieler Störpunkten im Binärbild wird die Pipeline in den oberen zwei Segmenten gut erkannt. In \textit{d)} ist im unteren Bereich eine Fehldetektion aufgrund der hohen Störpunktdichte in diesem Bereich. Die Randbereiche werden während des Binärisierungsprozess am Bild hinzugefügt, um das Template auch auf den ersten und letzten Pixeln anwenden zu können. Diese Bereiche werden bei der Detektion nicht betrachtet.}
+\caption[Test der Objekterkennung auf Realbildern mit schlechten Sichtverhältnissen]{Tests der Objekterkennung auf realen Bildern aufgenommen im Unisee vom \gls{auv} \textit{DAGON}. Trotz sehr schlechter Sichtbedingungen und vieler Störpunkten im Binärbild wird die Pipeline in den oberen zwei Segmenten gut erkannt. In \textit{d)} ist im unteren Bereich eine Fehldetektion aufgrund der hohen Störpunktdichte in diesem Bereich. Die Randbereiche werden während des Binärisierungsprozess am Bild hinzugefügt, um das Template auch auf den ersten und letzten Pixeln anwenden zu können. Diese Bereiche werden bei der Detektion nicht betrachtet.}
 \label{realData_bad}
 \end{figure}
 
@@ -81,7 +81,7 @@ In den Bildern, in denen die Pipeline kaum zu erkennen ist, wie in Abbildung \re
 \subfloat[]{\includegraphics[height=0.2\textheight,width=0.5\textwidth]{imageProcessing/realPipe/008orgImstart.jpg}}&
 \subfloat[]{\includegraphics[height=0.2\textheight,width=0.5\textwidth]{imageProcessing/realPipe/008detectedImage.jpg}}\\
 \end{tabular}
-\caption{Test der Objekterkennung auf einem realen Bild aufgenommen im Unisee vom \gls{auv} \textit{DAGON}. Die Pipeline reflektiert sehr stark und hebt sich dadurch deutlich vom Hintergrund ab. Jedoch gibt es eine starke Reflexion nah an der Pipeline, was zu einer Fehldetektion im zweiten Segment führt.}
+\caption[Test der Objekterkennung auf Realbildern mit starker Reflexion]{Test der Objekterkennung auf einem realen Bild aufgenommen im Unisee vom \gls{auv} \textit{DAGON}. Die Pipeline reflektiert sehr stark und hebt sich dadurch deutlich vom Hintergrund ab. Jedoch gibt es eine starke Reflexion nah an der Pipeline, was zu einer Fehldetektion im zweiten Segment führt.}
 \label{realData_good}
 \end{figure}
 

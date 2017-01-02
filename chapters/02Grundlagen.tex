@@ -1,3 +1,4 @@
+\cleardoublepage
 \section{Grundlagen}
 \subsection{Simulationsumgebung}
 Die Simulationsumgebung wurde von der \atlas entwickelt und wird für diese Arbeit zur Verfügung gestellt [Abb. \ref{screenSim}].
@@ -13,12 +14,12 @@ Die Simulation basiert auf der \matlab Simulink 3D Animation Toolbox, somit steh
 \subsection{AUV-Simulation}
 \label{sec_auvSimGrundlage}
 Das simulierte \gls{auv} wurde von der \atlas auf Grundlage eines der eigenen \gls{auv}s entwickelt. Zu dieser Simulation gehören die bereits erwähnten \textit{wrl} Dateien sowie eine Simulation der Fahrzeugaktuatorik und -sensorik in \matlab Simulink. Es werden die für die Steuerung benötigte Schnittstelle in Form von Wegpunkten ($x$ und $y$ Koordinaten) und eine Schnittstelle für die innere Sensorik des \gls{auv}s bereitgestellt. Die für diese Arbeit wichtigen Informationen aus der inneren Sensorik bestehen aus der \gls{pose} des \gls{auv}s in der Welt in Form von geografischen Koordinaten, der Höhe über dem Meeresboden und den \gls{roll}-, \gls{pitch}- und \gls{yaw}-Werten.\\
-Für die Steuerung wird ein \texttt{\gls{lanefollow}} verwendet, bei dem eine Linie zwischen einem neuen und altem Wegpunkt gebildet und diese dann verfolgt wird. Für die Höhenkontrolle werden zwei Steuerungsmodi zur Verfügung gestellt. Zum einen die Fahrt auf Tiefe unter der Wasserobefläche oder Höhe über Meeresboden. Für diese Arbeit wird die Fahrt auf Höhe über dem Meeresboden gewählt, da die \gls{transform} von Pixelkoordinaten in Kamerakoordinaten am zuverlässigsten in dem Abstand zum Objekt funktioniert, in dem auch die Kamerakalibrierung durchgeführt wurde. Änderungen der Höhe können zu leichten Fehlern in der Positionsbestimmung führen. Jedoch sind diese Fehler bei realistischen Höhenunterschieden von einigen Metern nicht ausschlaggebend für die Ergebnisse der Arbeit.
+Für die Steuerung wird ein \texttt{\gls{lanefollow}} verwendet, der das Fahrzeug auf einer Linie zwischen einem neuen und einem alten Wegpunkten führt. Für die Höhenkontrolle werden zwei Steuerungsmodi zur Verfügung gestellt. Zum einen die Fahrt auf Tiefe unter der Wasserobefläche oder Höhe über Meeresboden. Für diese Arbeit wird die Fahrt auf Höhe über dem Meeresboden gewählt, da die \gls{transform} von Pixelkoordinaten in Kamerakoordinaten am zuverlässigsten in dem Abstand zum Objekt funktioniert, in dem auch die Kamerakalibrierung durchgeführt wurde. Änderungen der Höhe können zu leichten Fehlern in der Positionsbestimmung führen. Jedoch sind diese Fehler bei realistischen Höhenunterschieden von einigen Metern nicht ausschlaggebend für die Ergebnisse der Arbeit.
 
 Am Bug des \gls{auv}s befindet sich eine Kamera, die zentral nach unten ausgerichtet ist. Das Sichtfeld beträgt dabei 45$^\circ$ bei einer Auflösung von 640x480 Pixeln.
 \subsection{Koordinatensysteme}
 \label{sec_coordsystems}
-Im Folgenden werde ich die Koordinatensysteme beschreiben, in denen Koordinaten angegeben werden. Hierbei wird von einer Tangentialebene an der WGS84-Kugel verschoben auf den Meeresboden ausgegangen\todo{link}, da nur hinreichend kleine Operationsgebiete des \gls{auv}s betrachtet werden, sodass die Erdkrümmung keine Auswirkung hat.
+Im Folgenden werde ich die Koordinatensysteme beschreiben, in denen Koordinaten angegeben werden. Hierbei wird von einer Tangentialebene an der WGS84-Kugel\footnote{https://confluence.qps.nl/pages/viewpage.action?pageId=29855173} verschoben auf den Meeresboden ausgegangen, da nur hinreichend kleine Operationsgebiete des \gls{auv}s betrachtet werden, sodass die Erdkrümmung keine Auswirkung hat.
 \subsubsection{Bild und Kamera}
 \label{sec_img_cam_coords}
 Das Bildkoordinatensystem [Abb. \ref{imageKoords}] beschreibt die Anordnung der Pixel im Bild als 2D-Koordinaten. Der Ursprung ist immer die linke obere Bildecke. Ich gehe davon aus, dass das Bildkoordinatensystem immer auf der Meeresbodenebene liegt. Diese Annahme ist wichtig für die \glspl{transform} [Kapitel \ref{sec_transformations}].
@@ -51,13 +52,22 @@ Das Koordinatensystem entspricht dem klassischen nautischen Koordinatensystem, d
 \end{figure}
 
 Die Neigungswinkel (\gls{roll}-\gls{pitch}-\gls{yaw}) werden wie in [Abb. \ref{Abb. 2}] im Body Koordinatensystem angegeben.
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[scale=0.7]{Einleitung/rollPitchYaw.jpg}
+%	\caption[Die Neigungswinkel im Body-Koordinatensystem]{Die Neigungswinkel am \gls{auv}. Phi beschreibt den \gls{roll} Winkel um den Massenschwerpunkt (\textit{cog}) und p die dazugehörige \textit{roll rate},  Theta beschreibt den \gls{pitch} Winkel um den Massenschwerpunkt (\textit{cog}) und q die dazugehörige \textit{roll rate} und  Psi beschreibt die Ausrichtung des \gls{auv}s im Bezug zur Nordrichtung.}
+%	\label{Abb. 2}
+%\end{figure}
+
 \begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.7]{Einleitung/rollPitchYaw.jpg}
-	\caption[Die Neigungswinkel im Body-Koordinatensystem]{Die Neigungswinkel am \gls{auv}. Phi beschreibt den \gls{roll} Winkel um den Massenschwerpunkt (\textit{cog}) und p die dazugehörige \textit{roll rate},  Theta beschreibt den \gls{pitch} Winkel um den Massenschwerpunkt (\textit{cog}) und q die dazugehörige \textit{roll rate} und  Psi beschreibt die Ausrichtung des \gls{auv}s im Bezug zur Nordrichtung.}
-	\label{Abb. 2}
+\begin{tabular}{ccc}
+\subfloat[]{\includegraphics[width=0.33\textwidth]{/Einleitung/roll.png}}&
+\subfloat[]{\includegraphics[width=0.33\textwidth,height=0.2\textheight]{/Einleitung/pitch.png}}&
+\subfloat[]{\includegraphics[width=0.33\textwidth,height=0.2\textheight]{/Einleitung/yaw.png}}
+\end{tabular}
+\caption[Die Neigungswinkel im Body-Koordinatensystem]{Die Neigungswinkel am \gls{auv}. Phi beschreibt den \gls{roll} Winkel um den Massenschwerpunkt (\textit{cog}) und p die dazugehörige \textit{roll rate},  Theta beschreibt den \gls{pitch} Winkel um den Massenschwerpunkt (\textit{cog}) und q die dazugehörige \textit{roll rate} und  Psi beschreibt die Ausrichtung des \gls{auv}s im Bezug zur Nordrichtung.}
+\label{Abb. 2}
 \end{figure}
-\todo{figure 3 weg machen}
 \subsubsection{\matlab und \gls{vrml} (World)}
 Abbildung \ref{Abb. 3} zeigt die Koordinatensysteme der \matlab -Grafikbibliothek und der \textit{\gls{vrml}} -Bibliothek. Zum Berechnen der Wegpunkte für die Steuerung des \gls{auv}s muss eine \gls{pose} in das \gls{vrml}-Koordinatensystem transformiert werden. Der Ursprung beider Systeme liegt im Mittelpunkt der Simulationsumgebung.
 \begin{figure}[H]

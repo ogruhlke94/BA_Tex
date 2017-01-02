@@ -25,18 +25,18 @@
 \input{Optionen}
 
 % Hinweis Entwurfsphase
-\ifdraft
-	\usepackage{datetime}
-	\settimeformat{hhmmsstime}
-
-	\usepackage{eso-pic}
-	\makeatletter
-	\AddToShipoutPicture{
-		\unitlength1mm
-		\put(1,5){{\parbox{21cm}{\centering \small \textcolor{orange}{\texttt{---- \DraftMessage{} -- (\today{} \currenttime) -- \DraftMessage{} ----}}}}}
-		\put(1,290){{\parbox{21cm}{\centering \small \textcolor{orange}{\texttt{---- \DraftMessage{} -- (\today{} \currenttime) -- \DraftMessage{} ----}}}}}
-	}
-\fi
+%\ifdraft
+%	\usepackage{datetime}
+%	\settimeformat{hhmmsstime}
+%
+%	\usepackage{eso-pic}
+%	\makeatletter
+%	\AddToShipoutPicture{
+%		\unitlength1mm
+%		\put(1,5){{\parbox{21cm}{\centering \small \textcolor{orange}{\texttt{---- \DraftMessage{} -- (\today{} \currenttime) -- \DraftMessage{} ----}}}}}
+%		\put(1,290){{\parbox{21cm}{\centering \small \textcolor{orange}{\texttt{---- \DraftMessage{} -- (\today{} \currenttime) -- \DraftMessage{} ----}}}}}
+%	}
+%\fi
 
 % Seitenränder
 \usepackage{geometry}
@@ -172,7 +172,7 @@
 	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
 	{€}{{\EUR}}1 {£}{{\pounds}}1
 }
-
+\definecolor{darkgreen}{HTML}{006400}
 \lstset{language=Matlab,%
     %basicstyle=\color{red},
     inputpath=code/,
@@ -184,7 +184,7 @@
     morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
     identifierstyle=\color{black},%
     stringstyle=\color{lila},
-    commentstyle=\color{green},%
+    commentstyle=\color{darkgreen},%
     showstringspaces=false,%without this there will be a symbol in the places where there is a space
     numbers=left,%
     numberstyle={\tiny \color{black}},% size of the numbers
@@ -249,6 +249,9 @@
 \usepackage[hyphenbreaks]{breakurl}
 
 \parindent0mm
+
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
 
 \begin{document}
 

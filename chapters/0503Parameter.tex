@@ -15,7 +15,7 @@ Dieses Verhalten ist im Testlauf Abb. \ref{curveLost} zu beobachten. Je schärfe
 \subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kurvenichtverloren/groundTruth.jpg}}&
 \subfloat[Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kurveverloren/groundTruth.jpg}}
 \end{tabular}
-\caption{Hier wurden zwei Testläufe in der identischen Umgebung (Sichtbedingungen und Objektlage) durchgeführt. Nur die Parametrisierung der Regression wurden geändert. Es ist zu beobachte, dass trotz gleich guter Detektion des Objektes (der Fehlerausschlag in \textit{c)} und \textit{d)} ist sehr ähnlich) das Objekt nur mit der richtigen Parametrisierung verfolgt werden kann.}
+\caption[Testläufe am identischen Objekt mit verschiedener Parametrisierung]{Hier wurden zwei Testläufe in der identischen Umgebung (Sichtbedingungen und Objektlage) durchgeführt. Nur die Parametrisierung der Regression wurden geändert. Es ist zu beobachte, dass trotz gleich guter Detektion des Objektes (der Fehlerausschlag in \textit{c)} und \textit{d)} ist sehr ähnlich) das Objekt nur mit der richtigen Parametrisierung verfolgt werden kann.}
 \label{curveLost}
 \end{figure}
 
@@ -30,7 +30,7 @@ In Abbildung \ref{figpendel} ist diese Beobachtung mit verschiedenen Parametrisi
 \subfloat[Gute Parametrisierung mit Gleichgewichtung der Fehlerarten, geringer \textit{Tikhonov Regularisierung} und weder hohem, noch geringem Maximalfehler.]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/testlaeufe/Gradeok/groundTruthPosition.jpg}}\\
 \subfloat[Schlechte Parametrisierung mit höherer Gewichtung des Orientierungsfehlers, keiner \textit{Tikhonov Regularisierung} und geringem Maximalfehler.]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/testlaeufe/Gradeschlecht/groundTruthPosition.jpg}}
 \end{tabular}
-\caption{Testlauf mit einem geraden Objekt [Abb. \ref{testStraight}] mit unterschiedlicher Parametrisierung. Im Fehler der \gls{auv}-Position zur Objektposition ist zu erkennen, dass bei den guten Parametrisierungen der Fehler über die Zeit abfällt. Bei der sehr guten Parametrisierung (\textit{a)}) sogar noch weitaus schneller. Bei der schlechten Parametrisierung (\textit{c)}) findet keine Verringerung des Fehlers statt. Die Höhe der Ausschläge nimmt auch nicht beständig ab, wie bei den guten Parametern.}
+\caption[Einpendelverhalten am geraden Objekt verdeutlicht]{Testlauf mit einem geraden Objekt [Abb. \ref{testStraight}] mit unterschiedlicher Parametrisierung. Im Fehler der \gls{auv}-Position zur Objektposition ist zu erkennen, dass bei den guten Parametrisierungen der Fehler über die Zeit abfällt. Bei der sehr guten Parametrisierung (\textit{a)}) sogar noch weitaus schneller. Bei der schlechten Parametrisierung (\textit{c)}) findet keine Verringerung des Fehlers statt. Die Höhe der Ausschläge nimmt auch nicht beständig ab, wie bei den guten Parametern.}
 \label{figpendel}
 \end{figure}
 
