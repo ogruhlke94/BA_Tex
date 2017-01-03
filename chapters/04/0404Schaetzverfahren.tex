@@ -19,7 +19,7 @@ err = \sum_{i}w_i \cdot (f(p,x_i)-y_i)^2
 \caption[Weighted-Least-Squares-Verfahren]{Weighted-Least-Squares Verfahren. Erweitert das Least-Squares Verfahren um eine Gewichtung der Punkte.}
 \label{wlsq}
 \end{ownequation}
-
+\newpage
 Das \textit{Weighted-Least-Squares} Verfahren bietet eine gute Grundlage für die Regression. Es bleiben jedoch noch einige Probleme, die das Verfahren in der Form nicht lösen kann.
 \begin{enumerate}
 \item Beachtung der Orientierung erkannter Punkte
@@ -65,7 +65,7 @@ Als Lösung für dieses Problem wird ein alternatives Weltkoordinatensystem eing
 \caption[Transformation in alternatives Koordinatensystem]{Eine Transformation der detektierten Punkte in das alternative Koordinatensystem, um ein besseres Polynom bestimmen zu können. Das Polynom in \textit{a)} übersteigt den Fehlerschwellenwert und löst damit die Transformation aus.}
 \label{figAlterCoords}
 \end{figure}
-Nach jeder Regression wird das berechnete Polynom in den aktuellsten Punkten getestet. Sollte dabei ein gewisser Fehlerschwellenwert überschritten werden, wird eine neue \gls{transform} berechnet [Listing \ref{transPseudo}]. Diese neue Transformation besteht aus einer Translation zum Punkt mit dem größten $x$-Wert und einer Rotation um die durchschnittliche Ausrichtung der neuesten Punkte. Neben der Transformationsmatrix wird auch die Inverse der Matrix gespeichert, die für die Wegpunktberechnung [Kapitel \ref{sec_waypoint}] wichtig ist. Da die Transformation ausgelöst wird, sobald das Polynom in den neuesten Punkten einen zu großen Fehler ergibt, werden nach dem Speichern der Matrizen alle Punkte, bis auf die neuesten, verworfen, um ein potentiell besseres Polynom für die Extrapolation zu ermöglichen.\\
+Nach jeder Regression wird das berechnete Polynom in den aktuellsten Punkten getestet. Sollte dabei ein gewisser Fehlerschwellenwert überschritten werden, wird eine neue \gls{transform} berechnet (vgl. Listing \ref{transPseudo}). Diese neue Transformation besteht aus einer Translation zum Punkt mit dem größten $x$-Wert und einer Rotation um die durchschnittliche Ausrichtung der neuesten Punkte. Neben der Transformationsmatrix wird auch die Inverse der Matrix gespeichert, die für die Wegpunktberechnung [Kapitel \ref{sec_waypoint}] wichtig ist. Da die Transformation ausgelöst wird, sobald das Polynom in den neuesten Punkten einen zu großen Fehler ergibt, werden nach dem Speichern der Matrizen alle Punkte, bis auf die neuesten, verworfen, um ein potentiell besseres Polynom für die Extrapolation zu ermöglichen. Die \textit{aktuellsten} Punkte wurden im Rahmen dieser Arbeit auf konstant 10 Punkte gesetzt. Bei einer größeren Anzahl an Punkten, die nach einer neuen Transformation nicht verworfen werden, konnte oftmals kein neues Polynom gefunden werden, dass die maximale Fehlerschwelle wieder unterschreitet.\\
 Sobald eine beschriebene \gls{transform} gespeichert wurde, werden alle Punkte vor der Regression in das alternative Koordinatensystem transformiert. Durch diese Transformation sind die erkannten Punkte entlang der X-Achse gelegen und somit ist es möglich, stets ein geeignetes Polynom für die Punkte zu finden. Durch die Translation liegen die Punkte stets nah am Ursprung, was den Parameterraum für die Regression verringert und somit zu schnelleren Ergebnissen führt.\label{alterWorldCoords}
 \begin{lstlisting}[language=Matlab,caption=Pseudocode des Schätzverfahrens,label=transPseudo]
 function polynomFit(points,maxError)
@@ -82,6 +82,7 @@ function polynomFit(points,maxError)
 	end
 end
 \end{lstlisting}
+In Listing \ref{transPseudo} ist das Schätzverfahren grob als Pseudocode dargestellt. \textit{points} ist ein Array von \textit{pointInFrame}-Objekten [Listing \ref{pointInFrame}] und \textit{maxError} gibt den Schwellenwert für eine Transformation an. Zunächst werden alle Punkte in das derzeitige alternative Weltkoordinatensystem transformiert. Sollte noch keine Transformation generiert worden sein, besteht \textit{actualTransform} aus der Einheitsmatrix und somit wird keine Transformation durchgeführt. Im Anschluss wird das Polynom durch die Regression auf den transformierten Punkten ermittelt und der Fehler in den aktuellsten Punkten berechnet. Sollte der Schwellenwert überstiegen werden wird zunächst die benötigte Translation und Rotation bestimmt und eine neue Transformationsmatrix erstellt. Diese Matrix wird mit der aktuellen Transformationsmatrix multipliziert, um beide Transformationen zu verbinden. In \textit{saveNewTransform} werden die neue Transformationsmatrix und ihre Inverse gespeichert.
 
 
 
