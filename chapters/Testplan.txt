@@ -4,26 +4,24 @@ Fehler von AUV Position - Pipe
 Fehler von Pipe erkannt - Pipe
 Parameterbeschreibung
 
-1.
-Grade Pipe +
-2.
-Kurve
-3. 
-Grade dann Kurve
-4.
-Sinus
-5.
-Kreis 
-6.
-Grade dann Kreis
+-Geraden
+	- gradeGut
+	
+-Kurven
+	- linkskurve
+	- rechtskurveLinks
+	- gradeKurveSicht
+	- sinusSicht
+	- S-Kurve_Gut
 
-
-Parameter:
-Grade mit verschiedenen Parametern
-
-Kurve verpassen wegen Parametern
-
-"Einschwingen"
-
-Fahrt entlang Y-Achse
-Transformation zeigen - unterschied der Qualität mit und ohne
+-Ellipsen
+	- kreissicht
+	- gradeKreissicht
+	
+- Schlechte Sichtbedingungen
+	- linkskurveschlechtesicht
+	- kreisschlechtesicht
+	
+- Parametrisierung
+	- kurve verpasst vs kurve nicht verpasst
+	- pendeln gradegut, gradeok, gradeschlecht

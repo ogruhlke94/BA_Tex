@@ -1,9 +1,9 @@
 \cleardoublepage
 \section{State of the Art}
 In diesem Kapitel werden verwandte Arbeiten zum Thema dieser Arbeit vorgestellt. Außerdem wird erläutert, inwiefern die vorgestellten Arbeiten sich zum Lösen der gestellten Aufgabe eignen.\\
-Die Arbeit wird in die Oberpunkte \textit{Objekterkennung}, zum Detektieren der Objekte und Bestimmen der Lage, und das \textit{Schätzverfahren}, zur Bestimmung und Vorhersage des Objektverlaufs unterteilt.
+Die Arbeit wird in die Oberpunkte \textit{Objekterkennung}, zum Detektieren der Objekte und Bestimmen der Lage, und das \textit{Schätzverfahren}, zur Bestimmung und Vorhersage des Objektverlaufs, unterteilt.
 \subsection{Objekterkennung}
-Bei der Objekterkennung unterscheide ich grob zwischen Ansätzen, die Objekte aufgrund von Linien und deren Beziehungen detektieren und solchen, die andere Objekteigenschaften nutzen.
+Bei der Objekterkennung unterscheide ich grob zwischen Ansätzen die Objekte aufgrund von Linien und deren Beziehungen detektieren und solchen, die andere Objekteigenschaften nutzen.
 \subsubsection{Linienerkennung}
 Linienförmige Objekte heben sich unter anderem durch zwei annähernd parallel verlaufende Kanten vom Hintergrund ab.
 Ein verwandtes Problem hierzu ist die Detektion eines Straßenverlaufs, der sich ebenso durch zwei fast parallele Linien (den Fahrbahnmarkierungen) auszeichnet [Abb. \ref{Abb. 4}].\\
@@ -14,17 +14,15 @@ Ein verwandtes Problem hierzu ist die Detektion eines Straßenverlaufs, der sich
 \end{figure}
 
 Viele Arbeiten zum Tracking von Fahrbahnmarkierungen basieren auf der Kantenextraktion (\cite{Voisin2005},\cite{bai2010multiple}, \cite{Park20032301},\cite{wang2004lane}). Aus dem Kantenbild werden dann die Charakteristiken der Straße extrahiert.
-Hierfür wird oft versucht, mithilfe von \glspl{lcf} (lane-curve-function) die Markierungen zu finden. Dies eignet sich besonders gut, um den typischen Straßenverlauf in Form von leichten Kurven zu erkennen. Eine \gls{lcf} stellt ein Modell des gekrümmten Straßenverlaufs dar, das sich durch Parameter bestimmen lässt. Hierbei unterteilt sich die \gls{lcf} in zwei Breiche. Zum einen einen geraden Beginn, gefolgt von einem gekrümmten Bereich.\\
+Hierfür wird oft versucht, mithilfe von \glspl{lcf} (lane-curve-function) die Markierungen zu finden. Dies eignet sich besonders gut um den typischen Straßenverlauf in Form von leichten Kurven zu erkennen. Eine \gls{lcf} stellt ein Modell des gekrümmten Straßenverlaufs dar, das sich durch Parameter bestimmen lässt. Hierbei unterteilt sich die \gls{lcf} in zwei Breiche. Zum einen einen geraden Beginn, gefolgt von einem gekrümmten Bereich.\\
 Jong Woung Park et al.\cite{Park20032301} untersuchen Straßenbilder mithilfe von \glspl{lcf} und einem Krümmungsindex, der die Richtung und Stärke der Krümmung beeinflusst. Bestimmt wird dabei, ob es sich im Bild um eine gerade, nach links oder nach rechts gebogene Straße handelt.\\
 Die Methode setzt dabei voraus, dass die geraden Anfänge der Straßenmarkierungen nah an der Kamera sowie der \textit{\gls{vp}}  bereits erkannt wurden. Der \textit{\gls{vp}} ist der Punkt, an dem sich parallele Linien projiziert auf die Bildebene schneiden (vgl. Abb. \ref{detHough}). Aus diesem Wissen werden zunächst die von der Krümmung unabhängigen Parameter der \gls{lcf} berechnet. Der Bereich weiter entfernt von der Kamera bestimmt dann die Krümmung der gesuchten \gls{lcf}. Hierfür wird für die verschiedenen Krümmungen eine \textit{region of interest} (ROI) um die \gls{lcf} definiert. Innerhalb der ROI wird dann mithilfe von Kantenerkennung evaluiert, welcher Krümmungsgrad am ehesten den Fahrbahnverlauf abbildet. Dieses Verfahren ist in Abbildung \ref{lcfDec} zu sehen, in dem die ROI der Linkskurve das beste Ergebnis liefert.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth,height=0.2\textheight]{SOTA/lcfResult.jpg}
+	\includegraphics[width=\textwidth,height=0.3\textheight]{SOTA/lcfResult.jpg}
 	\caption[Detektion eines Straßenverlaufs über eine \gls{lcf}]{Detektion des Straßenverlaufs mithilfe von \gls{lcf} und ROI. Die schwarz umrahmte Fläche bestimmt die ROI. Die Kurven der drei Bilder werden durch verschiedene Krümmungindizes der \gls{lcf} erzeugt. Die von der Krümmung unabhängigen Parameter der \gls{lcf} sind in allen Bildern gleich.}
 	\label{lcfDec}
 \end{figure}
-
-Alternativ können auch gerade Linien im Kantenbild gesucht werden. In \texttt{A Real-time Lane Detection Algorithm Based on a Hyperbola-Pair Model} \cite{chen2006real} suchen Chen et al. mithilfe des \textit{\gls{rans}}-Algorithmus auf einem Kantenbild zwei gerade Linien. Auf Grundlage der gefundenen Linien wird anschließend die Mitte der Straße und in weiteren Schritten der Straßenverlauf bestimmt [Abb. \ref{ransDetectChen}].\\
 \begin{figure}[H]
 \centering
 \begin{tabular}{cc}
@@ -34,6 +32,8 @@ Alternativ können auch gerade Linien im Kantenbild gesucht werden. In \texttt{A
 \caption[Detektion eines Straßenverlaufs mit dem \gls{rans}-Algorithmus]{Erkennungsprozess aus \textit{A Real-time Lane Detection Algorithm Based on a Hyperbola-Pair Model}. Im rechten Bild ist in rot die detektierte Straßenmitte gekennzeichnet.}
 \label{ransDetectChen}
 \end{figure}
+Alternativ können auch gerade Linien im Kantenbild gesucht werden. In \texttt{A Real-time Lane Detection Algorithm Based on a Hyperbola-Pair Model} \cite{chen2006real} suchen Chen et al. mithilfe des \textit{\gls{rans}}-Algorithmus auf einem Kantenbild zwei gerade Linien. Auf Grundlage der gefundenen Linien wird anschließend die Mitte der Straße und in weiteren Schritten der Straßenverlauf bestimmt [Abb. \ref{ransDetectChen}].\\
+
 Einen ähnlichen Ansatz verfolgen auch Wang et al. für ihre Detektion in \texttt{Lane detection and tracking using B-Snake}\cite{wang2004lane}. Besonders hierbei ist, dass das Eingabebild vertikal in fünf Segmente eingeteilt wird (siehe Ab. \ref{Abb. 4}). In jedem Segment werden mithilfe der \textit{Hough Transformation} Linien erkannt und wie bei Chen die Mitte der Straße bestimmt. Außerdem wird für jedes Segment auch der \textit{\gls{vp}} bestimmt. Der \textit{\gls{vp}} eines Segmentes bestimmt die Richtung der detektierten Straße (siehe Abb. \ref{detHough}).\\
 Die Arbeit bietet eine Möglichkeit innerhalb eines Bildes eine Kurve zu detektieren, obwohl nur gerade Linien gesucht wurden.
 \begin{figure}[H]
@@ -46,17 +46,16 @@ Aus den von mir betrachteten Arbeiten geht hervor, dass mithilfe von \glspl{lcf}
 Aus dieser Ausrichtung resultiert jedoch, dass der betrachtete Bereich weitaus kleiner ist und die meisten Objekte nur eine sehr leichte Krümmung im Bild aufweisen. In solch kleinen Bereichen reicht eine Linienerkennung aus.
 
 \subsubsection{Andere Ansätze}
-Im \texttt{CSurvey}-Projekt \cite{Albiez2015CSurveyA} beleuchten Albiez et al. eine Pipeline mit einem Linienlaser und erkennen die Linie im Kamerabild über den Helligkeitswert. Für die Detektion wird für jede Bildzeile ein Helligkeitsmaximum gesucht. Hierfür wird ein Template, das den typischen Helligkeitsunterschied der beleuchteten Pipeline zum Hintergrund abbildet, auf die Zeile angewandt [Abb. \ref{templateCSurv}].\\
-Diese Detektion wurde vor allem in verschiedenen Entfernungen zum Boden und verschiedenen Trübheitsgraden des Wassers getestet. Ein Ergebnis der Arbeit ist, dass mit dem Template auch bei schlechter Sicht die Pipeline noch erkennbar ist. Jedoch wird ab einem bestimmten Trübheitsgrad das gesamte Bild zu hell für eine Erkennung, da die Reflexion des Laserlichts im trüben Wasser viel zu groß ist.\\
+Im \texttt{Avalon}-Projekt \cite{avalon} wird eine Pipeline mit einem Farbfilter im HSV-Farbraum detektiert. Dieser Filter erzeugt zuerst ein Binärbild. Auf diesem Binärbild wird dann mit einem Canny Edge Detector ein Kantenbild generiert. Im Kantenbild wird mithilfe der Hough-Transformation nach Linien gesucht.\\
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.6]{SOTA/templateCSurvey.jpg}
 \caption[Template zur Pipelinedetektion aus \textit{CSurvey}]{Template zur Detektion auf Helligkeitsdaten aus \textit{CSurvey}.}
 \label{templateCSurv}
 \end{figure}
-Im \texttt{Avalon}-Projekt \cite{avalon} wird eine Pipeline mit einem Farbfilter im HSV-Farbraum detektiert. Dieser Filter erzeugt zuerst ein Binärbild. Auf diesem Binärbild wird dann mit einem Canny Edge Detector ein Kantenbild generiert. Im Kantenbild wird mithilfe der Hough-Transformation nach Linien gesucht.\\
-In \texttt{Simple vision tracking of pipelines for an autonomous underwater vehicle}\cite{hallset1991simple} wird ähnlich wie bei den Linienerkennungsansätzen eine Kantenerkennung durchgeführt. Im Kantenbild werden dann durch Segmentierung Regionen definiert, auf welche dann umschließende Rechtecke gelegt werden.
-Aus diesen Rechtecken lässt sich dann die gesuchte Pipeline bestimmen.\\
+Im \texttt{CSurvey}-Projekt \cite{Albiez2015CSurveyA} beleuchten Albiez et al. eine Pipeline mit einem Linienlaser und erkennen die Linie im Kamerabild über den Helligkeitswert. Für die Detektion wird für jede Bildzeile ein Helligkeitsmaximum gesucht. Hierfür wird ein Template, das den typischen Helligkeitsunterschied der beleuchteten Pipeline zum Hintergrund abbildet, auf die Zeile angewandt [Abb. \ref{templateCSurv}].\\
+Diese Detektion wurde vor allem in verschiedenen Entfernungen zum Boden und verschiedenen Trübheitsgraden des Wassers getestet. Ein Ergebnis der Arbeit ist, dass mit dem Template auch bei schlechter Sicht die Pipeline noch erkennbar ist. Jedoch wird ab einem bestimmten Trübheitsgrad das gesamte Bild zu hell für eine Erkennung, da die Reflexion des Laserlichts im trüben Wasser viel zu groß ist.\\
+
 \begin{figure}[H]
 \centering
 \begin{tabular}{cc}
@@ -68,6 +67,8 @@ Aus diesen Rechtecken lässt sich dann die gesuchte Pipeline bestimmen.\\
 \caption[Detektion einer Pipeline im Kantenbild]{Einzelschritte der Erkennung aus \textit{Simple vision tracking of pipelines for an autonomous underwater vehicle}. Die Pipeline wird hierbei durch das Untersuchen des Kantenbildes auf rechteckige Strukturen detektiert.}
 \label{rectDetect}
 \end{figure}
+In \texttt{Simple vision tracking of pipelines for an autonomous underwater vehicle}\cite{hallset1991simple} wird ähnlich wie bei den Linienerkennungsansätzen eine Kantenerkennung durchgeführt. Im Kantenbild werden dann durch Segmentierung Regionen definiert, auf welche dann umschließende Rechtecke gelegt werden.
+Aus diesen Rechtecken lässt sich dann die gesuchte Pipeline bestimmen.\\
 
 Foresti et al. detektieren in \textit{A Vision Based System for Object Detection in
 Underwater Images}\cite{foresti2000vision} Unterwasserpipelines mithilfe eines neuronalen Netzes. In Abbildung \ref{nnDet} ist zu sehen, dass die Pipelines sehr gut erkannt wurden. Selbst bei vom Sand verdeckten Pipelines (\ref{nnDet}c und \ref{nnDet}d) werden die Kanten der Pipelines noch richtig bestimmt.
@@ -78,10 +79,10 @@ Underwater Images}\cite{foresti2000vision} Unterwasserpipelines mithilfe eines n
 \caption[Pipelinedetektion mit neuronalem Netzwerk.]{Pipelines erkannt mithilfe eines neuronalen Netzwerks aus \textit{A Vision Based System for Object Detection in Underwater Images}\cite{foresti2000vision}. Es werden selbst verdeckte Pipelines sehr gut erkannt.}
 \label{nnDet}
 \end{figure}
-Trotz dieser guten Ergebnisse habe ich mich gegen ein neuronales Netz entschieden. Zum einen gab es zu Beginn der Arbeit keine geeigneten Trainingsbilder aus der Simulationsumgebung, um das Netz zu trainieren. Außerdem ist ein neuronales Netz stets als \textit{black box} zu betrachten und die Detektion ist nicht eindeutig nachvollziehbar. Neben diesen Faktoren ist auch der Berechnungsaufwand für ein neuronales Netz höher einzuschätzen, als bei anderen Ansätzen.\\
+Trotz dieser guten Ergebnisse habe ich mich gegen ein neuronales Netz entschieden. Zum einen gab es zu Beginn der Arbeit keine geeigneten Trainingsbilder aus der Simulationsumgebung, um das Netz zu trainieren. Das Training an sich wäre zudem ein sehr großer Mehraufwand, der den Rahmen der Arbeit überzogen hätte. Zudem ist ein neuronales Netz auch nicht so eindeutig nachvollziehbar, wie andere Algorithmen.\\
 Aus diesen Gründen habe ich mich für einen leichter zu implementierenden, klassischeren Ansatz der Bildverarbeitung entschieden.
 
-Die auf Linienerkennung basierenden Ansätze eignen sich sehr gut, solange klare Kanten im Bild erkennbar sind. Im Unterwasserszenario setzt dies gute Sicht- und Lichtverhältnisse voraus. Außerdem würden vom Meeresboden verdeckte Objekte keine oder sehr kurvige Kanten ergeben, in denen die vorgestellten Ansätze keine Ergebnisse liefern würde. Beide Voraussetzungen sind im Unterwasserbereich nicht erfüllbar, weswegen in dieser Arbeit ein anderer Ansatz gewählt wurde.\\
+Die auf Linienerkennung basierenden Ansätze eignen sich sehr gut, solange klare Kanten im Bild erkennbar sind. Im Unterwasserszenario setzt dies gute Sicht- und Lichtverhältnisse voraus. Außerdem würden vom Meeresboden verdeckte Objekte keine oder sehr kurvige Kanten ergeben, in denen die vorgestellten Ansätze keine Ergebnisse liefern würden. Beide Voraussetzungen sind im Unterwasserbereich nicht erfüllbar, weswegen in dieser Arbeit ein anderer Ansatz gewählt wurde.\\
 Sehr gut eignet sich ein helligkeitsbasierter Ansatz. Wie im \textit{CSurvey}-Projekt\cite{Albiez2015CSurveyA} gezeigt, kann ein solcher Ansatz selbst unter schlechten Sichtbedingungen noch gute Ergebnisse liefern. Es ist zu erwarten, dass auch in der verwendeten Simulationsumgebung gute Resultate erzielt werden können.\\
 \subsection{Schätzverfahren}
 Wie in der Einleitung beschrieben muss ein Schätzverfahren entwickelt werden, um dem Objektverlauf optimal folgen zu können. Das Verfahren muss auf der Ausgabe der Objekterkennung aufsetzen.
@@ -92,14 +93,14 @@ In der Arbeit ist sehr gut zu sehen, wie der Kalman-Filter den Fehler der Objekt
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.8]{SOTA/Kalman.jpg}
-\caption[Schätzung einer Objektbewegung mit Kalman-Filter.]{Eine Objektbewegung wird mit einem Kalman-Filter verfolgt. Lila sind hierbei die Positionsbestimmungen aus der Bilderkennung, blau der wirkliche Objektverlauf, grün der vom Zustandsübergang des Kalman-Filters erwartete Verlauf und rot der vom Kalman-Filter korrigierte Verlauf.}
+\caption[Schätzung einer Objektbewegung mit Kalman-Filter.]{Eine Objektbewegung wird mit einem Kalman-Filter verfolgt. In schwarz ist der tatsächliche Objektverlauf gekennzeichnet. In grün ist ein Referenz-Tracking angegeben, dass ausschließlich auf der Objekterkennung basiert. Die verrauschten Messdaten sind in lila markiert.}
 \label{kalmanFilter}
 \end{figure}
 \todo{nochmal checken was hier was ist}
 Der Kalman-Filter eignet sich jedoch nicht gut für das gestellte Szenario. Um den Messfehler der Objekterkennung auszugleichen, müsste der Zustand des Kalman-Filters das zu verfolgende Objekt abbilden. Dieser Zustand sowie der benötigte Zustandsübergang sind jedoch nicht problemlos zu definieren.\\
 Das Problem beim Definieren des Zustands liegt darin, dass das Objekt selbst keine wechselnden Zustände hat, sondern stets fest bleibt. Ein Ansatz wäre, die Position und Ausrichtung des Objektes im Zustand abzubilden. Bei einem Zustandsübergang müsste dann eine neue Position und Ausrichtung berechnet werden. Da sich das Objekt selbst nicht bewegt, müsste dieser Übergang in Abhängigkeit der Bewegung des \gls{auv}s umgesetzt werden. Es gibt jedoch keinen direkten Zusammenhang zwischen der Objektlage und der \gls{auv} Bewegung und somit kann kein Folgezustand berechnet werden. Da das Objekt keine Eigenbewegung durchführt ist die Lage stets unabhängig vom \gls{auv}. Eine von dem \gls{auv} abhängige Position wäre die nächste Position vom \gls{auv} auf dem Objektverlauf. Hierfür müsste jedoch aus den vorhandenen Daten zuerst der Objektverlauf berechnet werden, was direkt zum nächsten vorgestellten Ansatz führt.
 \subsubsection{Regressionsverfahren}
-Ein weiterer Lösungsansatz für das Schätzverfahren ist die Regression. Bei der Regression wird versucht, ein parametrisierbares Modell an gegebene Daten anzupassen. Dabei wird versucht, den Fehler der Daten im Bezug zur aus dem Model generierten Kurve zu minimieren.
+Ein weiterer Lösungsansatz für das Schätzverfahren ist die Regression. Bei der Regression wird versucht, ein parametrisierbares Modell an gegebene Daten anzupassen. Dabei wird versucht den Fehler der Daten im Bezug zur aus dem Model generierten Kurve zu minimieren.
 Brundson nutzt in \texttt{Path estimation from GPS tracks}\cite{brunsdon2007path} einen Regressionsansatz, um aus fehlerbehafteten GPS-Daten einen Pfad durch ein Stadtgebiet genauer zu bestimmen. Die GPS-Daten ähneln den zu erwartenden Daten der Objekterkennung. Auch hier gibt es einen reellen Verlauf und fehlerbehaftete Messdaten zu beiden Seiten dieses Verlaufs.\\
 Brundson berechnet die optimalen Modellparameter durch das Minimieren des quadrierten Fehlers jedes Punktes zur Kurve.\\
 In der Abbildung \ref{gpsfit} ist gut zu sehen, wie die Kurve nahezu den echten Pfad abbildet.

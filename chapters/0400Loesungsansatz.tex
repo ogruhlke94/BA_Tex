@@ -5,7 +5,7 @@ Danach folgen genauere Ausführungen zu den Kernelementen der Arbeit, der Objekt
 
 Ein grundlegender Datentyp, der sich über alle Teile der Arbeit erstreckt, ist durch die Struktur \textit{pointInFrame} [Listing \ref{pointInFrame}] definiert. Diese Struktur bildet einen von der Objekterkennung detektierten Punkt des Objektes mit seiner Position und Orientierung ab. Zudem wird gespeichert, in welchem Referenzframe der Punkt angegeben ist. Neben diesen Positionsdaten sind zudem noch die Gütefaktoren der Objekterkennung angegeben (siehe hierfür Kapitel \ref{sec_learnWeights}).
 
-\begin{lstlisting}[language=Matlab,caption={Initialisierung der \textit{pointInFrame}-Struktur, die erkannte Punkte in verschiedenen Referenzkoordinatensystemen abbildet.}, label = pointInFrame]
+\begin{lstlisting}[language=Matlab,caption={[Initialisierung der \textit{pointInFrame}-Struktur]Initialisierung der \textit{pointInFrame}-Struktur, die erkannte Punkte in verschiedenen Referenzkoordinatensystemen abbildet.}, label = pointInFrame]
 Point_In_Frame = struct;
 Point_In_Frame.point = [0 0 0];
 Point_In_Frame.direction = 0;
@@ -21,6 +21,15 @@ Point_In_Frame.phi = 0;
 \end{lstlisting}
 
 \begin{figure}[H]
-\includegraphics[width=\textwidth]{Systementwurf.jpg}
-\caption[Systementwurf]{Systementwurf der eingesetzten Lösung. Die Simulationsumgebung }
+\includegraphics[width=\textwidth]{Systementwurf.png}
+\caption[Systementwurf]{Systementwurf der eingesetzten Lösung. Die Simulationsumgebung ist hierbei als \textit{black box} zu betrachten, die das Kamerabild und \gls{auv}-Pose liefert und durch die Wegpunkte für den \gls{lanefollow} gesteuert wird. In dieser Grafik ist der Datenfluss der vier Hauptkomponenten der Arbeit (Objekterkennung, Transformation, Schätzverfahren und Wegpunktberechnung) dargestellt.}
 \end{figure}
+Die Objekterkennung nutzt das Kamerabild aus der Simulationsumgebung um in zwei Schritten (Binärisierung und \gls{rans}) das Objekt zu detektieren. Die detektierten Punkte werden mithilfe der Information der \gls{auv}-Pose in das globale Weltkoordinatensystem transformiert. Im Schätzverfahren wird das alternative Weltkoordinatensystem geführt, in welchem auch die Regression durchgeführt wird. Mit dem Polynom aus dem Schätzverfahren und der \gls{auv}-Pose werden die Wegpunkte für den \gls{lanefollow} bestimmt.
+
+\input{chapters/04/0401Simulationserweiterung}
+\newpage
+\input{chapters/04/0402Transformation.tex}
+\newpage
+\input{chapters/04/0403Objekterkennung.tex}
+\newpage
+\input{chapters/04/0404Schaetzverfahren.tex}
