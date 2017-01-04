@@ -88,15 +88,16 @@ Sehr gut eignet sich ein helligkeitsbasierter Ansatz. Wie im \textit{CSurvey}-Pr
 Wie in der Einleitung beschrieben muss ein Schätzverfahren entwickelt werden, um dem Objektverlauf optimal folgen zu können. Das Verfahren muss auf der Ausgabe der Objekterkennung aufsetzen.
 \subsubsection{Kalman-Filter}
 Ein Kalman-Filter ist ein Ansatz, um verrauschte Messwerte zu verbessern und auch ausbleibende Messungen auszugleichen. Der Kalman-Filter basiert auf einem linearen Zustand wie zum Beispiel der \gls{pose} und Posenänderung eines Roboters. In jedem Zeitschritt des Filters wird aufgrund des vorherigen Zustands und dem Weltmodell ein Folgezustand berechnet und dieser dann mit den aktuellen Messwerten verglichen.(vgl. \textit{Optimal State Estimation, Chapter 5}\cite{simon2006optimal}).
-In \textit{Real-Time Visual Tracking of a Moving Object Using Pan and Tilt Platform: A Kalman Filter Approach}\cite{torkaman2012real} nutzen Bahare Torkaman und Mohammad Farrokhi einen Kalman-Filter, um die Bewegung eines Objektes, das mit einer Kamera detektiert wird, zu verfolgen (siehe Abb. \ref{kalmanFilter}). Der Zustand des Kalman-Filters ist dabei die \textit{x}- und \textit{y}-Position des Objektes in der Ebene, sowie dessen aktuelle Positionsänderung. Der Zustandsübergang wird durch die Objektbewegung durchgeführt. Das Update der Messung besteht aus der erkannten Position der Objekterkennung.\\
-In der Arbeit ist sehr gut zu sehen, wie der Kalman-Filter den Fehler der Objekterkennung nahezu halbiert.\\
+In \textit{Kalman filter for vision tracking}\cite{cuevas2005kalman} tracken Cuevas et al. einen Fußball über mehrere Bilder hinweg mit einem Kalman-Filter. In Abbildung \ref{kalmanTrack} ist zu sehen, wie der Zustand des Balls vom Kalman-Filter geschätzt wird.\\
+Der Zustand des Balls wird durch die aktuellen x-/y-Koordinaten und der Veränderung dieser beiden. Im Zustandsübergang wird die aktuelle Veränderung auf die Koordinaten angewandt und somit eine neue Position bestimmt. Mit dem Kalman-Filter kann der Ball zuverlässig selbst bei kleineren Bereichen ohne Sichtkontakt zuverlässig verfolgt werden.
+
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.8]{SOTA/Kalman.jpg}
-\caption[Schätzung einer Objektbewegung mit Kalman-Filter.]{Eine Objektbewegung wird mit einem Kalman-Filter verfolgt. In schwarz ist der tatsächliche Objektverlauf gekennzeichnet. In grün ist ein Referenz-Tracking angegeben, dass ausschließlich auf der Objekterkennung basiert. Die verrauschten Messdaten sind in lila markiert.}
-\label{kalmanFilter}
+\includegraphics[scale=0.7]{SOTA/Kalman.jpg}
+\caption[Objekttracking mit Kalman-Filter]{Cuevas et al.\cite{cuevas2005kalman} folgen einem Fußball über mehrere Bilder mit einem Kalman-Filter. Im Bereich der Initialposition ist zu sehen, dass der Kalman-Filter zunächst den Verlauf nicht optimal abbildet. Im weiteren Verlauf wird der wahre Objektzustand jedoch gut getroffen und selbst der Bereich ohne Sichtkontakt zum Ball wird gut überbrückt. Bei spontanen Richtungsänderungen ist ein \textit{Zick-Zack-Muster} im Ergebnis des Kalman-Filters zu beobachten.}
+\label{kalmanTrack}
 \end{figure}
-\todo{nochmal checken was hier was ist}
+
 Der Kalman-Filter eignet sich jedoch nicht gut für das gestellte Szenario. Um den Messfehler der Objekterkennung auszugleichen, müsste der Zustand des Kalman-Filters das zu verfolgende Objekt abbilden. Dieser Zustand sowie der benötigte Zustandsübergang sind jedoch nicht problemlos zu definieren.\\
 Das Problem beim Definieren des Zustands liegt darin, dass das Objekt selbst keine wechselnden Zustände hat, sondern stets fest bleibt. Ein Ansatz wäre, die Position und Ausrichtung des Objektes im Zustand abzubilden. Bei einem Zustandsübergang müsste dann eine neue Position und Ausrichtung berechnet werden. Da sich das Objekt selbst nicht bewegt, müsste dieser Übergang in Abhängigkeit der Bewegung des \gls{auv}s umgesetzt werden. Es gibt jedoch keinen direkten Zusammenhang zwischen der Objektlage und der \gls{auv} Bewegung und somit kann kein Folgezustand berechnet werden. Da das Objekt keine Eigenbewegung durchführt ist die Lage stets unabhängig vom \gls{auv}. Eine von dem \gls{auv} abhängige Position wäre die nächste Position vom \gls{auv} auf dem Objektverlauf. Hierfür müsste jedoch aus den vorhandenen Daten zuerst der Objektverlauf berechnet werden, was direkt zum nächsten vorgestellten Ansatz führt.
 \subsubsection{Regressionsverfahren}
