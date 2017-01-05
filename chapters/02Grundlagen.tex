@@ -1,4 +1,3 @@
-\cleardoublepage
 \section{Grundlagen}
 \subsection{Simulationsumgebung}
 Die Simulationsumgebung wurde von der \atlas\ entwickelt und wird für diese Arbeit zur Verfügung gestellt [Abb. \ref{screenSim}].
@@ -33,7 +32,7 @@ Das Kamerakoordinatensystem [Abb. \ref{CamKoords}] beschreibt das dreidimensiona
 Das Bildkoordinatensystem [Abb. \ref{imageKoords}] beschreibt die Anordnung der Pixel im Bild als 2D-Koordinaten. Der Ursprung ist immer die linke obere Bildecke. Ich gehe davon aus, dass das Bildkoordinatensystem immer auf der Meeresbodenebene liegt. Diese Annahme ist wichtig für die \glspl{transform} [Kapitel \ref{sec_transformations}].
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{Einleitung/imageCoords2.jpg}
+	\includegraphics[scale=0.4]{Einleitung/imageCoords2.jpg}
 	\caption[Das Bildkoordinatensystem]{Anordnung der 2D-Pixelkoordinaten. Ursprung liegt in der linken oberen Bildecke. Die X-Achse bildet die Bildspalten und die Y-Achse die Bildzeilen ab.}
 	\label{imageKoords}
 \end{figure}
@@ -48,7 +47,7 @@ Das Koordinatensystem entspricht dem klassischen nautischen Koordinatensystem, d
 	\caption[Das Body-Koordinatensystem]{Das Body-Koordinatensystem mit Massenschwerpunkt (\textit{cog}) des \gls{auv}s. Die X-Achse zeigt frontal voraus, die Y-Achse Richtung Steuerbord und die Z-Achse zeigt nach unten. \textit{p}, \textit{r} und \textit{q} beschreiben die Neigungswinkel und Rotationsrichtung an den jeweiligen Achsen (vgl. Abb. \ref{Abb. 2})}
 	\label{Abb. 1}
 \end{figure}
-
+\newpage
 Die Neigungswinkel (\gls{roll}-\gls{pitch}-\gls{yaw}) werden wie in [Abb. \ref{Abb. 2}] im Body Koordinatensystem angegeben.
 %\begin{figure}[H]
 %	\centering
@@ -59,7 +58,7 @@ Die Neigungswinkel (\gls{roll}-\gls{pitch}-\gls{yaw}) werden wie in [Abb. \ref{A
 
 \begin{figure}[H]
 \begin{tabular}{ccc}
-\subfloat[]{\includegraphics[width=0.33\textwidth]{/Einleitung/roll.png}}&
+\subfloat[]{\includegraphics[width=0.33\textwidth,height=0.2\textheight]{/Einleitung/roll.png}}&
 \subfloat[]{\includegraphics[width=0.33\textwidth,height=0.2\textheight]{/Einleitung/pitch.png}}&
 \subfloat[]{\includegraphics[width=0.33\textwidth,height=0.2\textheight]{/Einleitung/yaw.png}}
 \end{tabular}
@@ -84,4 +83,5 @@ Neben den bereits erwähnten \matlab -Bibliotheken \textit{Simulink}, \textit{Gr
 Grundlegende geometrische Berechnungen, zum Beispiel \glspl{transform} in 2D und 3D oder auch Distanzberechnungen von Punkten werden mithilfe der freien Bibliotheken \textit{geom2d}\footnote{https://de.mathworks.com/matlabcentral/fileexchange/7844-geom2d} und \textit{geom3d}\footnote{https://de.mathworks.com/matlabcentral/fileexchange/24484-geom3d} durchgeführt.\\
 Das Schätzverfahren nutzt die \textit{Optimization-Toolbox}\footnote{https://de.mathworks.com/products/optimization.html}, die Lösungen für verschiedene Minimierungs-, Maximierungs- und Optimierungsprobleme liefert.\\
 Für die Kamerakalibrierung wurde die \textit{Computer Vision System Toolbox} genutzt. Die Toolbox bietet die einfach zu bedienende \textit{Camera Calibration App} mit der die intrinsischen Parameter bestimmt werden können.
-Hilfestellung lieferte hierbei das dazugehörige Tutorial\footnote{https://de.mathworks.com/help/vision/ug/single-camera-calibrator-app.html}.\\
+Hilfestellung lieferte hierbei das dazugehörige Tutorial\footnote{https://de.mathworks.com/help/vision/ug/single-camera-calibrator-app.html}.
+\afterpage{\null\newpage}

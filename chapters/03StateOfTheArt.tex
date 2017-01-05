@@ -49,7 +49,7 @@ Aus dieser Ausrichtung resultiert jedoch, dass der betrachtete Bereich weitaus k
 Im \texttt{Avalon}-Projekt \cite{avalon} wird eine Pipeline mit einem Farbfilter im HSV-Farbraum detektiert. Dieser Filter erzeugt zuerst ein Binärbild. Auf diesem Binärbild wird dann mit einem Canny Edge Detector ein Kantenbild generiert. Im Kantenbild wird mithilfe der Hough-Transformation nach Linien gesucht.\\
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.6]{SOTA/templateCSurvey.jpg}
+\includegraphics[scale=0.6]{SOTA/templateCSurvey.png}
 \caption[Template zur Pipelinedetektion aus \textit{CSurvey}]{Template zur Detektion auf Helligkeitsdaten aus \textit{CSurvey}.}
 \label{templateCSurv}
 \end{figure}
@@ -87,14 +87,14 @@ Sehr gut eignet sich ein helligkeitsbasierter Ansatz. Wie im \textit{CSurvey}-Pr
 \subsection{Schätzverfahren}
 Wie in der Einleitung beschrieben muss ein Schätzverfahren entwickelt werden, um dem Objektverlauf optimal folgen zu können. Das Verfahren muss auf der Ausgabe der Objekterkennung aufsetzen.
 \subsubsection{Kalman-Filter}
-Ein Kalman-Filter ist ein Ansatz, um verrauschte Messwerte zu verbessern und auch ausbleibende Messungen auszugleichen. Der Kalman-Filter basiert auf einem linearen Zustand wie zum Beispiel der \gls{pose} und Posenänderung eines Roboters. In jedem Zeitschritt des Filters wird aufgrund des vorherigen Zustands und dem Weltmodell ein Folgezustand berechnet und dieser dann mit den aktuellen Messwerten verglichen.(vgl. \textit{Optimal State Estimation, Chapter 5}\cite{simon2006optimal}).
+Ein Kalman-Filter ist ein Ansatz, um verrauschte Messwerte zu verbessern und auch ausbleibende Messungen auszugleichen. Der Kalman-Filter basiert auf einem linearen Zustand wie zum Beispiel der \gls{pose} und Posenänderung eines Roboters. In jedem Zeitschritt des Filters wird aufgrund des vorherigen Zustands und dem Weltmodell ein Folgezustand berechnet und dieser dann mit den aktuellen Messwerten verglichen.(vgl. \textit{Optimal State Estimation, Chapter 5}\cite{simon2006optimal}).\\
 In \textit{Kalman filter for vision tracking}\cite{cuevas2005kalman} tracken Cuevas et al. einen Fußball über mehrere Bilder hinweg mit einem Kalman-Filter. In Abbildung \ref{kalmanTrack} ist zu sehen, wie der Zustand des Balls vom Kalman-Filter geschätzt wird.\\
-Der Zustand des Balls wird durch die aktuellen x-/y-Koordinaten und der Veränderung dieser beiden. Im Zustandsübergang wird die aktuelle Veränderung auf die Koordinaten angewandt und somit eine neue Position bestimmt. Mit dem Kalman-Filter kann der Ball zuverlässig selbst bei kleineren Bereichen ohne Sichtkontakt zuverlässig verfolgt werden.
+Der Zustand des Balls wird durch die aktuellen x-/y-Koordinaten und die Veränderung dieser beiden repräsentiert. Im Zustandsübergang wird die aktuelle Veränderung auf die Koordinaten angewandt und somit eine neue Position bestimmt. Mit dem Kalman-Filter kann der Ball zuverlässig selbst bei kleineren Bereichen ohne Sichtkontakt zuverlässig verfolgt werden.
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.7]{SOTA/Kalman.jpg}
-\caption[Objekttracking mit Kalman-Filter]{Cuevas et al.\cite{cuevas2005kalman} folgen einem Fußball über mehrere Bilder mit einem Kalman-Filter. Im Bereich der Initialposition ist zu sehen, dass der Kalman-Filter zunächst den Verlauf nicht optimal abbildet. Im weiteren Verlauf wird der wahre Objektzustand jedoch gut getroffen und selbst der Bereich ohne Sichtkontakt zum Ball wird gut überbrückt. Bei spontanen Richtungsänderungen ist ein \textit{Zick-Zack-Muster} im Ergebnis des Kalman-Filters zu beobachten.}
+\caption[Objekttracking mit Kalman-Filter]{Cuevas et al.\cite{cuevas2005kalman} folgen einem Fußball über mehrere Bilder mit einem Kalman-Filter. Im Bereich der Initialposition (linker vergrößerter Ausschnitt) ist zu sehen, dass der Kalman-Filter zunächst den Verlauf nicht optimal abbildet. Im weiteren Verlauf wird der wahre Objektzustand jedoch gut getroffen und selbst der Bereich ohne Sichtkontakt zum Ball wird gut überbrückt. Bei spontanen Richtungsänderungen (rechter vergrößerter Ausschnitt) ist ein \textit{Zick-Zack-Muster} im Ergebnis des Kalman-Filters zu beobachten.}
 \label{kalmanTrack}
 \end{figure}
 
@@ -124,4 +124,4 @@ Bemerkenswert ist, dass im roten Bereich ebenfalls keine Ergebnisse der Objekter
 \caption[Abbildung eines Flusses mit Regression]{Regression angewendet auf GPS-Daten eines Flussverlaufs aus \texttt{Autonomous Searching and Tracking of a River using an UAV}\cite{rathinam2007autonomous}. Im gelben Bereich wird ein fehlender Sichtkontakt zum Fluss nicht optimal abgedeckt. Im roten Bereich ist die Kurve trotz fehlender Detektion nahezu optimal abgebildet.}
 \label{riverCurve}
 \end{figure}
-Das Curve Fitting Verfahren eignet sich gut für die Problemstellung der Arbeit. Die zwei vorgestellten Arbeiten zeigen, dass sowohl Fehler durch Ausreißer abgefangen werden, als auch Bereiche ohne Ergebnisse der Objekterkennung gut überbrückt werden können. Die genaue Beschreibung der eingesetzten Lösung und des von mir eingesetzten Modells folgt im nächsten Kapitel.
+Das Regressionsverfahren eignet sich gut für die Problemstellung der Arbeit. Die zwei vorgestellten Arbeiten zeigen, dass sowohl Fehler durch Ausreißer abgefangen werden, als auch Bereiche ohne Ergebnisse der Objekterkennung gut überbrückt werden können. Die genaue Beschreibung der eingesetzten Lösung und des von mir eingesetzten Modells folgt im nächsten Kapitel.

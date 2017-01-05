@@ -55,14 +55,14 @@ Unter sehr schlechten Sichtbedingungen werden die Objekte noch immer gut detekti
 \subfloat[Leeres Bild unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsschlecht.jpg}}&
 \subfloat[Einige Störpunkte aus dem Bild ohne Objekt unter sehr schlechten Sichtbedingungen]{\includegraphics[width=0.5\textwidth,height=0.2\textheight]{/imageProcessing/nichtsschlechtFin.jpg}}
 \end{tabular}
-\caption[Test der Objekterkennung leerem Bild]{In den Vergleichsbildern ohne Objekt wird auch unter allen Sichtbedingungen kein Objekt detektiert. Lediglich in \textit{f)} sind einige Störpunkte im Binärbild vorhanden, die auf den niedrig gewählten Templateschwellenwert [Kapitel \ref{sec_templ}] zurückzuführen sind.}
+\caption[Test der Objekterkennung auf leerem Bild]{In den Vergleichsbildern ohne Objekt wird auch unter allen Sichtbedingungen kein Objekt detektiert. Lediglich in \textit{f)} sind einige Störpunkte im Binärbild vorhanden, die auf den niedrig gewählten Templateschwellenwert [Kapitel \ref{sec_templ}] zurückzuführen sind.}
 \label{testnothingObj}
 \end{figure}
 \newpage
 \subsubsection*{Tests auf Realbildern}
 \label{realObjTests}
 Um zu testen, ob das Verfahren auch bei echten Bildern funktioniert, wurden insgesamt 12 Bilder [Anhang \ref{anhang_objdecttests}] aus einem Testlauf des \gls{auv}s \textit{DAGON}\footnote{http://robotik.dfki-bremen.de/de/forschung/robotersysteme/dagon.html} während des Projektes \textit{CUSLAM}\footnote{http://robotik.dfki-bremen.de/de/forschung/projekte/cuslam.html} im Unisee getestet. Diese Testbilder wurden so ausgewählt, dass die relevanten Fälle abgedeckt sind. Es werden Bilder mit sehr schlechten Sichtbedingungen, in denen die Pipeline sehr schwer zu erkennen ist, in anderen ist die Pipeline sehr gut sichtbar und hebt sich deutlich vom Hintergrund ab. Zudem werden noch Bilder gewählt, in denen die Pipeline zuerst gut und im Bildverlauf immer schlechter sichtbar ist. Außerdem sind in der Auswahl noch Bilder, in denen die Pipeline direkt angestrahlt wird und dadurch sehr stark reflektiert.\\
-In den Bildern, in denen die Pipeline kaum zu erkennen ist, wie in Abbildung \ref{rp_a} oder \ref{rp_b}, muss der Schwellenwert für das Template entsprechend niedrig gesetzt werden, was zu vielen Punkten im Binärbild führt, die nicht zum Objekt gehören. In Bildern, in denen die Pipeline direkt angestrahlt wird und klar heller ist als der Hintergrund, wie in Abbildung \ref{realData_good}, kann der Schwellenwert höher angesetzt werden, um weniger Störpunkte zu erhalten.
+In den Bildern, in denen die Pipeline kaum zu erkennen ist, wie in Abbildung \ref{rp_a} oder \ref{rp_b} muss der Schwellenwert für das Template entsprechend niedrig gesetzt werden, was zu vielen Punkten im Binärbild führt, die nicht zum Objekt gehören. In Bildern, in denen die Pipeline direkt angestrahlt wird und klar heller ist als der Hintergrund, wie in Abbildung \ref{realData_good}, kann der Schwellenwert höher angesetzt werden, um weniger Störpunkte zu erhalten.
 
 \begin{figure}[H]
 \begin{tabular}{cc}
@@ -85,3 +85,4 @@ In den Bildern, in denen die Pipeline kaum zu erkennen ist, wie in Abbildung \re
 \end{figure}
 
 In den durchgeführten Tests wird deutlich, dass die Objekterkennung unter verschiedensten Sichtbedingungen gute Ergebnisse liefert. Die Sichtbedingungen haben dabei einen Einfluss auf die Binärisierung des Eingabebildes. Je schlechter die Sichtbedingungen sind, desto geringer muss der Templateschwellenwert gewählt werden. Der Schwellenwert ist jedoch ausschlaggebend für die Qualität der Abbildung vom Objekt im Binärbild. Umso geringer der Schwellenwert gewählt wird, umso mehr Störpunkte sind auch im Binärbild vorhanden (vgl. Abb. \ref{realData_bad} mit \ref{realData_good}). Bei schlechten Bedingungen muss der Schwellenwert jedoch gering gewählt werden, um das Objekt abbilden zu können (vgl. Kapitel \ref{sec_templ}). Somit steigt bei schlechteren Sichtbedingungen die Gefahr falsche Detektionen aufgrund von Störpunkten zu erhalten oder auch Objekte zu detektieren, wo keine vorhanden sind.\label{dangerLowTempl}
+\afterpage{\null\newpage}

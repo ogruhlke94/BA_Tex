@@ -69,7 +69,7 @@ Bei den Tests mit kurvigen Objekten ist zu beobachten, dass zu Beginn jeder Kurv
 \subfloat[Quadrierter Fehler der \gls{auv} Position zur echten Position des Objektes. Trotz des Fehlers im geraden Bereich und dem sehr großen Fehler innerhalb der Rechtskurve wird das Objekt nach dem Ausschlag wieder gut verfolgt.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/S-Kurve_Gut/groundTruthPosition.jpg}}&
 \subfloat[Quadrierter Fehler der detektierten Objektposition zur echten Objektposition. Der hier zu beobachtende Fehler ist im gesamten Bereich hoch.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/S-Kurve_Gut/groundTruth.jpg}}
 \end{tabular}
-\caption[Testlauf mit einer S-Kurve]{Den Kurven in diesem Lauf ist für das \gls{auv} aufgrund der starken Krümmung schwer zu folgen. Im mittleren Bereich tritt auf längerer Strecke ein größerer Fehler auf. Aufgrund dieses Fehlers wird die Rechtskurve fast \textit{verpasst} jedoch aufgrund des Schätzverfahrens trotzdem noch verfolgt. In diesem Lauf ist der Zusammenhang zwischen Positions- und Detektionsfehler deutlich zu erkennen.}
+\caption[Testlauf mit einer S-Kurve]{Den Kurven in diesem Lauf ist für das \gls{auv} aufgrund der starken Krümmung schwer zu folgen. Im mittleren Bereich tritt auf längerer Strecke ein größerer Fehler auf. Aufgrund dieses Fehlers wird die Rechtskurve fast \textit{verpasst}, jedoch aufgrund des Schätzverfahrens trotzdem noch verfolgt. In diesem Lauf ist der Zusammenhang zwischen Positions- und Detektionsfehler deutlich zu erkennen.}
 \label{testSCurve}
 \end{figure}
 \newpage
@@ -99,7 +99,14 @@ In diesen Tests ist zu sehen, dass sowohl Ellipsen, als auch dem Wechsel zwische
 
 \newpage
 \subsubsection{Schlechte Sichtbedingungen}
-Einige Tests wurden mit sehr schlechten Sichtbedingungen (siehe Abb. \ref{img_badSeight}) wiederholt. In den Tests ist zu sehen, dass selbst unter diesen Bedingungen dem Objekt gefolgt werden kann. Jedoch ist bei diesen Tests zu beachten, dass der Templateschwellenwert sehr gering gewählt wurde und dadurch eine sehr sensitive Objekterkennung genutzt wurde. Da jedoch in der Simulation nur Meeresboden und Zielobjekt existieren, führte dies nicht zu Problemen. Schon kleinste Objekte, wie kleinere Felsen oder Pflanzen, würden bei einem solch geringen Schwellenwert zu schwerwiegenden Fehldetektionen führen. Tests mit anderen Objekten in der Simulationsumgebung wurden jedoch nicht durchgeführt, da es keine einfache Methode gibt Steine oder Pflanzen hinzuzufügen. Die Tatsache, dass aber selbst der Meeresboden schon zu Störpunkten innerhalb des Binärbilds führt, unterstützt diese Aussage.
+Einige Tests wurden mit sehr schlechten Sichtbedingungen (siehe Abb. \ref{img_badSeight}) wiederholt. In den Tests ist zu sehen, dass selbst unter diesen Bedingungen dem Objekt gefolgt werden kann. Jedoch ist bei diesen Tests zu beachten, dass der Templateschwellenwert sehr gering gewählt wurde, wodurch die Objekterkennung sehr sensibel eingestellt ist. Da jedoch in der Simulation nur Meeresboden und Zielobjekt existieren, führte dies nicht zu Problemen. Schon kleinste Objekte, wie kleinere Felsen oder Pflanzen, würden bei einem solch geringen Schwellenwert zu schwerwiegenden Fehldetektionen führen. Tests mit anderen Objekten in der Simulationsumgebung wurden jedoch nicht durchgeführt, da es keine einfache Methode gibt Steine oder Pflanzen hinzuzufügen. Die Tatsache, dass aber selbst der Meeresboden schon zu Störpunkten innerhalb des Binärbilds führt, unterstützt diese Aussage. In Abbildung \ref{objOnLowBorder} ist zu sehen, welchen Effekt der geringe Schwellenwert auf ein echtes Testbild ausübt.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{realpipelowschwelle.jpg}
+\caption[Objekterkennung auf einem echten Testbild mit geringem Schwellenwert]{Die Objekterkennung wird auf ein echtes Testbild angewandt. Hierbei wird der selbe Schwellenwert benutzt, wie bei den Tests unter sehr schlechten Sichtbedingungen. Die Pipeline ist im Binärbild zwar deutlich zu erkennen, jedoch sind zu viele Störpunkte vom Meeresboden vorhanden, um diese zu detektieren. Die Störpunkte ermöglichen beim \gls{rans} ein Rechteck mit mehr Inlier, als die Pipeline selbst.}
+\label{objOnLowBorder}
+\end{figure}
 
 \begin{figure}[H]
 \begin{tabular}{cc}
@@ -107,7 +114,7 @@ Einige Tests wurden mit sehr schlechten Sichtbedingungen (siehe Abb. \ref{img_ba
 \subfloat[Quadrierter Fehler der \gls{auv} Position zur echten Position des Objektes.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/linkskurveschlechtesicht/groundTruthPosition.jpg}}&
 \subfloat[Quadrierter Fehler der detektierten Objektposition zur echten Objektposition. Der Anstieg zum Ende ist auf leichte Verdeckung des Objektes zurückzuführen.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/linkskurveschlechtesicht/groundTruth.jpg}}
 \end{tabular}
-\caption[Testlauf mit einer Kurve bei schlechten Sichtbedingungen]{Das Folgen der Kurve funktioniert auch bei schlechten Sichtbedingungen. Es ist jedoch zu beobachten, dass eine nur leichte Verdeckung des Objektes einen starken Einfluss auf den Fehler hat.}
+\caption[Testlauf mit einer Kurve bei schlechten Sichtbedingungen]{Testlauf mit einer Kurve bei schlechten Sichtbedingungen. Das Folgen der Kurve funktioniert auch bei schlechten Sichtbedingungen. Es ist jedoch zu beobachten, dass eine nur leichte Verdeckung des Objektes einen starken Einfluss auf den Fehler hat.}
 \label{curveBadSight}
 \end{figure}
 
@@ -117,5 +124,6 @@ Einige Tests wurden mit sehr schlechten Sichtbedingungen (siehe Abb. \ref{img_ba
 \subfloat[Quadrierter Fehler der \gls{auv} Position zur echten Position des Objektes.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kreisschlechtesicht/groundTruthPosition.jpg}}&
 \subfloat[Quadrierter Fehler der detektierten Objektposition zur echten Objektposition.]{\includegraphics[height=0.3\textheight,width=0.5\textwidth]{/testlaeufe/kreisschlechtesicht/groundTruth.jpg}}
 \end{tabular}
-\caption[Testlauf mit einem Ellipsenabschnitt unter schlechten Sichtbedingungen]{Ähnlich zu Abb. \ref{curveBadSight} wird dem Objekt gut gefolgt und leichte Verdeckungen haben einen starken Einfluss auf den Fehler.}
+\caption[Testlauf mit einem Ellipsenabschnitt unter schlechten Sichtbedingungen]{Testlauf mit einem Ellipsenabschnitt unter schlechten Sichtbedingungen. Ähnlich zu Abb. \ref{curveBadSight} wird dem Objekt gut gefolgt und leichte Verdeckungen haben einen starken Einfluss auf den Fehler.}
+\label{ellipseBadSight}
 \end{figure}

@@ -13,7 +13,7 @@ Aus Erfahrungswerten früherer Projekte riet Christopher Gaudig die Rotwerte der
 \subfloat[Auswertung des Helligkeitsverlauf einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.2\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/hellReal.jpg}\label{brightCurve_real}}&
 \subfloat[Auswertung des Rotwertverlauf einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.2\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/rotReal.jpg}\label{redCurve_real}}
 \end{tabular}
-\caption[Helligkeit und Rotwert im echten Testbild]{Helligkeit und Rotwert im echten Testbild. In beiden Grafiken zeigt die blaue Linie die jeweiligen Pixeldaten, die gelbe Linie den Wert des Testbereichs, die lila Linie den Durchschnitt des Checkbereichs und die weiter unten gelegene rote Linie den Templatewert für das Pixel. In beiden Templatewerten ist die Pipeline eindeutig zu erkennen, wobei der Ausschlag im Rotwert weitaus höher ist.}
+\caption[Helligkeit und Rotwert im echten Testbild]{Helligkeit und Rotwert im echten Testbild. In beiden Grafiken zeigt die blaue Linie die jeweiligen Pixeldaten, die rote Linie den Wert des Testbereichs, die gelbe Linie den Durchschnitt des Checkbereichs und die weiter unten gelegene lila Linie den Templatewert für das Pixel. In beiden Templatewerten ist die Pipeline eindeutig zu erkennen, wobei der Ausschlag im Rotwert weitaus höher ist.}
 \end{figure}
 
 \begin{figure}[H]
@@ -22,7 +22,7 @@ Aus Erfahrungswerten früherer Projekte riet Christopher Gaudig die Rotwerte der
 \subfloat[Auswertung des Helligkeitsverlaufs einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.2\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/hellSim.jpg}\label{brightCurve_sim}}&
 \subfloat[Auswertung des Rotwertverlaufs einer Bildzeile im oberen Drittel des Bildes]{\includegraphics[height=0.2\textheight,width=0.5\textwidth]{imageProcessing/Prinzip/rotSim.jpg}\label{redCurve_sim}}
 \end{tabular}
-\caption[Helligkeit und Rotwert im Simulationsbild]{Helligkeit und Rotwert im Simulationsbild.In beiden Grafiken zeigt die blaue Linie die jeweiligen Pixeldaten, die gelbe Linie den Wert des Testbereichs, die lila Linie den Durchschnitt des Checkbereichs und die weiter unten gelegene rote Linie den Templatewert für das Pixel. In beiden Templatewerten ist die Pipeline eindeutig zu erkennen, wobei der Ausschlag im Rotwert weitaus höher ist.}
+\caption[Helligkeit und Rotwert im Simulationsbild]{Helligkeit und Rotwert im Simulationsbild.In beiden Grafiken zeigt die blaue Linie die jeweiligen Pixeldaten, die rote Linie den Wert des Testbereichs, die gelbe Linie den Durchschnitt des Checkbereichs und die weiter unten gelegene lila Linie den Templatewert für das Pixel. In beiden Templatewerten ist die Pipeline eindeutig zu erkennen, wobei der Ausschlag im Rotwert weitaus höher ist.}
 \end{figure}
 Im nächsten Schritt wird mithilfe eines Templates [Abb. \ref{templImg}] ein Binärbild erzeugt. Das Template zeichnet sich durch drei Pixelangaben aus. Die \textit{Testpixel} (rot) geben einen Bereich an, der im aktuellen Schritt geprüft wird. Die \textit{Checkpixel} (blau) geben den Bereich rechts und links neben dem Testbereich an und bilden den Referenzwert. Die \textit{Borderpixel} (grün) geben einen Bereich zwischen Test- und Checkbereich an, der ignoriert wird.
 
@@ -79,7 +79,7 @@ Als Lösung für dieses Probleme werden die möglichen erzeugten Rechtecke für 
 \caption[Orientierung aufgrund von Beschränkung des \gls{rans} falsch detektiert]{Falsch detektierte Objektorientierung aufgrund der Beschränkung der Ausrichtungen für den \gls{rans}}
 \label{detecFail}
 \end{figure}
-\todo{evtl box vom ransac zeigen}
+
 Der zweite Faktor, der die Geschwindigkeit der Objekterkennung verringerte, ist die Menge der Punkte im Binärbild. So musste für jede Iteration des \gls{rans} für jeden Punkt geprüft werden, ob der Punkt im Rechteck liegt. In den Testbildern der Simulation lag die Anzahl der Punkte teilweise bei weit über $10000$, was in Kombination mit $200$ Iterationen zu einer inakzeptablen Laufzeit von ca. 5 Sekunden pro Bild führte.\\
 Zum Lösen dieses Problems wurde vor dem Einsatz des \gls{rans} die Punktanzahl verringert, indem nur jedes dritte Pixel betrachtet wird und dieses den Mittelwert aller seiner Nachbarpixel erhält. Somit konnte die Punktanzahl zuverlässig auf unter $2000$ verringert werden, was zu einer deutlichen Beschleunigung (ca. 1 Sekunde pro Bild) ohne nennenswerte Verschlechterung der Ergebnisse führte. Die Laufzeit wurde dabei mit dem \matlab\ \textit{Stopwatch Timer}\footnote{https://de.mathworks.com/help/matlab/ref/tic.html} gemessen.
 %\subsubsection*{Gewicht der erkannten Punkte}

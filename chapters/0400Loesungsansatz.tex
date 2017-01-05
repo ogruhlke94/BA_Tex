@@ -24,7 +24,7 @@ Point_In_Frame.phi = 0;
 \includegraphics[width=\textwidth]{Systementwurf.png}
 \caption[Systementwurf]{Systementwurf der eingesetzten Lösung. Die Simulationsumgebung ist hierbei als \textit{black box} zu betrachten, die das Kamerabild und \gls{auv}-Pose liefert und durch die Wegpunkte für den \gls{lanefollow} gesteuert wird. In dieser Grafik ist der Datenfluss der vier Hauptkomponenten der Arbeit (Objekterkennung, Transformation, Schätzverfahren und Wegpunktberechnung) dargestellt.}
 \end{figure}
-Die Objekterkennung nutzt das Kamerabild aus der Simulationsumgebung um in zwei Schritten (Binärisierung und \gls{rans}) das Objekt zu detektieren. Die detektierten Punkte werden mithilfe der Information der \gls{auv}-Pose in das globale Weltkoordinatensystem transformiert. Im Schätzverfahren wird das alternative Weltkoordinatensystem geführt, in welchem auch die Regression durchgeführt wird. Mit dem Polynom aus dem Schätzverfahren und der \gls{auv}-Pose werden die Wegpunkte für den \gls{lanefollow} bestimmt.
+Die Objekterkennung nutzt das Kamerabild aus der Simulationsumgebung um in zwei Schritten (Binärisierung und \gls{rans}) das Objekt zu detektieren. Die detektierten Punkte werden mithilfe der Information der \gls{auv}-Pose in das globale Weltkoordinatensystem transformiert. Im Schätzverfahren wird das alternative Weltkoordinatensystem verwendet, in welchem auch die Regression durchgeführt wird. Mit dem Polynom aus dem Schätzverfahren und der \gls{auv}-Pose werden die Wegpunkte für den \gls{lanefollow} bestimmt.
 
 \input{chapters/04/0401Simulationserweiterung}
 \newpage

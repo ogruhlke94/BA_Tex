@@ -1,7 +1,7 @@
 \subsection{Simulationserweiterung}
 \subsubsection{Steuerung}
 \label{sec_waypoint}
-Wie im Kapitel \ref{sec_auvSimGrundlage} Grundlagen beschrieben, wird in der bestehenden Simulation ein \texttt{\gls{lanefollow}}, der eine Linie zwischen einem \textit{old\_waypoint} und einem \textit{new\_waypoint} bildet, verwendet.
+Wie im Kapitel \ref{sec_auvSimGrundlage} Grundlagen beschrieben, wird in der bestehenden Simulation ein \texttt{\gls{lanefollow}}, der eine Linie zwischen einem \textit{old\_waypoint} und einem\\\textit{new\_waypoint} bildet, verwendet.
 Die Schnittstelle zur Steuerung bildet somit die Kombination aus den beiden Wegpunkten. Die Berechnung der Wegpunkte wird auf Basis des Polynoms aus dem Schätzverfahren generiert.\\
 Zunächst wird die Position des \gls{auv}s durch die aktuelle Transformationsmatrix in das alternative Weltkoordinatensystem (siehe Absatz \ref{alterWorldCoords}) transformiert. Es wird der, zu dieser Position, nächstgelegene Punkt auf dem Polynom berechnet. Dieser Punkt dient als Zentrum für einen Kreis zur Bestimmung der Wegpunkte. Mithilfe der Kreisgleichung [Gleichung \ref{circEq}] werden die zwei Schnittpunkte des Polynoms mit dem Kreis berechnet. Da durch die Nutzung des alternativen Weltkoordinatensystem sichergestellt wird, dass das \gls{auv} in Richtung der X-Achse fährt, kann problemlos der Schnittpunkt mit höherem $x$-Wert als \textit{next\_waypoint} und dementsprechend der zweite als \textit{old\_waypoint} verwendet werden. Es wird davon ausgegangen, dass bei einem solch kleinen Kreisradius (zwischen 5 und 10 Metern) nicht mehr als zwei Schnittpunkte zwischen Polynom und Kreis vorhanden sind. Sollte dies der Fall sein, wäre das Polynom viel zu stark gekrümmt, um noch verfolgt zu werden. Im Szenario dieser Arbeit gibt es auch keine Objekte, die eine solch starke Krümmung aufweisen.\\
 Der letzte Schritt besteht aus der \gls{transform} der Wegpunkte in das reale VRML-Koordinatensystem mithilfe der inversen Transformationsmatrix.
@@ -22,15 +22,15 @@ Das Verfahren ist in Abbildung \ref{wpCircle} grafisch dargestellt.
 \label{wpCircle}
 \end{figure}
 \subsubsection{Kamerabilder}
-Da die Simulation in der ursprünglichen Form noch sehr \textit{klinische} Bilder generierte, mussten diese Bilder künstlich verschlechtert und die Sichtverhältnisse eingeschränkt werden, um realistische Eingangsbilder zu erzeugen. In Abbildung \ref{simPics} ist von links nach rechts ein ursprüngliches Kamerabild, ein verschlechtertes Bild und ein sehr stark verschlechtertes Bild zu sehen. Die Testläufe der Arbeit wurden mit dem Verschlechterungsgrad des mittleren Bildes durchgeführt. Die Objekterkennung wurde zudem noch mit Bildern, wie dem rechten Bild getestet.
+Da die Simulation in der ursprünglichen Form noch sehr \textit{klinische} Bilder generierte, mussten diese Bilder künstlich verschlechtert und die Sichtverhältnisse eingeschränkt werden, um realistische Eingangsbilder zu erzeugen. In Abbildung \ref{simPics} ist ein ursprüngliches Kamerabild, zwei verschlechterte Bilder und ein sehr stark verschlechtertes Bild zu sehen. Die Testläufe der Arbeit wurden mit den Verschlechterungsgraden aus Abb. \ref{img_badQuali} und \ref{img_testQuali} durchgeführt. Abb. \ref{img_badSeight} zeigt die Sichtbedingungen für Tests mit sehr schlechten Bedingungen.
 \begin{figure}[H]
 \centering
 \begin{tabular}{cc}
 \subfloat[Ursprüngliches Bild]{\includegraphics[height=0.25\textheight,width=0.4\textwidth]{/imageProcessing/gradeOptimal.jpg}}&
-\subfloat[Bild verschlechtert mit leichter \gls{blur} und geringem Pixelrauschen]{\includegraphics[height=0.25\textheight,width=0.4\textwidth]{/imageProcessing/graeOk.jpg}}\\
-\subfloat[Sichtverhältnisse stark verschlechtert mit \gls{blur} und geringem Pixelrauschen]{\includegraphics[height=0.25\textheight,width=0.4\textwidth]{/imageProcessing/gradeTestQuali.jpg}}&
-\subfloat[Sichtverhältnisse sehr stark verschlechtert, simulierte Reflexion des Wassers mit \gls{blur} und geringem Pixelrauschen]{\includegraphics[height=0.25\textheight,width=0.4\textwidth]{/imageProcessing/gradeschlecht.jpg}}\label{img_badSeight}
+\subfloat[Bild verschlechtert mit leichter \gls{blur} und geringem Pixelrauschen]{\includegraphics[height=0.25\textheight,width=0.4\textwidth]{/imageProcessing/graeOk.jpg}\label{img_badQuali}}\\
+\subfloat[Sichtverhältnisse stark verschlechtert mit \gls{blur} und geringem Pixelrauschen]{\includegraphics[height=0.25\textheight,width=0.4\textwidth]{/imageProcessing/gradeTestQuali.jpg}\label{img_testQuali}}&
+\subfloat[Sichtverhältnisse sehr stark verschlechtert, simulierte Reflexion des Wassers mit \gls{blur} und geringem Pixelrauschen]{\includegraphics[height=0.25\textheight,width=0.4\textwidth]{/imageProcessing/gradeschlecht.jpg}\label{img_badSeight}}
 \end{tabular}
-\caption[Simulationsbilder]{Simulationsbilder. \textit{a)} zeigt das ursprüngliche Bild. In \textit{b)} bis \textit{e)} wird das Bild auf verschiedenen Arten verschlechtert. Die meisten Testläufe wurden mit der Verschlechterung von \textit{b)} und \textit{d)} durchgeführt. Tests unter sehr schlechten Bedingungen mit einem Grad der Verschlechterung aus \textit{e)}}
+\caption[Simulationsbilder]{Simulationsbilder. \textit{a)} zeigt das ursprüngliche Bild. In \textit{b)} bis \textit{d)} wird das Bild auf verschiedenen Arten verschlechtert. Die Testläufe wurden mit der Verschlechterung von \textit{b)} und \textit{c)} durchgeführt. Tests unter sehr schlechten Bedingungen mit einem Grad der Verschlechterung aus \textit{d)}}
 \label{simPics}
 \end{figure}
