@@ -29,7 +29,7 @@ Im nächsten Schritt wird mithilfe eines Templates [Abb. \ref{templImg}] ein Bin
 \begin{figure}[H]
 \centering
 \includegraphics[height=0.3\textheight,width=\textwidth]{imageProcessing/Prinzip/template.jpg}
-\caption[Template zum Bestimmen des Binärbilds]{Template zum Bestimmen des Binärbilds. Getestet wird das Pixel im Zentrum des Testbereichs (rot). Der Templatewert ergibt sich aus der Subtraktion des Durchschnitts im Checkbereich (blau) vom Durchschnitt des Testbereichs (rot). Der Borderbereich (grün) wird dabei nicht beachtet.}
+\caption[Template zum Bestimmen des Binärbilds]{Template zum Bestimmen des Binärbilds. Getestet wird das Pixel im Zentrum des Testbereichs (rot). Der Templatewert ergibt sich aus der Subtraktion des Durchschnitts im Checkbereich (blau) vom Durchschnitt des Testbereichs (rot). Der Borderbereich (grün) wird dabei nicht beachtet. Die rote Linie stellt den Templateschwellenwert dar, der überschritten werden muss.}
 \label{templImg}
 \end{figure}
 
@@ -76,12 +76,12 @@ Als Lösung für dieses Probleme werden die möglichen erzeugten Rechtecke für 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{imageProcessing/realPipe/004detectedImage.jpg}
-\caption[Orientierung aufgrund von Beschränkung des \gls{rans} falsch detektiert]{Falsch detektierte Objektorientierung aufgrund der Beschränkung der Ausrichtungen für den \gls{rans}}
+\caption[Orientierung aufgrund von Beschränkung des \gls{rans} falsch detektiert]{Falsch detektierte Objektorientierung aufgrund der Beschränkung der Ausrichtungen für den \gls{rans}.}
 \label{detecFail}
 \end{figure}
 
 Der zweite Faktor, der die Geschwindigkeit der Objekterkennung verringerte, ist die Menge der Punkte im Binärbild. So musste für jede Iteration des \gls{rans} für jeden Punkt geprüft werden, ob der Punkt im Rechteck liegt. In den Testbildern der Simulation lag die Anzahl der Punkte teilweise bei weit über $10000$, was in Kombination mit $200$ Iterationen zu einer inakzeptablen Laufzeit von ca. 5 Sekunden pro Bild führte.\\
-Zum Lösen dieses Problems wurde vor dem Einsatz des \gls{rans} die Punktanzahl verringert, indem nur jedes dritte Pixel betrachtet wird und dieses den Mittelwert aller seiner Nachbarpixel erhält. Somit konnte die Punktanzahl zuverlässig auf unter $2000$ verringert werden, was zu einer deutlichen Beschleunigung (ca. 1 Sekunde pro Bild) ohne nennenswerte Verschlechterung der Ergebnisse führte. Die Laufzeit wurde dabei mit dem \matlab\ \textit{Stopwatch Timer}\footnote{https://de.mathworks.com/help/matlab/ref/tic.html} gemessen.
+Zum Lösen dieses Problems wurde vor dem Einsatz des \gls{rans} die Punktanzahl verringert, indem nur jedes dritte Pixel betrachtet wird und dieses den Mittelwert aller seiner Nachbarpixel erhält. Somit konnte die Punktanzahl zuverlässig auf unter $2000$ verringert werden, was zu einer deutlichen Beschleunigung (ca. 1 Sekunde pro Bild) ohne nennenswerte Verschlechterung der Ergebnisse führte. Die Laufzeit wurde dabei mit dem \matlab\ \textit{Stopwatch Timer}\footnote{Stopwatch Timer: \url{https://de.mathworks.com/help/matlab/ref/tic.html}, Abrufdatum \textit{05.01.2017}} gemessen.
 %\subsubsection*{Gewicht der erkannten Punkte}
 %\label{sec_weights}
 %\begin{itemize}

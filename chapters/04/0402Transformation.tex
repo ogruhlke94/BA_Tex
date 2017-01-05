@@ -4,7 +4,7 @@ Wie bereits in der Einleitung beschrieben, werden mehrere Koordinatensysteme gen
 Eine \gls{transform} besteht aus einer Rotation und einer Translation, die sich aus den Beziehungen der Systeme zueinander ergibt.\\
 Im \texttt{enum} \textit{frames} [Listing \ref{framesEnum}] sind die verschiedenen Frames definiert, zwischen denen eine \gls{transform} möglich ist.
 
-\lstinputlisting[language=Matlab,caption={Enumeration der Frames,die die verschiedenen Koordinatensystem bezeichnen},label=framesEnum]{frames.m}
+\lstinputlisting[language=Matlab,inputencoding=utf8, extendedchars=true,caption={Enumeration der Frames,die die verschiedenen Koordinatensystem bezeichnen},label=framesEnum]{frames.m}
 
 Umgesetzt wird eine \gls{transform} aus einem \textit{source} Frame in einen \textit{target} Frame durch die Funktion \texttt{transform} [Listing \ref{transform}]. Die Transformation ist nur in eine Richtung möglich, da die inverse Transformation für diese Arbeit nicht benötigt wurde.
 
@@ -14,13 +14,13 @@ Umgesetzt wird eine \gls{transform} aus einem \textit{source} Frame in einen \te
 \label{section_PicToCam}
 Die verlustfreie \gls{transform} von 2D-Pixelkoordinaten in 3D-Kamerakoordinaten ist mit einer Kamera nicht möglich, da die Tiefeninformation nicht vorhanden ist. Jedoch lässt sich mit dem Wissen über die Entfernung zur Bildebene, der \textit{flat world assumption} (siehe Kapitel \ref{sec_coordsystems}) und den intrinsischen Kameraparametern eine ausreichend gute Transformation durchführen. Da die Kamera gerade nach unten gerichtet ist, entspricht die Entfernung zur Bildebene der Höhe des \gls{auv}s über dem Meeresboden, welche über die Sensorik bestimmt wird. Die intrinsischen Kameraparameter lassen sich über eine Kamerakalibrierung bestimmen, welche mithilfe der \matlab\ \textit{Computer Vision System Toolbox} durchgeführt wird.\\
 Da die resultierende \gls{transform} am besten im Abstand der Kalibrierung funktioniert wurde die Kalibrierung in einem Abstand von 6 Metern durchgeführt, was im späteren Verlauf auch der gewünschte Abstand zum Boden ist.\\
-Aus der Kamerakalibrierung wird ein \textit{CameraParameter}\footnote{https://de.mathworks.com/help/vision/ref/cameraparameters-class.html} Objekt erzeugt, welches die Methode \textit{pointsToWorld} bietet. Die Methode berechnet eine Projektionsmatrix aus den Kamera-Parametern und dem bekannten Abstand der Kamera zum Objekt. Mithilfe der Inversen dieser Matrix können dann Pixel in Kamerakoordinaten umgerechnet werden.\\
+Aus der Kamerakalibrierung wird ein \textit{CameraParameter}\footnote{CameraParameter Klasse: \url{https://de.mathworks.com/help/vision/ref/cameraparameters-class.html}, Abrufdatum \textit{05.01.2017}} Objekt erzeugt, welches die Methode \textit{pointsToWorld} bietet. Die Methode berechnet eine Projektionsmatrix aus den Kamera-Parametern und dem bekannten Abstand der Kamera zum Objekt. Mithilfe der Inversen dieser Matrix können dann Pixel in Kamerakoordinaten umgerechnet werden.\\
 Leichte Neigungswinkel, die während der Fahrt auftreten, können durch die Multiplikation mit der entsprechenden Rotationsmatrix herausgerechnet werden. Jedoch ist dabei zu beachten, dass durch die Neigungswinkel die Fläche, die die Kamera sieht, vergrößert wird. Dadurch bilden einzelne Pixel mehr Fläche ab und die \gls{transform} wird ungenauer.\\
 Die $z$-Koordinate ergibt sich aus dem Wissen, Objekte am Meeresboden zu betrachten und der Tatsache, dass die Höhe der Kamera über dem Meeresboden bekannt ist.
 
 \subsubsection{Kamera zu Body}
 Die \gls{transform} vom Kamerakoordinatensystem zum Bodykoordinatensystem besteht aus einer Translation und einer Rotation, die durch die Montageposition der Kamera am \gls{auv} bestimmt wird [Kapitel \ref{sec_img_cam_coords}].\\
-Aufgrund der Verschiebung der Kamera zum Bodykoordinatenursprung (Schwerpunkt des \gls{auv}s) ergibt sich eine Translation um $1,3$m in x-Richtung und $0,25$m in z-Richtung.\\
+Aufgrund der Verschiebung der Kamera zum Bodykoordinatenursprung (Schwerpunkt des \gls{auv}s) ergibt sich eine Translation um $1,3$ Meter in x-Richtung und $0,25$ Meter in z-Richtung.\\
 Die Rotation beträgt dabei $90^\circ$ um die Z-Achse.\\
 Somit ergibt sich die Tranformationsmatrix aus Gleichung \ref{trans_cam_body}\\
 
@@ -41,7 +41,7 @@ x_{body}\\y_{body}\\z_{body}\\1
 x_{cam}\\y_{cam}\\z_{cam}\\1
 \end{pmatrix}
 \end{equation}
-\caption[\gls{transform} der Kamerakoordinaten zu Bodykoordinaten]{Transformation der Kamerakoordinaten zu Bodykoordinaten. Die Kamerakoordinaten werden um $1,3$m auf der X-Achse und $0,25$m auf der Z-Achse verschoben. Außerdem wird eine Rotation um $90^\circ$ um die Z-Achse durchgeführt.}
+\caption[\gls{transform} der Kamerakoordinaten zu Bodykoordinaten]{Transformation der Kamerakoordinaten zu Bodykoordinaten. Die Kamerakoordinaten werden um $1,3$ Meter auf der X-Achse und $0,25$ Meter auf der Z-Achse verschoben. Außerdem wird eine Rotation um $90^\circ$ um die Z-Achse durchgeführt.}
 \label{trans_cam_body}
 \end{ownequation}
 

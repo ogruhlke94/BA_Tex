@@ -27,7 +27,7 @@ Das \textit{Weighted-Least-Squares} Verfahren bietet eine gute Grundlage für di
 \item Schätzungen für Punktverläufe, die sich nicht durch ein einzelnes Polynom darstellen lassen
 \end{enumerate}
 
-Zum Lösen der ersten zwei Probleme bietet die \matlab -Funktion \textit{fmincon}\footnote{https://de.mathworks.com/help/optim/ug/fmincon.html} aus der Optimization Toolbox eine geeignete Lösung. Die Funktion bietet die Möglichkeit eine Funktion $F(p)$ zu minimieren, wobei mit $c(p) \leq 0$ eine Bedingung erfüllt werden muss. Die Funktion $c(p,x_i)$ [Gleichung \ref{constraint}] berechnet über den Funktionsverlauf von $f(p,x)$ mithilfe der Ableitung $f'(p,x)$ die Steigung in jedem Punkt $x_i$. Da \textit{fmincon} prüft, ob die Bedingungsfunktion kleiner 0 ist wird von der Steigung ein Maximalwert ($max_{slope}$) abgezogen (\textit{Erfüllt 2.}).\\
+Zum Lösen der ersten zwei Probleme bietet die \matlab -Funktion \textit{fmincon}\footnote{Dokumentation fmincon: \url{https://de.mathworks.com/help/optim/ug/fmincon.html}, Abrufdatum \textit{05.01.2017}} aus der Optimization Toolbox eine geeignete Lösung. Die Funktion bietet die Möglichkeit eine Funktion $F(p)$ zu minimieren, wobei mit $c(p) \leq 0$ eine Bedingung erfüllt werden muss. Die Funktion $c(p,x_i)$ [Gleichung \ref{constraint}] berechnet über den Funktionsverlauf von $f(p,x)$ mithilfe der Ableitung $f'(p,x)$ die Steigung in jedem Punkt $x_i$. Da \textit{fmincon} prüft, ob die Bedingungsfunktion kleiner 0 ist wird von der Steigung ein Maximalwert ($max_{slope}$) abgezogen (\textit{Erfüllt 2.}).\\
 \begin{ownequation}[H]
 \begin{equation}
 c(p,x_i) = f'(p,x_i)-max_{slope}
@@ -54,7 +54,7 @@ h(p,x,s,w) = \sum_{i} w_i \cdot (f'(p,x_i)-s_i)^2
 \label{F-function}
 \end{ownequation}
 \newpage
-Um das Problem 3. zu lösen, betrachten wir Abbildung \ref{prob3}. Das Objekt ist hierbei so gelegen, dass das Polynom nur sehr schlecht durch die Daten gelegt werden kann und außerdem ein Teilabschnitt annähernd parallel zur Y-Achse verläuft. Der letzte Fall ist zu beachten, da ein solcher Verlauf durch eine unendliche Steigung im Polynom abgebildet werden müsste.\\
+Um das Problem 3. zu lösen, wird zunächst Abbildung \ref{prob3} betrachtet. Das Objekt ist hierbei so gelegen, dass das Polynom nur sehr schlecht durch die Daten gelegt werden kann und außerdem ein Teilabschnitt annähernd parallel zur Y-Achse verläuft. Der letzte Fall ist zu beachten, da ein solcher Verlauf durch eine unendliche Steigung im Polynom abgebildet werden müsste.\\
 Als Lösung für dieses Problem wird ein alternatives Weltkoordinatensystem eingeführt. Dieses unterscheidet sich durch eine \gls{transform} vom echten Weltkoordinatensystem. In Abbildung \ref{prob3solved} ist zu sehen, wie durch eine \gls{transform} ein weitaus besseres Polynom für die gleichen Punkte gefunden werden kann.\\
 \begin{figure}[H]
 \centering

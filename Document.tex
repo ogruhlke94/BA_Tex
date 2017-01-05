@@ -176,15 +176,24 @@
 }
 \definecolor{darkgreen}{HTML}{006400}
 \lstset{language=Matlab,%
-    %basicstyle=\color{red},
+	literate=
+   		{Ö}{{\"O}}1
+   		{Ä}{{\"A}}1
+    	{Ü}{{\"U}}1
+    	{ß}{{\ss}}1
+    	{ü}{{\"u}}1
+    	{ä}{{\"a}}1
+    	{ö}{{\"o}}1
+    	{~}{{\textasciitilde}}1,
+    basicstyle=\small,
     inputpath=code/,
 	captionpos=b,
     frame=single,
     breaklines=true,%
     morekeywords={matlab2tikz},
     %keywordstyle=\color{blue},%
-    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
-    identifierstyle=\color{black},%
+    %morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+   % identifierstyle=\color{black},%
     stringstyle=\color{lila},
     commentstyle=\color{darkgreen},%
     showstringspaces=false,%without this there will be a symbol in the places where there is a space
@@ -232,6 +241,8 @@
 
 % PDF-Eigenschaften
 \PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{spaces}{url}
+\PassOptionsToPackage{obeyspaces}{url}
 \usepackage{hyperref}
 \hypersetup{
 	bookmarksnumbered=true,
@@ -243,10 +254,11 @@
 	pdfstartview=FitV,
 	colorlinks=true,
 	linkcolor=black,
-	citecolor=green,
-	filecolor=magenta,
-	urlcolor=cyan
+	citecolor=black,
+	filecolor=black,
+	urlcolor=black
 }
+\urlstyle{same}
 
 \usepackage[hyphenbreaks]{breakurl}
 

@@ -18,18 +18,18 @@ Für die Steuerung wird ein \texttt{\gls{lanefollow}} verwendet, der das Fahrzeu
 Am Bug des \gls{auv}s befindet sich eine Kamera, die zentral nach unten ausgerichtet ist. Das Sichtfeld beträgt dabei 45$^\circ$ bei einer Auflösung von 640x480 Pixeln.
 \subsection{Koordinatensysteme}
 \label{sec_coordsystems}
-Im Folgenden werde ich die Koordinatensysteme beschreiben, in denen Koordinaten angegeben werden. Hierbei wird von einer Tangentialebene an der WGS84-Kugel\footnote{https://confluence.qps.nl/pages/viewpage.action?pageId=29855173}, verschoben auf den Meeresboden, ausgegangen, da nur hinreichend kleine Operationsgebiete des \gls{auv}s betrachtet werden, sodass die Erdkrümmung keine Auswirkung hat.
+Im Folgenden werden die Koordinatensysteme beschrieben, in denen Koordinaten angegeben werden. Hierbei wird von einer Tangentialebene an der WGS84-Kugel\footnote{Definition WGS84: \href{https://confluence.qps.nl/pages/viewpage.action?pageId=29855173}{https://confluence.qps.nl/pages/viewpage.action?pageId=29855173}, Abrufdatum \textit{05.01.2017}}, verschoben auf den Meeresboden, ausgegangen, da nur hinreichend kleine Operationsgebiete des \gls{auv}s betrachtet werden, sodass die Erdkrümmung keine Auswirkung hat.
 \subsubsection{Bild und Kamera}
 \label{sec_img_cam_coords}
-Das Kamerakoordinatensystem [Abb. \ref{CamKoords}] beschreibt das dreidimensionale Koordinatensystem mit Ursprung im Mittelpunkt der Kameralinse. Die Kamera befindet sich 25 cm unter und 1,3 m vor dem Fahrzeugmittelpunkt. Der Mittelpunkt der X-/Y-Ebene liegt genau zentral über der Bildebene.
+Das Kamerakoordinatensystem [Abb. \ref{CamKoords}] beschreibt das dreidimensionale Koordinatensystem mit Ursprung im Mittelpunkt der Kameralinse. Die Kamera befindet sich 25 Zentimeter unter und 1,3 Meter vor dem Fahrzeugmittelpunkt. Der Mittelpunkt der X-/Y-Ebene liegt genau zentral über der Bildebene.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=1]{Einleitung/camCoords.png}
-	\caption[Das Kamerakoordinatensystem]{Das Kamerakoordinatensystem. Ursprung des Systems liegt im Mittelpunkt der Kameralinse. Die X-Achse bildet die Bildspalten und die Y-Achse die Bildzeilen im Raum ab. Die Z-Achse zeigt in Blickrichtung der Kamera.}
+	\caption[Das Kamerakoordinatensystem]{Das Kamerakoordinatensystem. Der Ursprung des Systems liegt im Mittelpunkt der Kameralinse. Die X-Achse bildet die Bildspalten und die Y-Achse die Bildzeilen im Raum ab. Die Z-Achse zeigt in Blickrichtung der Kamera.}
 	\label{CamKoords}
 \end{figure}
 
-Das Bildkoordinatensystem [Abb. \ref{imageKoords}] beschreibt die Anordnung der Pixel im Bild als 2D-Koordinaten. Der Ursprung ist immer die linke obere Bildecke. Ich gehe davon aus, dass das Bildkoordinatensystem immer auf der Meeresbodenebene liegt. Diese Annahme ist wichtig für die \glspl{transform} [Kapitel \ref{sec_transformations}].
+Das Bildkoordinatensystem [Abb. \ref{imageKoords}] beschreibt die Anordnung der Pixel im Bild als 2D-Koordinaten. Der Ursprung ist immer die linke obere Bildecke. Es wird davon ausgegangen, dass das Bildkoordinatensystem immer auf der Meeresbodenebene liegt. Diese Annahme ist wichtig für die \glspl{transform} [Kapitel \ref{sec_transformations}].
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{Einleitung/imageCoords2.jpg}
@@ -38,7 +38,7 @@ Das Bildkoordinatensystem [Abb. \ref{imageKoords}] beschreibt die Anordnung der 
 \end{figure}
 
 \subsubsection{Body}
-Das Body-Koordinatensystem beschreibt das Koordinatensystem relativ zum \gls{auv}-Mittelpunkt [Abb. \ref{Abb. 1}].
+Das Body-Koordinatensystem beschreibt das Koordinatensystem relativ zum \\ \gls{auv}-Mittelpunkt [Abb. \ref{Abb. 1}].
 Der Ursprung wird hierbei durch den Massenschwerpunkt des \gls{auv}s bestimmt.
 Das Koordinatensystem entspricht dem klassischen nautischen Koordinatensystem, dem North-East-Down Koordinatensystem (vgl. Kapitel 2 in \texttt{Unmanned rotorcraft systems} \cite{cai2011unmanned})
 \begin{figure}[H]
@@ -80,8 +80,8 @@ Abbildung \ref{Abb. 3} zeigt die Koordinatensysteme der \matlab -Grafikbibliothe
 
 \subsection{Eingesetzte Software}
 Neben den bereits erwähnten \matlab -Bibliotheken \textit{Simulink}, \textit{Graphics} und \textit{3D Animation} werden in dieser Arbeit noch weitere Bibliotheken verwendet.\\
-Grundlegende geometrische Berechnungen, zum Beispiel \glspl{transform} in 2D und 3D oder auch Distanzberechnungen von Punkten werden mithilfe der freien Bibliotheken \textit{geom2d}\footnote{https://de.mathworks.com/matlabcentral/fileexchange/7844-geom2d} und \textit{geom3d}\footnote{https://de.mathworks.com/matlabcentral/fileexchange/24484-geom3d} durchgeführt.\\
-Das Schätzverfahren nutzt die \textit{Optimization-Toolbox}\footnote{https://de.mathworks.com/products/optimization.html}, die Lösungen für verschiedene Minimierungs-, Maximierungs- und Optimierungsprobleme liefert.\\
+Grundlegende geometrische Berechnungen, zum Beispiel \glspl{transform} in 2D und 3D oder auch Distanzberechnungen von Punkten werden mithilfe der freien Bibliotheken \textit{geom2d}\footnote{Bibliothek geom2d: \url{https://de.mathworks.com/matlabcentral/fileexchange/7844-geom2d}, Abrufdatum \textit{05.01.2017}} und \textit{geom3d}\footnote{Bibliothek geomd3d: \url{https://de.mathworks.com/matlabcentral/fileexchange/24484-geom3d}, Abrufdatum \textit{05.01.2017}} durchgeführt.\\
+Das Schätzverfahren nutzt die \textit{Optimization-Toolbox}\footnote{Optimization-Toolbox: \href{https://de.mathworks.com/products/optimization.html}{https://de.mathworks.com/products/optimization.html}, Abrufdatum \textit{05.01.2017}}, die Lösungen für verschiedene \\ Minimierungs-, Maximierungs- und Optimierungsprobleme liefert.\\
 Für die Kamerakalibrierung wurde die \textit{Computer Vision System Toolbox} genutzt. Die Toolbox bietet die einfach zu bedienende \textit{Camera Calibration App} mit der die intrinsischen Parameter bestimmt werden können.
-Hilfestellung lieferte hierbei das dazugehörige Tutorial\footnote{https://de.mathworks.com/help/vision/ug/single-camera-calibrator-app.html}.
+Hilfestellung lieferte hierbei das dazugehörige Tutorial\footnote{Computer Vision Toolbox: \url{https://de.mathworks.com/help/vision/ug/single-camera-calibrator-app.html}, Abrufdatum \textit{05.01.2017}}.
 \afterpage{\null\newpage}

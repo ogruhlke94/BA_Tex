@@ -3,7 +3,7 @@
 In diesem Kapitel werden verwandte Arbeiten zum Thema dieser Arbeit vorgestellt. Außerdem wird erläutert, inwiefern die vorgestellten Arbeiten sich zum Lösen der gestellten Aufgabe eignen.\\
 Die Arbeit wird in die Oberpunkte \textit{Objekterkennung}, zum Detektieren der Objekte und Bestimmen der Lage, und das \textit{Schätzverfahren}, zur Bestimmung und Vorhersage des Objektverlaufs, unterteilt.
 \subsection{Objekterkennung}
-Bei der Objekterkennung unterscheide ich grob zwischen Ansätzen die Objekte aufgrund von Linien und deren Beziehungen detektieren und solchen, die andere Objekteigenschaften nutzen.
+Bei der Objekterkennung wird grob zwischen Ansätzen die Objekte aufgrund von Linien und deren Beziehungen detektieren und solchen, die andere Objekteigenschaften nutzen unterschieden.
 \subsubsection{Linienerkennung}
 Linienförmige Objekte heben sich unter anderem durch zwei annähernd parallel verlaufende Kanten vom Hintergrund ab.
 Ein verwandtes Problem hierzu ist die Detektion eines Straßenverlaufs, der sich ebenso durch zwei fast parallele Linien (den Fahrbahnmarkierungen) auszeichnet [Abb. \ref{Abb. 4}].\\
@@ -42,7 +42,7 @@ Die Arbeit bietet eine Möglichkeit innerhalb eines Bildes eine Kurve zu detekti
 \caption[Detektion eines Straßenverlaufs mit der \textit{Hough Transformation}]{Ergebnis der Straßenverlaufsdetektion mithilfe von \textit{Hough Transformation} nach Wang et al.. Links werden die erkannten Straßenmarkierungen der Segmente angedeutet und der \textit{\gls{vp}} des vierten Segmentes. Rechts ist die final detektierte Mittellinie der Straße über alle Segmente.}
 \label{detHough}
 \end{figure}
-Aus den von mir betrachteten Arbeiten geht hervor, dass mithilfe von \glspl{lcf} kurvige Straßenverläufe gut erkannt werden können. Da Kameras in den betrachteten Arbeiten jedoch nach vorne ausgerichtet sind, um den Straßenverlauf möglichst weit zu erkennen, unterscheidet sich dieser Ansatz in einem wesentlichen Punkt vom Unterwasserszenario. In den meisten Einsatzgebieten würde eine nach vorn ausgerichtete Kamera keine Objekte am Meeresboden sehen können. Der Höhenunterschied von der Kamera zum Boden wäre zu groß um Objekte nah am Fahrzeug zu sehen und in der Entfernung sind oftmals, bedingt durch schlechte Sichtverhältnisse, keine Objekte erkennbar. Aus diesen Gründen sollte die Kamera gerade nach unten oder leicht nach vorne geneigt ausgerichtet sein.\\
+Aus den betrachteten Arbeiten geht hervor, dass mithilfe von \glspl{lcf} kurvige Straßenverläufe gut erkannt werden können. Da Kameras in den betrachteten Arbeiten jedoch nach vorne ausgerichtet sind, um den Straßenverlauf möglichst weit zu erkennen, unterscheidet sich dieser Ansatz in einem wesentlichen Punkt vom Unterwasserszenario. In den meisten Einsatzgebieten würde eine nach vorn ausgerichtete Kamera keine Objekte am Meeresboden sehen können. Der Höhenunterschied von der Kamera zum Boden wäre zu groß um Objekte nah am Fahrzeug zu sehen und in der Entfernung sind oftmals, bedingt durch schlechte Sichtverhältnisse, keine Objekte erkennbar. Aus diesen Gründen sollte die Kamera gerade nach unten oder leicht nach vorne geneigt ausgerichtet sein.\\
 Aus dieser Ausrichtung resultiert jedoch, dass der betrachtete Bereich weitaus kleiner ist und die meisten Objekte nur eine sehr leichte Krümmung im Bild aufweisen. In solch kleinen Bereichen reicht eine Linienerkennung aus.
 
 \subsubsection{Andere Ansätze}
@@ -79,8 +79,8 @@ Underwater Images}\cite{foresti2000vision} Unterwasserpipelines mithilfe eines n
 \caption[Pipelinedetektion mit neuronalem Netzwerk.]{Pipelines erkannt mithilfe eines neuronalen Netzwerks aus \textit{A Vision Based System for Object Detection in Underwater Images}\cite{foresti2000vision}. Es werden selbst verdeckte Pipelines sehr gut erkannt.}
 \label{nnDet}
 \end{figure}
-Trotz dieser guten Ergebnisse habe ich mich gegen ein neuronales Netz entschieden. Zum einen gab es zu Beginn der Arbeit keine geeigneten Trainingsbilder aus der Simulationsumgebung, um das Netz zu trainieren. Das Training an sich wäre zudem ein sehr großer Mehraufwand, der den Rahmen der Arbeit überzogen hätte. Zudem ist ein neuronales Netz auch nicht so eindeutig nachvollziehbar, wie andere Algorithmen.\\
-Aus diesen Gründen habe ich mich für einen leichter zu implementierenden, klassischeren Ansatz der Bildverarbeitung entschieden.
+Trotz dieser guten Ergebnisse wurde kein neuronales Netz verwendet. Zum einen gab es zu Beginn der Arbeit keine geeigneten Trainingsbilder aus der Simulationsumgebung, um das Netz zu trainieren. Das Training an sich wäre zudem ein sehr großer Mehraufwand, der den Rahmen der Arbeit überzogen hätte. Zudem ist ein neuronales Netz auch nicht so eindeutig nachvollziehbar, wie andere Algorithmen.\\
+Aus diesen Gründen wurde ein leichter zu implementierenden, klassischeren Ansatz der Bildverarbeitung genutzt.
 
 Die auf Linienerkennung basierenden Ansätze eignen sich sehr gut, solange klare Kanten im Bild erkennbar sind. Im Unterwasserszenario setzt dies gute Sicht- und Lichtverhältnisse voraus. Außerdem würden vom Meeresboden verdeckte Objekte keine oder sehr kurvige Kanten ergeben, in denen die vorgestellten Ansätze keine Ergebnisse liefern würden. Beide Voraussetzungen sind im Unterwasserbereich nicht erfüllbar, weswegen in dieser Arbeit ein anderer Ansatz gewählt wurde.\\
 Sehr gut eignet sich ein helligkeitsbasierter Ansatz. Wie im \textit{CSurvey}-Projekt\cite{Albiez2015CSurveyA} gezeigt, kann ein solcher Ansatz selbst unter schlechten Sichtbedingungen noch gute Ergebnisse liefern. Es ist zu erwarten, dass auch in der verwendeten Simulationsumgebung gute Resultate erzielt werden können.\\
@@ -124,4 +124,4 @@ Bemerkenswert ist, dass im roten Bereich ebenfalls keine Ergebnisse der Objekter
 \caption[Abbildung eines Flusses mit Regression]{Regression angewendet auf GPS-Daten eines Flussverlaufs aus \texttt{Autonomous Searching and Tracking of a River using an UAV}\cite{rathinam2007autonomous}. Im gelben Bereich wird ein fehlender Sichtkontakt zum Fluss nicht optimal abgedeckt. Im roten Bereich ist die Kurve trotz fehlender Detektion nahezu optimal abgebildet.}
 \label{riverCurve}
 \end{figure}
-Das Regressionsverfahren eignet sich gut für die Problemstellung der Arbeit. Die zwei vorgestellten Arbeiten zeigen, dass sowohl Fehler durch Ausreißer abgefangen werden, als auch Bereiche ohne Ergebnisse der Objekterkennung gut überbrückt werden können. Die genaue Beschreibung der eingesetzten Lösung und des von mir eingesetzten Modells folgt im nächsten Kapitel.
+Das Regressionsverfahren eignet sich gut für die Problemstellung der Arbeit. Die zwei vorgestellten Arbeiten zeigen, dass sowohl Fehler durch Ausreißer abgefangen werden, als auch Bereiche ohne Ergebnisse der Objekterkennung gut überbrückt werden können. Die genaue Beschreibung der eingesetzten Lösung und des eingesetzten Modells folgt im nächsten Kapitel.

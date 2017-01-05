@@ -1,6 +1,7 @@
 function transformed =transform(toTransform,targetFrame,height,PosEast_m,PosNorth_m,psi,phi,theta,cameraParameters)
-%TRANSFORM Summary of this function goes here
-%   Detailed explanation goes here
+	%TRANSFORM Transformiert das pointInFrame Objekt aus dem ursprünglichen in den targetFrame
+	%% Transformiert schrittweise von Frame zu Frame bis das Ziel erreicht ist.
+	%% Benötigt wird hierzu die Pose des AUVs und die Kameraparameter aus der Kalibriegung
     while(toTransform.frame~=targetFrame)
         switch toTransform.frame
             case frames.image
